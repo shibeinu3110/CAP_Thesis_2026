@@ -35,8 +35,11 @@ end
 
 constraints
 
-context Person inv:
+context Person inv checkAge:
   age >= 18
+
+context Person inv checkLocation:
+  self.employer.location = 'Hanoi'
 
 context Person::raiseSalary(rate : Real) : Real
   post raiseSalaryPost: 

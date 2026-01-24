@@ -37,6 +37,9 @@ public class ASTRealLiteral extends ASTExpression {
     public ASTRealLiteral(Token token) {
         fValue = Double.valueOf(token.getText()).doubleValue();
     }
+    public double getValue() {
+        return fValue;
+    }
 
     public Expression gen(Context ctx) {
         return new ExpConstReal(fValue); 

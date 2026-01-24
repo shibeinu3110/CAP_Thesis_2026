@@ -44,6 +44,16 @@ public class ASTBinaryExpression extends ASTExpression {
         fRight = right;
     }
 
+    public Token getToken() {
+    	return fToken;
+    }
+    public ASTExpression getLeft() {
+    	return fLeft;
+    }
+    public ASTExpression getRight() {
+    	return fRight;
+    }
+
     public Expression gen(Context ctx) throws SemanticException {
         ASTExpression[] args = { fLeft, fRight };
         return genStdOperation(ctx, fToken, fToken.getText(), args);

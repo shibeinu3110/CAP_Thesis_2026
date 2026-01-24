@@ -95,6 +95,9 @@ public class ASTOperationExpression extends ASTExpression {
     public Token getOpToken() {
     	return fOp;
     }
+    public boolean isfFollowsArrow() {
+    	return fFollowsArrow;
+    }
     
     public ASTExpression getSourceExpression() {
     	return fSrcExpr;

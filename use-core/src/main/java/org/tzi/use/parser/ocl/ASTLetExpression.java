@@ -51,7 +51,16 @@ public class ASTLetExpression extends ASTExpression {
 
     public void setInExpr(ASTExpression inExpr) {
         fInExpr = inExpr;
-    }   
+    }
+    public Token getVarToken() {
+        return fVarToken;
+    }
+    public ASTExpression getVarExpr() {
+        return fVarExpr;
+    }
+    public ASTExpression getInExpr() {
+        return fInExpr;
+    }
 
     public Expression gen(Context ctx) throws SemanticException {
         Expression res = null;

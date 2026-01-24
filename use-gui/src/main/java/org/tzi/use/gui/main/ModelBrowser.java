@@ -56,6 +56,9 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
+import org.antlr.runtime.ANTLRStringStream;
+import org.antlr.runtime.CommonTokenStream;
+import org.antlr.runtime.RecognitionException;
 import org.tzi.use.config.Options;
 import org.tzi.use.gui.main.ModelBrowserSorting.SortChangeEvent;
 import org.tzi.use.gui.main.ModelBrowserSorting.SortChangeListener;
@@ -65,9 +68,18 @@ import org.tzi.use.gui.views.diagrams.event.HighlightChangeEvent;
 import org.tzi.use.gui.views.diagrams.event.HighlightChangeListener;
 import org.tzi.use.gui.views.diagrams.event.ModelBrowserMouseHandling;
 import org.tzi.use.main.runtime.IRuntime;
+import org.tzi.use.parser.ParseErrorHandler;
+import org.tzi.use.parser.ocl.ASTBinaryExpression;
+import org.tzi.use.parser.ocl.ASTExpression;
+import org.tzi.use.parser.ocl.ASTIntegerLiteral;
+import org.tzi.use.parser.ocl.ASTLetExpression;
+import org.tzi.use.parser.ocl.ASTOperationExpression;
+import org.tzi.use.parser.ocl.ASTRealLiteral;
+import org.tzi.use.parser.ocl.OCLLexer;
+import org.tzi.use.parser.ocl.OCLParser;
 import org.tzi.use.uml.mm.*;
 
-/** 
+/**
  * A ModelBrowser provides a tree view of classes, associations, and constraints
  * in a model. The definition of a selected element is shown in an HTML pane. A
  * class can be dragged onto an object diagram to create a new object of this
@@ -76,7 +88,7 @@ import org.tzi.use.uml.mm.*;
  * @author      Mark Richters
  */
 @SuppressWarnings("serial")
-public class ModelBrowser extends JPanel 
+public class ModelBrowser extends JPanel
     implements DragSourceListener, DragGestureListener, SortChangeListener {
     private MModel fModel;
     private JTree fTree;
@@ -87,12 +99,12 @@ public class ModelBrowser extends JPanel
 
     private DefaultTreeModel fTreeModel = null;
     private DefaultMutableTreeNode fTop;
-    
+
     private EventListenerList fListenerList;
     private ModelBrowserMouseHandling fMouseHandler;
     private Map<String, Collection<?>> modelCollections = new HashMap<String, Collection<?>>();
     private MainWindow mainWindow;
-    
+
     // implementation of interface DragSourceListener
     public void dragEnter(DragSourceDragEvent dsde) {
         //Log.trace(this, "dragEnter");
@@ -132,14 +144,14 @@ public class ModelBrowser extends JPanel
     	}
     	return null;
     }
-    
+
     // implementation of interface DragSourceListener
     public void dragGestureRecognized(DragGestureEvent dge) {
         //Log.trace(this, "dragGestureRecognized");
 		DefaultMutableTreeNode node = (DefaultMutableTreeNode) fTree
 			.getLastSelectedPathComponent();
 
-        if (fModel == null || node == null ) 
+        if (fModel == null || node == null )
             return;
 
         Object nodeInfo = node.getUserObject();
@@ -150,7 +162,7 @@ public class ModelBrowser extends JPanel
         }
     }
 
-    /** 
+    /**
      * Creates a browser with no model.
      */
     public ModelBrowser(MainWindow mainWindow, IRuntime pluginRuntime) {
@@ -158,7 +170,7 @@ public class ModelBrowser extends JPanel
         fListenerList = new EventListenerList();
     }
 
-    /** 
+    /**
      * Creates a model browser. The model may be null.
      */
     public ModelBrowser(MModel model, MainWindow mainWindow,
@@ -170,7 +182,7 @@ public class ModelBrowser extends JPanel
         setModel(model);
 
         fDragSource = new DragSource();
-        fDragSource.createDefaultDragGestureRecognizer(fTree, 
+        fDragSource.createDefaultDragGestureRecognizer(fTree,
 		DnDConstants.ACTION_MOVE, this);
 
         // Allow one selection at a time.
@@ -194,7 +206,7 @@ public class ModelBrowser extends JPanel
 				Object nodeInfo = node.getUserObject();
 				if (node.isLeaf() && (nodeInfo instanceof MModelElement)) {
 					MModelElement me = (MModelElement) nodeInfo;
-					displayInfo(me);
+          displayInfo(me);
 					int selectedRow = -1;
 					// which node is selected
 					for (int i = 0; i < fTree.getRowCount(); i++) {
@@ -205,7 +217,7 @@ public class ModelBrowser extends JPanel
 					fMouseHandler.setSelectedNodeRectangle(fTree
 							.getRowBounds(selectedRow));
 					fMouseHandler.setSelectedModelElement(me);
-					
+
 					fireSelectionChanged(me);
 				} else {
 					fireSelectionChanged(null);
@@ -213,7 +225,7 @@ public class ModelBrowser extends JPanel
 			}
 		});
 
-        // Create the scroll pane and add the tree to it. 
+        // Create the scroll pane and add the tree to it.
         JScrollPane treeView = new JScrollPane(fTree);
 
         // Create the HTML viewing pane.
@@ -267,7 +279,7 @@ public class ModelBrowser extends JPanel
             if (level == 0 ) {
                 if (node.isLeaf() )
                     setIcon(getClosedIcon()); // we don't have a model
-                else 
+                else
                     setIcon(getOpenIcon());
             } else if (level == 1 ) {
                 if (tree.isExpanded(new TreePath(node.getPath())) )
@@ -288,8 +300,8 @@ public class ModelBrowser extends JPanel
         }
     }
 
-    /** 
-     * Initializes the browser to a new model. The model may be null.  
+    /**
+     * Initializes the browser to a new model. The model may be null.
      */
     public void setModel(MModel model) {
         fModel = model;
@@ -308,7 +320,7 @@ public class ModelBrowser extends JPanel
             fTree = new JTree(fTreeModel);
             fMbs = ModelBrowserSorting.getInstance();
             fMbs.addSortChangeListener( this );
-            
+
             fMouseHandler = new ModelBrowserMouseHandling( this );
             fTree.addMouseListener( fMouseHandler );
         } else {
@@ -321,28 +333,32 @@ public class ModelBrowser extends JPanel
             fHtmlPane.setText("");
     }
 
-    /** 
+    /**
      * Displays info about the selected model element in the HTML pane.
      */
     private void displayInfo(MModelElement element) {
 		IPluginMModelExtensionPoint modelExtensionPoint = (IPluginMModelExtensionPoint) fPluginRuntime
 			.getExtensionPoint("model");
 	        StringWriter sw = new StringWriter();
-	        sw.write("<html><head>");
-	        sw.write("<style> <!-- body { font-family: sansserif; } --> </style>");
-	        sw.write("</head><body><font size=\"-1\">");
-	
-		IPluginMMVisitor v = modelExtensionPoint.createMMHTMLPrintVisitor(
+//	        sw.write("<html><head>");
+//	        sw.write("<style> <!-- body { font-family: sansserif; } --> </style>");
+//	        sw.write("</head><body><font size=\"-1\">");
+
+		IPluginMMVisitor v = modelExtensionPoint.createMMPrintVisitor(
 			new PrintWriter(sw), this);
 
         element.processWithVisitor(v);
 
-        sw.write("</font></body></html>");
+//        sw.write("</font></body></html>");
         String spec = sw.toString();
+        if (element instanceof MClassInvariant) {
+          parseOCLStringToAST(spec);
+        }
         fHtmlPane.setText(spec);
     }
 
-    public void createNodes( final DefaultMutableTreeNode top ) {
+
+  public void createNodes( final DefaultMutableTreeNode top ) {
         final Collection<MClassifier> sortedDataTypes =
                 fMbs.sortClasses( new ArrayList<MClassifier>(fModel.dataTypes()) );
         addChildNodes( top, "Data types", sortedDataTypes );
@@ -351,22 +367,22 @@ public class ModelBrowser extends JPanel
             fMbs.sortClasses( new ArrayList<MClassifier>(fModel.classes()) );
         addChildNodes( top, "Classes", sortedClasses );
 
-        final ArrayList<MAssociation> sortedAssociations = 
+        final ArrayList<MAssociation> sortedAssociations =
             fMbs.sortAssociations(new ArrayList<MAssociation>(fModel.associations()));
-	    
+
         addChildNodes( top, "Associations", sortedAssociations );
 
-        final Collection<MClassInvariant> sortedInvariants = 
+        final Collection<MClassInvariant> sortedInvariants =
             fMbs.sortInvariants( fModel.classInvariants() );
-        
+
         addChildNodes( top, "Invariants", sortedInvariants );
 
-        final Collection<MPrePostCondition> sortedConditions = 
+        final Collection<MPrePostCondition> sortedConditions =
             fMbs.sortPrePostConditions(fModel.prePostConditions());
         addChildNodes( top, "Pre-/Postconditions", sortedConditions );
-        
+
 		Set<Map.Entry<String, Collection<?>>> modelCollectionEntrySet = this.modelCollections.entrySet();
-				
+
 		for (Map.Entry<String, Collection<?>> modelCollectionMapEntry : modelCollectionEntrySet) {
 		    String modelCollectionName = modelCollectionMapEntry.getKey()
 			    .toString();
@@ -374,7 +390,7 @@ public class ModelBrowser extends JPanel
 			    .sortPluginCollection(modelCollectionMapEntry.getValue());
 		    addChildNodes(top, modelCollectionName, modelCollection);
 		}
-		
+
 		final Collection<MOperation> queryOperations = new ArrayList<MOperation>();
 		for (MClass mClass : fModel.classes()) {
 			for (MOperation mOperation : mClass.operations()) {
@@ -383,7 +399,7 @@ public class ModelBrowser extends JPanel
 				}
 			}
 		}
-		
+
 		addChildNodes(top, "Query Operations", queryOperations);
     }
 
@@ -395,7 +411,7 @@ public class ModelBrowser extends JPanel
         DefaultMutableTreeNode category = new DefaultMutableTreeNode(name);
         top.add(category);
         Iterator<?> it = items.iterator();
-	    
+
         while (it.hasNext() ) {
             DefaultMutableTreeNode child = new DefaultMutableTreeNode(it.next());
             category.add(child);
@@ -416,7 +432,7 @@ public class ModelBrowser extends JPanel
     public void stateChanged( SortChangeEvent e ) {
         ArrayList<Integer> pathWereExpanded = new ArrayList<Integer>();
         int selectedRow = -1;
-        
+
         // which nodes are expanded
         for ( int i=0; i<fTree.getRowCount(); i++ ){
             if ( fTree.isExpanded( i ) ){
@@ -439,24 +455,24 @@ public class ModelBrowser extends JPanel
         }
         // set selected node again.
         if ( selectedRow >= 0 ) {
-            fTree.setSelectionRow( selectedRow );    
+            fTree.setSelectionRow( selectedRow );
         }
     }
-    
+
     /**
      * Adds Listeners who are interested on a change event of highlighting.
-     * 
+     *
      * @param l
      *            The listener who is interested
      */
     public void addHighlightChangeListener( HighlightChangeListener l ) {
         fListenerList.add( HighlightChangeListener.class, l );
     }
-    
+
     public void removeHighlightChangeListener( HighlightChangeListener l ) {
         fListenerList.remove( HighlightChangeListener.class, l );
     }
-    
+
     /*
      * Notify all listeners that have registered interest for notification on
      * this event type. The event instance is lazily created using the
@@ -477,10 +493,10 @@ public class ModelBrowser extends JPanel
                     e.setHighlight( highlight );
                 }
                 ((HighlightChangeListener) listeners[i+1]).stateChanged(e);
-            }          
+            }
         }
     }
-    
+
     /*
      * Notify all listeners that have registered interest for notification on
      * this event type. The event instance is lazily created using the
@@ -489,27 +505,27 @@ public class ModelBrowser extends JPanel
     public void fireSelectionChanged( MModelElement elem ) {
         // Guaranteed to return a non-null array
         Object[] listeners = fListenerList.getListenerList();
-        
+
         // Process the listeners last to first, notifying
         // those that are interested in this event
         for (int i = listeners.length-2; i >= 0; i -= 2) {
             if (listeners[i] == SelectionChangedListener.class ) {
                 // Lazily create the event:
                 ((SelectionChangedListener) listeners[i+1]).selectionChanged(elem);
-            }          
+            }
         }
     }
-    
+
     /**
      * Adds Listeners who are interested on a change of the selected element in the browser.
-     * 
+     *
      * @param l
      *            The listener who is interested
      */
     public void addSelectionChangedListener( SelectionChangedListener l ) {
         fListenerList.add( SelectionChangedListener.class, l );
     }
-    
+
     public void removeSelectionChangedListener(SelectionChangedListener l) {
         listenerList.remove(SelectionChangedListener.class, l);
     }
@@ -517,4 +533,134 @@ public class ModelBrowser extends JPanel
     public interface SelectionChangedListener extends EventListener {
     	public void selectionChanged(MModelElement element);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  private void parseOCLStringToAST(String oclText) {
+    try {
+      ANTLRStringStream input = new ANTLRStringStream(oclText);
+      OCLLexer lexer = new OCLLexer(input);
+      CommonTokenStream tokens = new CommonTokenStream(lexer);
+      OCLParser parser = new OCLParser(tokens);
+
+      ParseErrorHandler handler =
+          new ParseErrorHandler("input", new PrintWriter(System.err));
+      parser.init(handler);
+      lexer.init(handler);
+
+      System.out.println("Parser ready, parsing...");
+
+      ASTExpression expr = parser.expression();
+
+      System.out.println("AST root = " + expr.getClass().getSimpleName());
+      printAST(expr);
+    } catch (RecognitionException e) {
+      throw new RuntimeException(e);
+    }
+  }
+  private void printAST(ASTExpression expr) {
+    printAST(expr, 0);
+  }
+
+  private void printAST(ASTExpression expr, int indent) {
+    indent(indent);
+    if (expr == null) {
+      System.out.println("<null>");
+      return;
+    }
+
+    if (expr instanceof ASTOperationExpression) {
+      ASTOperationExpression op = (ASTOperationExpression) expr;
+      System.out.println("ASTOperationExpression op=" + op.getOpToken().getText()
+          + " arrow=" + op.isfFollowsArrow());
+
+
+      // source
+      indent(indent);
+      System.out.println("source:");
+      printAST(op.getSourceExpression(), indent + 2);
+
+      // args
+      indent(indent);
+      System.out.println("args:");
+      for (ASTExpression arg : op.getArgs()) {
+        printAST(arg, indent + 2);
+      }
+
+      return;
+    }
+
+    if (expr instanceof ASTLetExpression) {
+      ASTLetExpression let = (ASTLetExpression) expr;
+      System.out.println("ASTLetExpression var=" + let.getVarToken().getText());
+
+      indent(indent);
+      System.out.println("varExpr:");
+      printAST(let.getVarExpr(), indent + 2);
+
+      indent(indent);
+      System.out.println("inExpr:");
+      printAST(let.getInExpr(), indent + 2);
+
+      return;
+    }
+
+    if (expr instanceof ASTBinaryExpression) {
+      ASTBinaryExpression bin = (ASTBinaryExpression) expr;
+      System.out.println("ASTBinaryExpression op=" + bin.getToken().getText());
+
+      indent(indent);
+      System.out.println("left:");
+      printAST(bin.getLeft(), indent + 2);
+
+      indent(indent);
+      System.out.println("right:");
+      printAST(bin.getRight(), indent + 2);
+
+      return;
+    }
+
+    if (expr instanceof ASTRealLiteral) {
+      ASTRealLiteral lit = (ASTRealLiteral) expr;
+      indent(indent);
+      System.out.println("Literal: " + lit.getValue());
+      return;
+    }
+
+    if (expr instanceof ASTIntegerLiteral) {
+      ASTIntegerLiteral lit = (ASTIntegerLiteral) expr;
+      indent(indent);
+      System.out.println("Literal: " + lit.getValue());
+      return;
+    }
+
+    // fallback cho literal, var…
+    System.out.println(expr.getClass().getSimpleName() + " : " + expr.getStringRep());
+  }
+
+  private void indent(int n) {
+    for (int i = 0; i < n; i++) System.out.print(" ");
+  }
+
 }

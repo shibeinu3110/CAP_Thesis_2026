@@ -37,6 +37,9 @@ public class ASTIntegerLiteral extends ASTExpression {
     public ASTIntegerLiteral(Token token) {
         fValue = Integer.parseInt(token.getText());
     }
+    public int getValue() {
+        return fValue;
+    }
 
     @Override
     public Expression gen(Context ctx) {
