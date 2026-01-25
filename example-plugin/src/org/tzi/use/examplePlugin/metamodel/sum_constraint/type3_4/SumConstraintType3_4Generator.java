@@ -60,11 +60,23 @@ public class SumConstraintType3_4Generator implements SumConstraintGenerator<Sum
       return "";
     }
     return switch (sc.boundType) {
-      case MAX, MAX_LIM -> "v <= " + sc.boundValue;
-      case MIN, MIN_LIM -> "v >= " + sc.boundValue;
-      case MAX_ATTR, MAX_LIM_ATTR -> "v <= self." + sc.boundValue;
-      case MIN_ATTR, MIN_LIM_ATTR -> "v >= self." + sc.boundValue;
-      case EQUALS -> "v = " + sc.boundValue;
+      case MAX ->
+          "v < " + sc.boundValue;
+      case MAX_LIM ->
+          "v <= " + sc.boundValue;
+      case MIN ->
+          "v >= " + sc.boundValue;
+      case MIN_LIM ->
+          "v > " + sc.boundValue;
+      case MAX_ATTR ->
+          "v <= self." + sc.boundValue;
+      case MAX_LIM_ATTR ->
+          "v < self." + sc.boundValue;
+      case MIN_ATTR ->
+          "v >= self." + sc.boundValue;
+      case MIN_LIM_ATTR ->
+          "v > self." + sc.boundValue;
+      case EQUALS -> null;
     };
   }
 

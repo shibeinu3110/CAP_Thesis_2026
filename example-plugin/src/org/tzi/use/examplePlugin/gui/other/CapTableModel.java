@@ -2,7 +2,6 @@ package org.tzi.use.examplePlugin.gui.other;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
-// test commit
 public class CapTableModel extends AbstractTableModel {
   private final List<String> caps;
 

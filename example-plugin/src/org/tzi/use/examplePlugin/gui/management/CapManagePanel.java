@@ -5,6 +5,7 @@ import org.tzi.use.examplePlugin.gui.other.ActionCellEditor;
 import org.tzi.use.examplePlugin.gui.other.ActionCellRenderer;
 import org.tzi.use.examplePlugin.gui.other.CapNameCellRenderer;
 import org.tzi.use.examplePlugin.gui.other.CapTableModel;
+import org.tzi.use.examplePlugin.gui.type.CapTypePopup;
 import org.tzi.use.gui.main.MainWindow;
 import org.tzi.use.gui.main.ViewFrame;
 import org.tzi.use.gui.views.diagrams.classdiagram.ClassDiagramView;
@@ -67,7 +68,8 @@ public class CapManagePanel extends JPanel {
     actionCol.setCellEditor(new ActionCellEditor(
         this::openDiagram,
         this::editCap,
-        this::deleteCap));
+        this::deleteCap,
+        this::showTypesPopup));
     table.putClientProperty(
         "terminateEditOnFocusLost",
         Boolean.TRUE
@@ -188,5 +190,44 @@ public class CapManagePanel extends JPanel {
     initUI();
     revalidate();
     repaint();
+  }
+
+  private void showTypesPopup(
+      String capName,
+      JTable table,
+      int row,
+      JButton sourceBtn
+  ) {
+    CapTypePopup popup = new CapTypePopup(
+        capName,
+        t -> openTypeView(capName, t),
+        t -> openTypeEdit(capName, t),
+        t -> deleteType(capName, t),
+        () -> openTypeAdd(capName)
+    );
+
+    Rectangle cellRect = table.getCellRect(row, 0, true);
+
+    Point p = new Point(cellRect.x, cellRect.y + cellRect.height);
+    SwingUtilities.convertPointToScreen(p, table);
+
+    popup.setInvoker(table);
+    popup.setLocation(p);
+    popup.setVisible(true);
+  }
+  private void openTypeView(String capName, String typeName) {
+    System.out.println("View type " + typeName + " of CAP " + capName);
+  }
+
+  private void openTypeEdit(String capName, String typeName) {
+    System.out.println("Edit type " + typeName + " of CAP " + capName);
+  }
+
+  private void deleteType(String capName, String typeName) {
+    System.out.println("Delete type " + typeName + " of CAP " + capName);
+  }
+
+  private void openTypeAdd(String capName) {
+    System.out.println("Add new type for CAP " + capName);
   }
 }

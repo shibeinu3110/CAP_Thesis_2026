@@ -10,6 +10,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import static org.tzi.use.examplePlugin.util.CommonVar.CAP_ROOT;
+import static org.tzi.use.examplePlugin.util.CommonVar.CAP_STORAGE_URL;
 
 
 public class FileUtils {
@@ -19,7 +20,7 @@ public class FileUtils {
 
     List<String> currentCAPs = new ArrayList<>();
 
-    Path parentDir = Paths.get("D:/DATN/cap_storage");
+    Path parentDir = Paths.get(CAP_STORAGE_URL);
 
     try (DirectoryStream<Path> stream =
              Files.newDirectoryStream(parentDir, Files::isDirectory)) {
@@ -51,5 +52,13 @@ public class FileUtils {
             throw new RuntimeException("Cannot delete: " + path, e);
           }
         });
+  }
+
+  // ensure a directory exists, if not create it
+  public static Path ensureDirectory(Path path) throws IOException {
+    if (!Files.exists(path)) {
+      Files.createDirectories(path);
+    }
+    return path;
   }
 }

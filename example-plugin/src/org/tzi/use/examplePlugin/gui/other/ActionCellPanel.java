@@ -11,6 +11,7 @@ public class ActionCellPanel extends JPanel {
   public final JButton openBtn;
   public final JButton editBtn;
   public final JButton deleteBtn;
+  public final JButton typesBtn = new JButton("Types ▼");
 
   public ActionCellPanel() {
     setLayout(new FlowLayout(FlowLayout.CENTER, 8, 6));
@@ -29,6 +30,7 @@ public class ActionCellPanel extends JPanel {
     add(openBtn);
     add(editBtn);
     add(deleteBtn);
+    add(typesBtn);
   }
 }
 
