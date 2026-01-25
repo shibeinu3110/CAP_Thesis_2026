@@ -33,6 +33,7 @@ public class CapCreatePanel extends JPanel {
 
   private final boolean editMode;
   private final String originalCapName;
+  private JPanel previousPanel;
 
   public CapCreatePanel() {
     this.editMode = false;
@@ -40,9 +41,11 @@ public class CapCreatePanel extends JPanel {
     initUI();
   }
 
-  public CapCreatePanel(String capName) {
+  public CapCreatePanel(String capName, JPanel previousPanel) {
     this.editMode = true;
     this.originalCapName = capName;
+    this.previousPanel = previousPanel;
+
     initUI();
     loadExistingCap(capName);
   }

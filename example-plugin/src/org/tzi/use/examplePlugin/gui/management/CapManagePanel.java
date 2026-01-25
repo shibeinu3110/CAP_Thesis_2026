@@ -1,11 +1,16 @@
 package org.tzi.use.examplePlugin.gui.management;
 
 import org.tzi.use.examplePlugin.gui.create.CapCreatePanel;
+import org.tzi.use.examplePlugin.gui.create.CapCreateView;
+import org.tzi.use.examplePlugin.gui.create_type.TypeCreatePanel;
+import org.tzi.use.examplePlugin.gui.create_type.TypeCreateView;
 import org.tzi.use.examplePlugin.gui.other.ActionCellEditor;
 import org.tzi.use.examplePlugin.gui.other.ActionCellRenderer;
 import org.tzi.use.examplePlugin.gui.other.CapNameCellRenderer;
 import org.tzi.use.examplePlugin.gui.other.CapTableModel;
 import org.tzi.use.examplePlugin.gui.type.CapTypePopup;
+import org.tzi.use.examplePlugin.gui.view_type.TypeViewView;
+import org.tzi.use.examplePlugin.util.CapTypeStorage;
 import org.tzi.use.gui.main.MainWindow;
 import org.tzi.use.gui.main.ViewFrame;
 import org.tzi.use.gui.views.diagrams.classdiagram.ClassDiagramView;
@@ -36,6 +41,9 @@ import static org.tzi.use.examplePlugin.util.GUIUtils.showErrorDialog;
  * Panel for managing CAP (read - update - delete) operations.
  */
 public class CapManagePanel extends JPanel {
+
+  private JPanel previousPanel;
+  private CapTypePopup popup;
 
   public CapManagePanel() {
     initUI();
@@ -106,8 +114,10 @@ public class CapManagePanel extends JPanel {
   private void editCap(String capName) {
     Container parent = getParent();
 
+    previousPanel = this;
+
     parent.remove(this);
-    parent.add(new CapCreatePanel(capName));
+    parent.add(new CapCreatePanel(capName, previousPanel));
 
     parent.revalidate();
     parent.repaint();
@@ -198,12 +208,24 @@ public class CapManagePanel extends JPanel {
       int row,
       JButton sourceBtn
   ) {
-    CapTypePopup popup = new CapTypePopup(
+    popup = new CapTypePopup(
         capName,
-        t -> openTypeView(capName, t),
-        t -> openTypeEdit(capName, t),
-        t -> deleteType(capName, t),
-        () -> openTypeAdd(capName)
+        t -> {
+          popup.setVisible(false);
+          openTypeView(capName, t);
+        },
+        t -> {
+          popup.setVisible(false);
+          openTypeEdit(capName, t);
+        },
+        t -> {
+          popup.setVisible(false);
+          deleteType(capName, t);
+        },
+        () -> {
+          popup.setVisible(false);
+          openTypeAdd(capName);
+        }
     );
 
     Rectangle cellRect = table.getCellRect(row, 0, true);
@@ -217,17 +239,88 @@ public class CapManagePanel extends JPanel {
   }
   private void openTypeView(String capName, String typeName) {
     System.out.println("View type " + typeName + " of CAP " + capName);
+    TypeViewView typeView = new TypeViewView(capName, typeName);
+    ViewFrame frame = new ViewFrame(
+        "View type '" + typeName + "' of CAP '" + capName + "'",
+        typeView,
+        "CommunicationDiagram.gif"
+    );
+
+    typeView.setFrame(frame);
+    frame.setContentPane(typeView);
+    setMaximumFrameSize(frame);
+    MainWindow.instance().addNewViewFrame(frame);
   }
 
   private void openTypeEdit(String capName, String typeName) {
     System.out.println("Edit type " + typeName + " of CAP " + capName);
+    Container parent = getParent();
+
+    previousPanel = this;
+
+    parent.remove(this);
+    parent.add(new TypeCreatePanel(capName, typeName, previousPanel));
+
+    parent.revalidate();
+    parent.repaint();
   }
 
   private void deleteType(String capName, String typeName) {
-    System.out.println("Delete type " + typeName + " of CAP " + capName);
+
+    int choice = JOptionPane.showConfirmDialog(
+        this,
+        "Are you sure you want to delete type '" + typeName + "'\n"
+            + "from CAP '" + capName + "'?\n\n"
+            + "This action cannot be undone.",
+        "Confirm Delete",
+        JOptionPane.YES_NO_OPTION,
+        JOptionPane.WARNING_MESSAGE
+    );
+
+    if (choice != JOptionPane.YES_OPTION) {
+      return;
+    }
+
+    try {
+      CapTypeStorage.delete(capName, typeName);
+
+      JOptionPane.showMessageDialog(
+          this,
+          "Type '" + typeName + "' was deleted successfully.",
+          "Delete Successful",
+          JOptionPane.INFORMATION_MESSAGE
+      );
+
+      refreshUI();
+    } catch (Exception e) {
+      showErrorDialog(
+          this,
+          "Failed to delete type '" + typeName + "':\n" + e.getMessage()
+      );
+    }
   }
 
   private void openTypeAdd(String capName) {
     System.out.println("Add new type for CAP " + capName);
+    TypeCreateView typeCreateView = new TypeCreateView(capName);
+
+    ViewFrame frame = new ViewFrame(
+        "Create new type for CAP '" + capName + "'",
+        typeCreateView,
+        "CommunicationDiagram.gif"
+    );
+
+    // link CapView with its ViewFrame
+    // required for going back to CRUD view
+    typeCreateView.setFrame(frame);
+
+    // compose frame content
+    // add CapView to frame content pane
+    JComponent content = (JComponent) frame.getContentPane();
+    content.setLayout(new BorderLayout());
+    content.add(typeCreateView, BorderLayout.CENTER);
+
+    MainWindow.instance().addNewViewFrame(frame);
+    setMaximumFrameSize(frame);
   }
 }
