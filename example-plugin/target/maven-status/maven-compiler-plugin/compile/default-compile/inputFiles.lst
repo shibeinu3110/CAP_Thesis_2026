@@ -73,6 +73,9 @@ D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\retake_constr
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\retake_constraint\type2\RetakeConstraintType2.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\retake_constraint\type2\RetakeConstraintType2Generator.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\retake_constraint\type2\RetakeConstraintType2Parser.java
+D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\retake_constraint\type3\RetakeConstraintType3.java
+D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\retake_constraint\type3\RetakeConstraintType3Generator.java
+D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\retake_constraint\type3\RetakeConstraintType3Parser.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\schedule_constraint\ScheduleConstraintDetector.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\schedule_constraint\ScheduleConstraintExecutor.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\schedule_constraint\ScheduleConstraintGenerator.java

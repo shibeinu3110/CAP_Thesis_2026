@@ -1,5 +1,6 @@
 package org.tzi.use.examplePlugin.util;
 
+import org.jetbrains.annotations.Nullable;
 import org.tzi.use.examplePlugin.metamodel.AttrCondPro;
 import org.tzi.use.examplePlugin.metamodel.IfPart;
 import org.tzi.use.examplePlugin.metamodel.OperatorValue;
@@ -7,6 +8,9 @@ import org.tzi.use.examplePlugin.metamodel.eligibility_constraint.RootScope;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static org.tzi.use.examplePlugin.util.UseUtils.isNumber;
 
 /**
  * Utility class for code generation, especially for generating condition strings based on IfPart.
@@ -186,5 +190,106 @@ public class GeneratorUtilsV2 {
     String right = referenceClass + "|" + referenceClass + "." + cond.insideExistValue + "=" + rootReferenceClass;
 
     return left + "->exists(" + right + ")";
+  }
+
+
+  /**
+   * Build allowed condition for retake based on the given filters and scope.
+   * @param filters
+   * @param scope
+   * @param iterator
+   * @return
+   */
+  public static String buildAllowedConditionForRetake(
+      List<AttrCondPro> filters,
+      RootScope scope,
+      @Nullable String iterator,
+      String referenceClass
+  ) {
+    System.out.println("Building allowed condition for filters: " + filters + " with scope: " + scope);
+    int lastIndex = filters.size() - 1;
+    System.out.println("Last index: " + lastIndex);
+
+    return IntStream.range(0, filters.size())
+        .mapToObj(i -> buildSingleAllowedCondition(
+            filters.get(i),
+            scope,
+            i == lastIndex,
+            i == 0,
+            iterator,
+            referenceClass
+        ))
+        .collect(Collectors.joining(" and "));
+  }
+  private static String buildSingleAllowedCondition(
+      AttrCondPro c,
+      RootScope scope,
+      boolean isLast,
+      boolean isFirst,
+      @Nullable String iterator,
+      String referenceClass
+  ) {
+
+    System.out.println("Condition type is: " + c.type);
+    String root;
+    boolean hasIterator = iterator != null && !iterator.isEmpty();
+
+    switch (scope) {
+      case ALL -> root = "self";
+
+      case LAST_ONLY -> {
+        if (isLast) root = "self";
+        else root = hasIterator ? iterator : "e";
+      }
+
+      case FIRST_ONLY -> {
+        if (isFirst && hasIterator) root = iterator;
+        else root = "self";
+      }
+
+      default -> root = hasIterator ? iterator : "e";
+    }
+
+    String right = "";
+    if (c.scale != null && !c.scale.isEmpty()) {
+      right = c.scale + " * " + root + "." + c.attrs.get(0) + "." + c.matchAttr;
+    } else if (isNumber(c.matchAttr)
+        || c.type == AttrCondPro.Type.MIN_LIM
+        || c.type == AttrCondPro.Type.MAX_LIM) {
+      // in case matchAttr is a number or it's a limit, we treat it as a value, not a path
+      right = c.matchAttr.toString();
+    } else {
+      right = root + "." + c.matchAttr;
+    }
+
+    // build left hand side path: self.course.credits or e.course.credits
+    String path = root + "." + String.join(".", c.attrs);
+    if (referenceClass != null && !referenceClass.isEmpty()) {
+      path = path + "(" + referenceClass + ")";
+    }
+
+    // in case c.type is null, (like we only have attr=value and attr2=value2), we will treat it as path
+    if (c.type == null) {
+      return path;
+    }
+
+    String cond;
+    switch (c.type) {
+      case MIN_LIM, MIN_LIM_ATTR, MIN -> cond = path + " < " + right;
+
+      case MAX_LIM, MAX_LIM_ATTR, MAX -> cond = path + " > " + right;
+
+      case MATCH_ATTR ->  cond = path + " = " + right;
+
+      case FIX_BOOL -> cond = Boolean.parseBoolean(c.matchAttr.toString())
+          ? path
+          : "not " + path;
+
+      case MATCH_STR, FIX_ENUM, FIX_STR -> cond = path + " = '" + c.matchAttr + "'";
+
+      default -> throw new RuntimeException("Unsupported AttrCondPro type: " + c.type);
+    }
+
+    return cond;
   }
 }

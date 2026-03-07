@@ -5,6 +5,7 @@ org\tzi\use\examplePlugin\gui\parser\CapParserView.class
 org\tzi\use\examplePlugin\gui\parser\ConstraintKind.class
 org\tzi\use\examplePlugin\metamodel\retake_constraint\RetakeConstraintParser.class
 org\tzi\use\examplePlugin\metamodel\eligibility_constraint\type4\EligibilityConstraintType4Generator.class
+org\tzi\use\examplePlugin\metamodel\retake_constraint\type3\RetakeConstraintType3Parser.class
 org\tzi\use\examplePlugin\metamodel\sum_constraint\SumConstraintDetector.class
 org\tzi\use\examplePlugin\metamodel\time_constraint\type2\TimeConstraintType2Parser.class
 org\tzi\use\examplePlugin\metamodel\eligibility_constraint\RootScope.class
@@ -87,6 +88,7 @@ org\tzi\use\examplePlugin\metamodel\eligibility_constraint\type3\EligibilityCons
 org\tzi\use\examplePlugin\metamodel\IfPart.class
 org\tzi\use\examplePlugin\util\UseUtils.class
 org\tzi\use\examplePlugin\enumarate\Phase.class
+org\tzi\use\examplePlugin\metamodel\retake_constraint\type3\RetakeConstraintType3Generator.class
 org\tzi\use\examplePlugin\util\enumarate\BoundType.class
 org\tzi\use\examplePlugin\CaculatorEnum.class
 org\tzi\use\examplePlugin\metamodel\sum_constraint\type3_4\SumConstraintType3_4Parser.class
@@ -148,6 +150,7 @@ org\tzi\use\examplePlugin\metamodel\OperatorValue.class
 org\tzi\use\examplePlugin\metamodel\time_constraint\TimeConstraintParser.class
 org\tzi\use\examplePlugin\metamodel\status_constraint\type5\StatusConstraintType5Generator.class
 org\tzi\use\examplePlugin\metamodel\time_constraint\type1\TimeConstraintType1.class
+org\tzi\use\examplePlugin\metamodel\retake_constraint\type3\RetakeConstraintType3.class
 org\tzi\use\examplePlugin\util\ConstraintType.class
 org\tzi\use\examplePlugin\metamodel\time_constraint\type4\TimeConstraintType4Generator.class
 org\tzi\use\examplePlugin\parser\UseSpecSplitter.class

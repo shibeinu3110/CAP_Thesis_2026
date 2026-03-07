@@ -31,13 +31,15 @@ public class RetakeConstraintType2Generator implements RetakeConstraintGenerator
 
     return """
         context %s inv %s:
-            self.failedCourses->forAll(%s |
+            %s.%s->forAll(%s |
                 %s
                 implies %s
             )
         """.formatted(
         contextClass,
         invariantName,
+        rc2.rolePath,
+        rc2.targetAssoc,
         var1,
         ifCondition,
         existsCondition

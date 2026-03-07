@@ -170,6 +170,25 @@ public class UseUtils {
     return false;
   }
 
+  /**
+   * Check length of params in specific conditions, such as ifPart, checkForExi... and whatever conditions that we will have in the future
+   *
+   * Length should be equal to the length of the key list, which means all the keys in the list should exist in the specific condition
+     *
+   * @param astInterface
+   * @return
+   */
+  public static boolean hasParamsLengthEqualsTo(ASTInterface astInterface, String param, int length) {
+
+    Object raw = astInterface.args.get(param);
+
+    if (!(raw instanceof List<?> list)) {
+      return false;
+    }
+
+    return list.size() == length;
+  }
+
   public static boolean hasKeyEqualsToValue(ASTInterface astInterface, String key, Object value) {
     if (!hasSpecificKey(astInterface, key)) {
       return false;
