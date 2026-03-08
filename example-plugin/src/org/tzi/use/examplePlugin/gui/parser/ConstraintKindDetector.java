@@ -13,6 +13,7 @@ public class ConstraintKindDetector {
       case "EligibilityConstraint" -> ConstraintKind.ELIGIBILITY;
       case "StatusConstraint" -> ConstraintKind.STATUS;
       case "RetakeConstraint" -> ConstraintKind.RETAKE;
+      case "StructuralConstraint" -> ConstraintKind.STRUCTURAL;
 
       default -> ConstraintKind.UNKNOWN;
     };

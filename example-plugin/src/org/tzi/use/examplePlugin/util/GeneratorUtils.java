@@ -175,13 +175,21 @@ public class GeneratorUtils {
     System.out.println("Last index: " + lastIndex);
 
     return IntStream.range(0, filters.size())
-        .mapToObj(i -> buildSingleAllowedCondition(
-            filters.get(i),
-            scope,
-            i == lastIndex,
-            i == 0,
-            iterator
-        ))
+        .mapToObj(i -> {
+          AttrCondPro c = filters.get(i);
+          if (c.excludesSelf) {
+            System.out.println("Condition excludes self, skipping: " + c);
+            return buildExcludeSelfCondition(c);
+          }
+
+          return buildSingleAllowedCondition(
+              c,
+              scope,
+              i == lastIndex,
+              i == 0,
+              iterator
+          );
+        })
         .collect(Collectors.joining(" and "));
   }
 
@@ -544,6 +552,18 @@ public class GeneratorUtils {
   }
 
 
+  /**
+   * Builds a condition string for excludesSelf condition.
+   * e.g: @AttrCond(attr = "previousSemester", excludesSelf = true) with rolePath equals to "self"
+   * then the generated OCL will be: previousSemester <> self
+   * @param c
+   * @return
+   */
+  private static String buildExcludeSelfCondition(AttrCondPro c) {
+    String attrs = buildAttrPath(c.attrs, null);
+
+    return attrs + " <> self";
+  }
 
 
 

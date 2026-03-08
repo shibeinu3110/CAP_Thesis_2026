@@ -43,4 +43,8 @@ public class CommonAttributes {
 
   // retake constraint specific
   public static final String ATTR_EXISTS = "attrExists";
+
+  // structural constraint specific
+  public static final String CHECK_STRUCTURE = "checkStructure";
+  public static final String EXCLUDE_SELF = "excludesSelf";
 }

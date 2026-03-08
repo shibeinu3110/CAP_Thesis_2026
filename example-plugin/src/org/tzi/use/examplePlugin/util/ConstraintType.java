@@ -8,4 +8,5 @@ public class ConstraintType {
   public static final String TIME_CONSTRAINT = "TimeConstraint";
   public static final String STATUS_CONSTRAINT = "StatusConstraint";
   public static final String RETAKE_CONSTRAINT = "RetakeConstraint";
+  public static final String STRUCTURAL_CONSTRAINT = "StructuralConstraint";
 }

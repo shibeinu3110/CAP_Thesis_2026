@@ -9,6 +9,7 @@ org\tzi\use\examplePlugin\metamodel\retake_constraint\type3\RetakeConstraintType
 org\tzi\use\examplePlugin\metamodel\sum_constraint\SumConstraintDetector.class
 org\tzi\use\examplePlugin\metamodel\time_constraint\type2\TimeConstraintType2Parser.class
 org\tzi\use\examplePlugin\metamodel\eligibility_constraint\RootScope.class
+org\tzi\use\examplePlugin\metamodel\structural_constraint\type1\StructuralConstraintType1.class
 org\tzi\use\examplePlugin\util\CapTypeStorage.class
 org\tzi\use\examplePlugin\ExamplePluginAction.class
 org\tzi\use\examplePlugin\use\CAPToOCLVisitor.class
@@ -49,11 +50,14 @@ org\tzi\use\examplePlugin\gui\management\CapDiagramPanel.class
 org\tzi\use\examplePlugin\metamodel\size_constraint\SizeConstraintType.class
 org\tzi\use\examplePlugin\parser\CAPLexer.class
 org\tzi\use\examplePlugin\metamodel\sum_constraint\type1\SumConstraintType1Generator.class
+org\tzi\use\examplePlugin\metamodel\structural_constraint\type1\StructuralConstraintType1Generator.class
+org\tzi\use\examplePlugin\metamodel\structural_constraint\StructuralConstraintDetector.class
 org\tzi\use\examplePlugin\metamodel\eligibility_constraint\type4\EligibilityConstraintType4.class
 org\tzi\use\examplePlugin\metamodel\status_constraint\type1\StatusConstraintType1Generator.class
 org\tzi\use\examplePlugin\metamodel\sum_constraint\type3_4\SumConstraintType3_4.class
 org\tzi\use\examplePlugin\metamodel\eligibility_constraint\type2\EligibilityConstraintType2Generator.class
 org\tzi\use\examplePlugin\metamodel\AttrCond.class
+org\tzi\use\examplePlugin\metamodel\structural_constraint\StructuralConstraintInterface.class
 org\tzi\use\examplePlugin\metamodel\schedule_constraint\ScheduleConstraintDetector.class
 org\tzi\use\examplePlugin\util\FileUtils.class
 org\tzi\use\examplePlugin\metamodel\size_constraint\SizeConstraintDetector.class
@@ -73,11 +77,14 @@ org\tzi\use\examplePlugin\model\CAPSelect.class
 org\tzi\use\examplePlugin\metamodel\schedule_constraint\type2\ScheduleConstraintType2Generator.class
 org\tzi\use\examplePlugin\gui\other\CapTableModel.class
 org\tzi\use\examplePlugin\metamodel\schedule_constraint\type3\ScheduleConstraintType3Generator.class
+org\tzi\use\examplePlugin\metamodel\structural_constraint\StructuralConstraintExecutor.class
 org\tzi\use\examplePlugin\gui\parse_file\FileParserPanel.class
+org\tzi\use\examplePlugin\metamodel\structural_constraint\StructuralConstraintParser.class
 org\tzi\use\examplePlugin\gui\other\QuadConsumer.class
 org\tzi\use\examplePlugin\util\GeneratorUtils$1.class
 org\tzi\use\examplePlugin\ExamplePlugin.class
 org\tzi\use\examplePlugin\model\CAPExpr.class
+org\tzi\use\examplePlugin\metamodel\structural_constraint\StructuralConstraintType.class
 org\tzi\use\examplePlugin\metamodel\eligibility_constraint\type1\EligibilityConstraintType1.class
 org\tzi\use\examplePlugin\util\CommonVar.class
 org\tzi\use\examplePlugin\metamodel\time_constraint\type1\TimeConstraintType1Parser.class
@@ -98,6 +105,7 @@ org\tzi\use\examplePlugin\metamodel\schedule_constraint\type2\ScheduleConstraint
 org\tzi\use\examplePlugin\util\ASTPrinter.class
 org\tzi\use\examplePlugin\gui\management\CapDiagramView.class
 org\tzi\use\examplePlugin\metamodel\schedule_constraint\type3\ScheduleConstraintType3.class
+org\tzi\use\examplePlugin\metamodel\structural_constraint\type1\StructuralConstraintType1Parser.class
 org\tzi\use\examplePlugin\metamodel\retake_constraint\RetakeConstraintGenerator.class
 org\tzi\use\examplePlugin\gui\parse_file\LineNumberView.class
 org\tzi\use\examplePlugin\metamodel\eligibility_constraint\type5\EligibilityConstraintType5.class
@@ -141,6 +149,7 @@ org\tzi\use\examplePlugin\model\CAPCompare.class
 org\tzi\use\examplePlugin\metamodel\sum_constraint\type2\SumConstraintType2Generator.class
 org\tzi\use\examplePlugin\metamodel\eligibility_constraint\EligibilityConstraintDetector.class
 org\tzi\use\examplePlugin\metamodel\OperatorEnum.class
+org\tzi\use\examplePlugin\metamodel\structural_constraint\StructuralConstraintGenerator.class
 org\tzi\use\examplePlugin\metamodel\schedule_constraint\ScheduleConstraintGenerator.class
 org\tzi\use\examplePlugin\metamodel\schedule_constraint\ScheduleConstraintType.class
 org\tzi\use\examplePlugin\metamodel\schedule_constraint\type3\LimitAttribute.class

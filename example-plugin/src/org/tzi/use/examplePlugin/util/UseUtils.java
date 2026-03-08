@@ -6,6 +6,7 @@ import org.tzi.use.examplePlugin.metamodel.retake_constraint.RetakeConstraintExe
 import org.tzi.use.examplePlugin.metamodel.schedule_constraint.ScheduleConstraintExecutor;
 import org.tzi.use.examplePlugin.metamodel.size_constraint.SizeConstraintExecutor;
 import org.tzi.use.examplePlugin.metamodel.status_constraint.StatusConstraintExecutor;
+import org.tzi.use.examplePlugin.metamodel.structural_constraint.StructuralConstraintExecutor;
 import org.tzi.use.examplePlugin.metamodel.sum_constraint.SumConstraintExecutor;
 import org.tzi.use.examplePlugin.metamodel.time_constraint.TimeConstraintExecutor;
 import org.tzi.use.examplePlugin.parser.CAPCompiler;
@@ -124,6 +125,8 @@ public class UseUtils {
       if (o instanceof ASTInterface cond) {
         Map<String, Object> args = cond.args;
 
+        System.out.println("Value is: " + asString(args.get(key)) + ", expected value is: " + value);
+
         if (value.equals(asString(args.get(key)))) {
           return true;
         }
@@ -179,12 +182,14 @@ public class UseUtils {
    * @return
    */
   public static boolean hasParamsLengthEqualsTo(ASTInterface astInterface, String param, int length) {
-
+    System.out.println("Checking if parameter '" + param + "' has length equals to " + length + "...");
     Object raw = astInterface.args.get(param);
 
     if (!(raw instanceof List<?> list)) {
       return false;
     }
+
+    System.out.println("Parameter '" + param + "' has length: " + list.size());
 
     return list.size() == length;
   }
@@ -333,6 +338,17 @@ public class UseUtils {
     if (type.equalsIgnoreCase(ConstraintType.RETAKE_CONSTRAINT)) {
       System.out.println("This is a Retake Constraint.");
       return RetakeConstraintExecutor.execute(
+          astInterface,
+          ASTToJSONConverter.toJsonObject(astInterface),
+          context,
+          name
+      );
+    }
+
+    // Structural constraint
+    if (type.equalsIgnoreCase(ConstraintType.STRUCTURAL_CONSTRAINT)) {
+      System.out.println("This is a Structural Constraint.");
+      return StructuralConstraintExecutor.execute(
           astInterface,
           ASTToJSONConverter.toJsonObject(astInterface),
           context,

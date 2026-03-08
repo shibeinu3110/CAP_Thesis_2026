@@ -8,5 +8,6 @@ public enum ConstraintKind {
   SIZE,
   STATUS,
   RETAKE,
+  STRUCTURAL,
   UNKNOWN,
 }

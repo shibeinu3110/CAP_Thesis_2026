@@ -117,6 +117,15 @@ D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\status_constr
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\status_constraint\type5\StatusConstraintType5.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\status_constraint\type5\StatusConstraintType5Generator.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\status_constraint\type5\StatusConstraintType5Parser.java
+D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\structural_constraint\StructuralConstraintDetector.java
+D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\structural_constraint\StructuralConstraintExecutor.java
+D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\structural_constraint\StructuralConstraintGenerator.java
+D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\structural_constraint\StructuralConstraintInterface.java
+D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\structural_constraint\StructuralConstraintParser.java
+D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\structural_constraint\StructuralConstraintType.java
+D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\structural_constraint\type1\StructuralConstraintType1.java
+D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\structural_constraint\type1\StructuralConstraintType1Generator.java
+D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\structural_constraint\type1\StructuralConstraintType1Parser.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\sum_constraint\SumConstraintDetector.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\sum_constraint\SumConstraintExecutor.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\sum_constraint\SumConstraintGenerator.java

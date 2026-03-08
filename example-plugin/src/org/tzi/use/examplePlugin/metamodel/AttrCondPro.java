@@ -17,6 +17,8 @@ public class AttrCondPro {
   // course is the value @AttrCond(attr="enrolments", attrExists="course", matchAttr="self") }
   public String insideExistValue;
 
+  public boolean excludesSelf;
+
   public enum Type {
     MIN_LIM,
     MAX_LIM,

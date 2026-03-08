@@ -237,6 +237,9 @@ import org.tzi.use.examplePlugin.metamodel.size_constraint.SizeConstraintType;
 import org.tzi.use.examplePlugin.metamodel.status_constraint.StatusConstraintDetector;
 import org.tzi.use.examplePlugin.metamodel.status_constraint.StatusConstraintExecutor;
 import org.tzi.use.examplePlugin.metamodel.status_constraint.StatusConstraintType;
+import org.tzi.use.examplePlugin.metamodel.structural_constraint.StructuralConstraintDetector;
+import org.tzi.use.examplePlugin.metamodel.structural_constraint.StructuralConstraintExecutor;
+import org.tzi.use.examplePlugin.metamodel.structural_constraint.StructuralConstraintType;
 import org.tzi.use.examplePlugin.metamodel.sum_constraint.SumConstraintExecutor;
 import org.tzi.use.examplePlugin.metamodel.sum_constraint.SumConstraintType;
 import org.tzi.use.examplePlugin.metamodel.sum_constraint.SumConstraintDetector;
@@ -445,6 +448,12 @@ public class CapPaserPanel extends JPanel {
           typeLabel.setText("RetakeConstraint: " + retakeType);
         }
 
+        case STRUCTURAL -> {
+          StructuralConstraintDetector structuralConstraintDetector = new StructuralConstraintDetector();
+          StructuralConstraintType structuralType = structuralConstraintDetector.detectType(ast);
+          typeLabel.setText("StructuralConstraint: " + structuralType);
+        }
+
         default -> {
           typeLabel.setText("Unsupported constraint");
         }
@@ -593,6 +602,17 @@ public class CapPaserPanel extends JPanel {
     if (type.equalsIgnoreCase(ConstraintType.RETAKE_CONSTRAINT)) {
       System.out.println("This is a Retake Constraint.");
       return RetakeConstraintExecutor.execute(
+          astInterface,
+          ASTToJSONConverter.toJsonObject(astInterface),
+          context,
+          name
+      );
+    }
+
+    // Structural Constraint
+    if (type.equalsIgnoreCase(ConstraintType.STRUCTURAL_CONSTRAINT)) {
+      System.out.println("This is a Structural Constraint.");
+      return StructuralConstraintExecutor.execute(
           astInterface,
           ASTToJSONConverter.toJsonObject(astInterface),
           context,

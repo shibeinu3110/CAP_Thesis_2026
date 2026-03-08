@@ -40,7 +40,7 @@ public class FileUtils {
   public static void deleteCapFolder(String name) throws IOException {
     Path target = CAP_ROOT.resolve(name);
 
-    // Không tồn tại → bỏ qua
+    // if the target folder does not exist or is not a directory, throw an exception
     if (!Files.exists(target) || !Files.isDirectory(target)) {
       throw new IOException("CAP folder not found: " + name);
     }

@@ -14,6 +14,7 @@ import java.util.Map;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ARGS;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ATTR_EXISTS;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CHECK_FOR_EXI;
+import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.EXCLUDE_SELF;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.RATIO;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.SCALE;
 import static org.tzi.use.examplePlugin.util.CommonAttributes.FIX_ATTR;
@@ -228,6 +229,9 @@ public class ParserUtil {
       c.refs = ParserUtil.parseRefsFromCondArgs(condArgs);
       c.neg = Boolean.TRUE.equals(condArgs.get("neg"));
       c.insideExistValue = asString(condArgs.get(ATTR_EXISTS));
+      c.excludesSelf = Boolean.parseBoolean(
+          String.valueOf(condArgs.get(EXCLUDE_SELF))
+      );
 
       // scale or ratio
       Object scale = condArgs.get(SCALE);
