@@ -15,6 +15,7 @@ import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ARGS;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ATTR_EXISTS;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CHECK_FOR_EXI;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.EXCLUDE_SELF;
+import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.IS_UNDEFINED;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.RATIO;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.SCALE;
 import static org.tzi.use.examplePlugin.util.CommonAttributes.FIX_ATTR;
@@ -231,6 +232,9 @@ public class ParserUtil {
       c.insideExistValue = asString(condArgs.get(ATTR_EXISTS));
       c.excludesSelf = Boolean.parseBoolean(
           String.valueOf(condArgs.get(EXCLUDE_SELF))
+      );
+      c.isUndefined  = Boolean.parseBoolean(
+          String.valueOf(condArgs.get(IS_UNDEFINED))
       );
 
       // scale or ratio

@@ -18,6 +18,7 @@ public class AttrCondPro {
   public String insideExistValue;
 
   public boolean excludesSelf;
+  public boolean isUndefined;
 
   public enum Type {
     MIN_LIM,

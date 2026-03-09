@@ -7,6 +7,7 @@ import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CHECK_STRUCTU
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.COLLECT;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.EXCLUDE_SELF;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.IF_PART;
+import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.IS_UNDEFINED;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.MATCH_ATTR;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.MAX;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.SUM_ATTR;
@@ -30,6 +31,9 @@ public class StructuralConstraintDetector {
         && hasKeyEqualsToValueInSpecificParam(astInterface, EXCLUDE_SELF, "true", CHECK_STRUCTURE)) {
       // if checkStructure has only 1 param and that param has excludesSelf == "true", then it's type 1
       return StructuralConstraintType.TYPE1;
+    } else if (hasKeyEqualsToValueInSpecificParam(astInterface, IS_UNDEFINED, "true", CHECK_STRUCTURE)) {
+      // if checkStructure has only 1 param and that param has excludesSelf == "false", then it's type 2
+      return StructuralConstraintType.TYPE2;
     } else {
       System.out.println("Could not detect a specific RetakeConstraintType based on AST attributes. Defaulting to UNSUPPORTED.");
     }

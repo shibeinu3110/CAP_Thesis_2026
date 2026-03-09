@@ -23,7 +23,7 @@ public class StructuralConstraintType1Parser implements StructuralConstraintPars
 
   @Override
   public StructuralConstraintType1 parse(Map<String, Object> astJson) {
-    StructuralConstraintType1 rc1 = new StructuralConstraintType1();
+    StructuralConstraintType1 sc1 = new StructuralConstraintType1();
 
     System.out.println("Parsing StructuralConstraintType1...");
 
@@ -31,11 +31,11 @@ public class StructuralConstraintType1Parser implements StructuralConstraintPars
     Map<String, Object> args = (Map<String, Object>) astJson.get(ARGS);
 
     // assocCls and rolePath
-    rc1.assocCls = (String) args.get(ASSOC_CLS);
-    rc1.rolePath = (String) args.get(ROLE_PATH);
+    sc1.assocCls = (String) args.get(ASSOC_CLS);
+    sc1.rolePath = (String) args.get(ROLE_PATH);
 
-    rc1.checkStructure = parseCheckForExi(args, CHECK_STRUCTURE);
+    sc1.checkStructure = parseCheckForExi(args, CHECK_STRUCTURE);
 
-    return rc1;
+    return sc1;
   }
 }

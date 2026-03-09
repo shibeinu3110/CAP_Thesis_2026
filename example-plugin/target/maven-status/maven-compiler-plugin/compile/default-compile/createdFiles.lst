@@ -53,10 +53,12 @@ org\tzi\use\examplePlugin\metamodel\sum_constraint\type1\SumConstraintType1Gener
 org\tzi\use\examplePlugin\metamodel\structural_constraint\type1\StructuralConstraintType1Generator.class
 org\tzi\use\examplePlugin\metamodel\structural_constraint\StructuralConstraintDetector.class
 org\tzi\use\examplePlugin\metamodel\eligibility_constraint\type4\EligibilityConstraintType4.class
+org\tzi\use\examplePlugin\metamodel\structural_constraint\type2\StructuralConstraintType2Generator.class
 org\tzi\use\examplePlugin\metamodel\status_constraint\type1\StatusConstraintType1Generator.class
 org\tzi\use\examplePlugin\metamodel\sum_constraint\type3_4\SumConstraintType3_4.class
 org\tzi\use\examplePlugin\metamodel\eligibility_constraint\type2\EligibilityConstraintType2Generator.class
 org\tzi\use\examplePlugin\metamodel\AttrCond.class
+org\tzi\use\examplePlugin\metamodel\structural_constraint\type2\StructuralConstraintType2.class
 org\tzi\use\examplePlugin\metamodel\structural_constraint\StructuralConstraintInterface.class
 org\tzi\use\examplePlugin\metamodel\schedule_constraint\ScheduleConstraintDetector.class
 org\tzi\use\examplePlugin\util\FileUtils.class
@@ -169,6 +171,7 @@ org\tzi\use\examplePlugin\metamodel\eligibility_constraint\EligibilityConstraint
 org\tzi\use\examplePlugin\metamodel\sum_constraint\SumConstraintExecutor.class
 org\tzi\use\examplePlugin\gui\type\CapTypeEditorPanel.class
 org\tzi\use\examplePlugin\metamodel\schedule_constraint\type2\ScheduleConstraintType2.class
+org\tzi\use\examplePlugin\metamodel\structural_constraint\type2\StructuralConstraintType2Parser.class
 org\tzi\use\examplePlugin\gui\other\CapNameCellRenderer.class
 org\tzi\use\examplePlugin\metamodel\size_constraint\SizeConstraintParser.class
 org\tzi\use\examplePlugin\metamodel\time_constraint\type2\TimeConstraintType2.class

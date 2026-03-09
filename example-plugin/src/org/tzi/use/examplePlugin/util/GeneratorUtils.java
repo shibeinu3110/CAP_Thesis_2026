@@ -180,11 +180,15 @@ public class GeneratorUtils {
           if (c.excludesSelf) {
             System.out.println("Condition excludes self, skipping: " + c);
             return buildExcludeSelfCondition(c);
+          } else if (c.isUndefined) {
+            System.out.println("Condition is undefined, skipping: " + c);
+            return buildAttrPath(c.attrs, null) + ".oclIsUndefined()";
           }
 
           return buildSingleAllowedCondition(
               c,
-              scope,
+              // if scope is null, we treat it as ALL
+              scope != null ? scope : RootScope.ALL,
               i == lastIndex,
               i == 0,
               iterator
@@ -272,9 +276,9 @@ public class GeneratorUtils {
 
     String cond;
     switch (c.type) {
-      case MIN_LIM, MIN_LIM_ATTR, MIN -> cond = path + " < " + right;
+      case MIN_LIM, MIN_LIM_ATTR, MIN, MIN_ATTR -> cond = path + " < " + right;
 
-      case MAX_LIM, MAX_LIM_ATTR, MAX -> cond = path + " > " + right;
+      case MAX_LIM, MAX_LIM_ATTR, MAX, MAX_ATTR -> cond = path + " > " + right;
 
       case MATCH_ATTR ->  cond = path + " = " + right;
 

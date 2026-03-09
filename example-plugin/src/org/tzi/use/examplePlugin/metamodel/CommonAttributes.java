@@ -47,4 +47,5 @@ public class CommonAttributes {
   // structural constraint specific
   public static final String CHECK_STRUCTURE = "checkStructure";
   public static final String EXCLUDE_SELF = "excludesSelf";
+  public static final String IS_UNDEFINED = "isUndefined";
 }

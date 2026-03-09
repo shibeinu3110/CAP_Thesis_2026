@@ -126,6 +126,9 @@ D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\structural_co
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\structural_constraint\type1\StructuralConstraintType1.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\structural_constraint\type1\StructuralConstraintType1Generator.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\structural_constraint\type1\StructuralConstraintType1Parser.java
+D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\structural_constraint\type2\StructuralConstraintType2.java
+D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\structural_constraint\type2\StructuralConstraintType2Generator.java
+D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\structural_constraint\type2\StructuralConstraintType2Parser.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\sum_constraint\SumConstraintDetector.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\sum_constraint\SumConstraintExecutor.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\sum_constraint\SumConstraintGenerator.java

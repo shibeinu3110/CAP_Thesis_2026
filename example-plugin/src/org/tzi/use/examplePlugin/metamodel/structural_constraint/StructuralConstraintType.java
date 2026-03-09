@@ -2,10 +2,12 @@ package org.tzi.use.examplePlugin.metamodel.structural_constraint;
 
 import org.tzi.use.examplePlugin.metamodel.structural_constraint.type1.StructuralConstraintType1Generator;
 import org.tzi.use.examplePlugin.metamodel.structural_constraint.type1.StructuralConstraintType1Parser;
+import org.tzi.use.examplePlugin.metamodel.structural_constraint.type2.StructuralConstraintType2Generator;
+import org.tzi.use.examplePlugin.metamodel.structural_constraint.type2.StructuralConstraintType2Parser;
 
 public enum StructuralConstraintType {
   TYPE1(new StructuralConstraintType1Parser(), new StructuralConstraintType1Generator()),
-  TYPE2(null, null),
+  TYPE2(new StructuralConstraintType2Parser(), new StructuralConstraintType2Generator()),
   TYPE3(null, null),
   TYPE4(null, null),
   TYPE5(null, null),
