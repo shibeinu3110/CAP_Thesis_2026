@@ -169,8 +169,8 @@ public class FileParserPanel extends JPanel {
       return;
     }
 
-    if (inputFile == null) {
-      JOptionPane.showMessageDialog(this, "Please upload a file first!");
+    if (leftTextArea.getText().trim().isEmpty()) {
+      JOptionPane.showMessageDialog(this, "Please upload a file or paste text!");
       return;
     }
 

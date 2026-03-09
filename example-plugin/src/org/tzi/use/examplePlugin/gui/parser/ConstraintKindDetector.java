@@ -5,15 +5,15 @@ import org.tzi.use.examplePlugin.ast.ASTInterface;
 public class ConstraintKindDetector {
 
   public static ConstraintKind detect(String type) {
-    return switch (type) {
-      case "TimeConstraint" -> ConstraintKind.TIME;
-      case "SumConstraint" -> ConstraintKind.SUM;
-      case "ScheduleConstraint" -> ConstraintKind.SCHEDULE;
-      case "SizeConstraint" -> ConstraintKind.SIZE;
-      case "EligibilityConstraint" -> ConstraintKind.ELIGIBILITY;
-      case "StatusConstraint" -> ConstraintKind.STATUS;
-      case "RetakeConstraint" -> ConstraintKind.RETAKE;
-      case "StructuralConstraint" -> ConstraintKind.STRUCTURAL;
+    return switch (type.toLowerCase()) {
+      case "timeconstraint" -> ConstraintKind.TIME;
+      case "sumconstraint" -> ConstraintKind.SUM;
+      case "scheduleconstraint" -> ConstraintKind.SCHEDULE;
+      case "sizeconstraint" -> ConstraintKind.SIZE;
+      case "eligibilityconstraint" -> ConstraintKind.ELIGIBILITY;
+      case "statusconstraint" -> ConstraintKind.STATUS;
+      case "retakeconstraint" -> ConstraintKind.RETAKE;
+      case "structuralconstraint" -> ConstraintKind.STRUCTURAL;
 
       default -> ConstraintKind.UNKNOWN;
     };

@@ -4,13 +4,14 @@ import org.tzi.use.examplePlugin.metamodel.structural_constraint.type1.Structura
 import org.tzi.use.examplePlugin.metamodel.structural_constraint.type1.StructuralConstraintType1Parser;
 import org.tzi.use.examplePlugin.metamodel.structural_constraint.type2.StructuralConstraintType2Generator;
 import org.tzi.use.examplePlugin.metamodel.structural_constraint.type2.StructuralConstraintType2Parser;
+import org.tzi.use.examplePlugin.metamodel.structural_constraint.type4.StructuralConstraintType4Generator;
+import org.tzi.use.examplePlugin.metamodel.structural_constraint.type4.StructuralConstraintType4Parser;
 
 public enum StructuralConstraintType {
   TYPE1(new StructuralConstraintType1Parser(), new StructuralConstraintType1Generator()),
   TYPE2(new StructuralConstraintType2Parser(), new StructuralConstraintType2Generator()),
   TYPE3(null, null),
-  TYPE4(null, null),
-  TYPE5(null, null),
+  TYPE4(new StructuralConstraintType4Parser(), new StructuralConstraintType4Generator()),
   UNSUPPORTED(null, null);
 
   public final StructuralConstraintParser<?> parser;

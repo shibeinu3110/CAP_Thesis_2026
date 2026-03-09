@@ -1,74 +1,36 @@
--- $ProjectHeader: use 0.393 Wed, 16 May 2007 14:10:28 +0200 opti $
+model EnrollmentSystem
 
--- Example illustrating pre- and postconditions
-
-model Employee
-
--- classes
-
-class Person
+-- Định nghĩa lớp Course (Khóa học)
+class Course
 attributes
-  name : String
-  age : Integer
-  salary : Real
-operations
-  raiseSalary(rate : Real) : Real
+    name : String
 end
 
-class Company
+-- Định nghĩa lớp Student (Sinh viên)
+class Student
 attributes
-  name : String
-  location : String
-operations
-  hire(p : Person)
-  fire(p : Person)
+    name : String
 end
 
--- associations
-
-association WorksFor between
-  Person[*] role employee
-  Company[0..1] role employer
+-- Định nghĩa lớp Enrolment (Đăng ký) làm lớp trung gian
+class Enrolment
+attributes
+    grade : Real
 end
 
--- constraints
+-- Thiết lập mối quan hệ
+association Participation between
+    Student[1] role student
+    Enrolment[*] role enrolments
+end
 
+association Subject between
+    Enrolment[*] role enrolments
+    Course[1] role course
+end
+
+-- Ràng buộc OCL
 constraints
-
-context Person inv ageCheck:
-  self.age >= 18
-
-context Person inv checkLocation:
-  self.employer.location = 'Hanoi'
-
-context Person::raiseSalary(rate : Real) : Real
-  post raiseSalaryPost: 
-    salary = salary@pre * (1.0 + rate)
-  post resultPost:
-    result = salary
-
-context Company::hire(p : Person)
-  pre  hirePre1: p.isDefined()
-  pre  hirePre2: employee->excludes(p)
-  post hirePost: employee->includes(p)
-
-context Company::fire(p : Person)
-  pre  firePre:  employee->includes(p)
-  post firePost: employee->excludes(p)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+context Student
+    inv UniqueEnrolmentPerCourse:
+        self.enrolments->isUnique(e | e.course)

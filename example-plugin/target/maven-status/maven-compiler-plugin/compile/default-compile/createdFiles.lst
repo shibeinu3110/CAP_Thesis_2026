@@ -4,6 +4,7 @@ org\tzi\use\examplePlugin\metamodel\sum_constraint\SumConstraintInterface.class
 org\tzi\use\examplePlugin\gui\parser\CapParserView.class
 org\tzi\use\examplePlugin\gui\parser\ConstraintKind.class
 org\tzi\use\examplePlugin\metamodel\retake_constraint\RetakeConstraintParser.class
+org\tzi\use\examplePlugin\metamodel\structural_constraint\type4\StructuralConstraintType4Parser.class
 org\tzi\use\examplePlugin\metamodel\eligibility_constraint\type4\EligibilityConstraintType4Generator.class
 org\tzi\use\examplePlugin\metamodel\retake_constraint\type3\RetakeConstraintType3Parser.class
 org\tzi\use\examplePlugin\metamodel\sum_constraint\SumConstraintDetector.class
@@ -30,6 +31,7 @@ org\tzi\use\examplePlugin\gui\type\CapTypePopup.class
 org\tzi\use\examplePlugin\metamodel\sum_constraint\type1\SumConstraintType1Parser.class
 org\tzi\use\examplePlugin\metamodel\sum_constraint\type1\SumConstraintType1.class
 org\tzi\use\examplePlugin\metamodel\sum_constraint\type2\SumConstraintType2Parser.class
+org\tzi\use\examplePlugin\metamodel\structural_constraint\type4\StructuralConstraintType4Generator.class
 org\tzi\use\examplePlugin\metamodel\size_constraint\SizeConstraintExecutor.class
 org\tzi\use\examplePlugin\metamodel\schedule_constraint\ScheduleConstraintParser.class
 org\tzi\use\examplePlugin\metamodel\status_constraint\StatusConstraintParser.class
@@ -59,6 +61,7 @@ org\tzi\use\examplePlugin\metamodel\sum_constraint\type3_4\SumConstraintType3_4.
 org\tzi\use\examplePlugin\metamodel\eligibility_constraint\type2\EligibilityConstraintType2Generator.class
 org\tzi\use\examplePlugin\metamodel\AttrCond.class
 org\tzi\use\examplePlugin\metamodel\structural_constraint\type2\StructuralConstraintType2.class
+org\tzi\use\examplePlugin\metamodel\structural_constraint\type4\StructuralConstraintType4.class
 org\tzi\use\examplePlugin\metamodel\structural_constraint\StructuralConstraintInterface.class
 org\tzi\use\examplePlugin\metamodel\schedule_constraint\ScheduleConstraintDetector.class
 org\tzi\use\examplePlugin\util\FileUtils.class
