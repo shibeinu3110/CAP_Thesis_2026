@@ -6,6 +6,7 @@ import java.util.Map;
 public class ASTInterface {
   public String name;
   public Map<String, Object> args = new LinkedHashMap<>();
+  public String contextClass;
 
 
   public void setName(String name) {

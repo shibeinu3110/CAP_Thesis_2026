@@ -3,7 +3,7 @@ model EnrollmentSystem
 -- Định nghĩa lớp Course (Khóa học)
 class Course
 attributes
-    name : String
+    name : Stri
 end
 
 -- Định nghĩa lớp Student (Sinh viên)
@@ -29,8 +29,8 @@ association Subject between
     Course[1] role course
 end
 
--- Ràng buộc OCL
 constraints
-context Student
-    inv UniqueEnrolmentPerCourse:
-        self.enrolments->isUnique(e | e.course)
+
+context Student inv ConstraintName:
+  self.enrolments -> isUnique(e | e.course)
+

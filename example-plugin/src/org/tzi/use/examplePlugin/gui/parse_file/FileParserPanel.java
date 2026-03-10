@@ -56,7 +56,7 @@ public class FileParserPanel extends JPanel {
     // ===== RIGHT TEXT AREA =====
     rightTextArea = new JTextArea();
     rightTextArea.setFont(textFont);
-    rightTextArea.setEditable(false);
+    rightTextArea.setEditable(true);
 
     JScrollPane rightScroll = new JScrollPane(rightTextArea);
     rightScroll.setBorder(BorderFactory.createTitledBorder("Output File"));

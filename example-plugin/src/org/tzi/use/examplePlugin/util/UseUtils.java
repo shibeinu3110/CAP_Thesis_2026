@@ -38,6 +38,7 @@ public class UseUtils {
       ASTInterface astInterface =
           CAPCompiler.compileSpecification(tempFile.toString(), err);
 
+      System.out.println("Parsed ASTInterface context class: " + astInterface.contextClass);
       // 4. Optional: delete temp file
       Files.deleteIfExists(tempFile);
 
