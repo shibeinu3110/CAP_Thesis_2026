@@ -257,6 +257,7 @@ import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class CapPaserPanel extends JPanel {
 
@@ -386,13 +387,7 @@ public class CapPaserPanel extends JPanel {
       return;
     }
 
-    String context = getRealText(contextField);
-    String name = getRealText(nameField);
-
-    if (context.isBlank() || name.isBlank()) {
-      showWarn("Please input Context and OCL Name");
-      return;
-    }
+//    String name = getRealText(nameField);
 
     try {
       ASTInterface ast = UseUtils.parseASTFromText(annotation);
@@ -400,8 +395,32 @@ public class CapPaserPanel extends JPanel {
       System.out.println("Parsed AST:");
       ASTPrinter.print(ast);
 
-//      SumConstraintDetector detector = new SumConstraintDetector();
-//      SumConstraintType type = detector.detectType(ast);
+      // get context from AST
+      String context = ast.contextClass;
+
+      // (1) CONTEXT
+      // if context is empty, try to get from input field
+      if (context == null || context.isBlank()) {
+        context = getRealText(contextField);
+      }
+
+      if (context == null || context.isBlank()) {
+        showWarn("Please input Context");
+        return;
+      }
+
+      // (2) NAME
+      // If name is empty, try to generate from AST
+      String name = getRealText(nameField);
+      if (name == null || name.isBlank()) {
+        name = generateNameFromAST(ast, context);
+      }
+
+      if (name == null || name.isBlank()) {
+        showWarn("Please input Name");
+        return;
+      }
+
       String type = ASTToJSONConverter.toJsonObject(ast).get(CommonAttributes.TYPE).toString();
       ConstraintKind kind = ConstraintKindDetector.detect(type);
 
@@ -481,6 +500,23 @@ public class CapPaserPanel extends JPanel {
           JOptionPane.ERROR_MESSAGE
       );
     }
+  }
+
+  /**
+   * Generate OCL name from AST automatically if not provided by user.
+   * @param ast
+   * @return
+   */
+  private String generateNameFromAST(ASTInterface ast, String context) {
+
+    String type = ASTToJSONConverter.toJsonObject(ast)
+        .get(CommonAttributes.TYPE).toString();
+
+    context = (context == null || context.isBlank()) ? "UnknownContext" : context.trim();
+
+    int random = ThreadLocalRandom.current().nextInt(1000, 9999);
+
+    return type + "_" + context + "_" + random;
   }
 
   /* =========================================================
