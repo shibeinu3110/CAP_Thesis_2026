@@ -448,6 +448,13 @@ public class FileParserPanel extends JPanel {
     return -1;
   }
 
+  /**
+   * Parse the input USE text into an ASTModel, which contains the CAP annotations and their context (the nearest class below them).
+   * @param useText the input USE specification text, which may contain CAP annotations
+   * @return the ASTModel containing the CAP annotations and their context
+   * @throws Exception
+   */
+
   private ASTModel parseAST(String useText) throws Exception {
 
     ANTLRInputStream input =
@@ -472,6 +479,12 @@ public class FileParserPanel extends JPanel {
     return ast;
   }
 
+  /**
+   * Assign context class to each CAP annotation in the ASTModel. The context class is determined by finding the nearest class declaration below the annotation in the source code.
+   * The line numbers of the annotation and class declarations are used to determine the nearest class. If an annotation cannot be assigned a context class, an error message will be shown.
+   *
+   * @param model the ASTModel containing the CAP annotations and class declarations
+   */
   public void assignContext(ASTModel model) {
 
     List<CAPAnnotation> caps = model.getCapAnnotations();
