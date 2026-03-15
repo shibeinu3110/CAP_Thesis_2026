@@ -66,7 +66,6 @@ org\tzi\use\examplePlugin\metamodel\structural_constraint\StructuralConstraintIn
 org\tzi\use\examplePlugin\metamodel\schedule_constraint\ScheduleConstraintDetector.class
 org\tzi\use\examplePlugin\util\FileUtils.class
 org\tzi\use\examplePlugin\metamodel\size_constraint\SizeConstraintDetector.class
-org\tzi\use\examplePlugin\parser\CAPLexer$DFA11.class
 org\tzi\use\examplePlugin\ast\ASTInterface.class
 org\tzi\use\examplePlugin\metamodel\retake_constraint\RetakeConstraintInterface.class
 org\tzi\use\examplePlugin\metamodel\status_constraint\StatusConstraintExecutor.class
@@ -152,6 +151,7 @@ org\tzi\use\examplePlugin\metamodel\size_constraint\type1\SizeConstraintType1Gen
 org\tzi\use\examplePlugin\use\ASTToJSONConverter.class
 org\tzi\use\examplePlugin\model\CAPCompare.class
 org\tzi\use\examplePlugin\metamodel\sum_constraint\type2\SumConstraintType2Generator.class
+org\tzi\use\examplePlugin\parser\CAPLexer$DFA12.class
 org\tzi\use\examplePlugin\metamodel\eligibility_constraint\EligibilityConstraintDetector.class
 org\tzi\use\examplePlugin\metamodel\OperatorEnum.class
 org\tzi\use\examplePlugin\metamodel\structural_constraint\StructuralConstraintGenerator.class

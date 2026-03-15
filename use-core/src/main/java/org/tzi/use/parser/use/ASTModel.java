@@ -78,6 +78,9 @@ public class ASTModel extends ASTAnnotatable {
         fClasses.add(cls);
     }
 
+    public List<ASTClass> getClasses() {
+    	return fClasses;
+    }
     public void addAssociationClass( ASTAssociationClass assocCls ) {
         fAssociationClasses.add( assocCls );
     }
@@ -101,6 +104,10 @@ public class ASTModel extends ASTAnnotatable {
   public void setCapAnnotations(List<CAPAnnotation> capAnnos) {
       this.capAnnos.clear();
       this.capAnnos.addAll(capAnnos);
+  }
+
+  public List<CAPAnnotation> getCapAnnotations() {
+      return capAnnos;
   }
 	
     public MModel gen(Context ctx) {

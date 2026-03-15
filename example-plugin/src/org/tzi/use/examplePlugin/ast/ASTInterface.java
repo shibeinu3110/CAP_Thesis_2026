@@ -16,4 +16,8 @@ public class ASTInterface {
   public void setArgs(Map<String, Object> args) {
     this.args = args;
   }
+
+  public void setContextClass(String contextClass) {
+    this.contextClass = contextClass;
+  }
 }

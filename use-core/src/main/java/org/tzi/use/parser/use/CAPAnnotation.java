@@ -1,5 +1,7 @@
 package org.tzi.use.parser.use;
 
+import org.antlr.runtime.Token;
+
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,9 +9,24 @@ import java.util.Map;
 public class CAPAnnotation {
   public String name;
   public Map<String, Object> capArgs = new LinkedHashMap<>();
+  public String contextClass;
+  public Token token;
 
   public CAPAnnotation(String name) {
     this.name = name;
+  }
+
+  public CAPAnnotation(String name, Token token) {
+     this.name = name;
+     this.token = token;
+  }
+
+  public Token getToken() {
+    return token;
+  }
+
+  public int getLine() {
+    return token.getLine();
   }
 
   public void addArg(String key, Object value) {
@@ -85,4 +102,19 @@ public class CAPAnnotation {
     return v.toString();
   }
 
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public void setCapArgs(Map<String, Object> capArgs) {
+    this.capArgs = capArgs;
+  }
+
+  public String getContextClass() {
+    return contextClass;
+  }
+
+  public void setContextClass(String contextClass) {
+    this.contextClass = contextClass;
+  }
 }

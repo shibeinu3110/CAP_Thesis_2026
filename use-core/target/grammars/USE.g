@@ -194,13 +194,25 @@ dataTypeDefinition[boolean isAbstract] returns [ASTDataType n]
 generalClassifierDefinition[ASTModel n]
 @init{ 
   boolean isAbstract = false;
+  List<CAPAnnotation> caps = new ArrayList<>();
 }
 :
 	as = annotationSet
-    ( 'abstract' { isAbstract = true; } )? 
-    ( 
-        c  = classDefinition[isAbstract] 
-             { $n.addClass($c.n); $c.n.setAnnotations($as.annotations); }
+    ( 'abstract' { isAbstract = true; } )?
+    (
+        c  = classDefinition[isAbstract]
+         {  $n.addClass($c.n);
+            $c.n.setAnnotations($as.annotations);
+
+            String className = $c.n.getName().getText();
+            for(CAPAnnotation a : caps){
+                a.contextClass = className;
+            }
+
+            $n.setCapAnnotations(caps);
+         }
+
+
       
       | d  = dataTypeDefinition[isAbstract]
              { $n.addDataType($d.n); $d.n.setAnnotations($as.annotations); }
@@ -545,8 +557,8 @@ annotationSet returns [Set<ASTAnnotation> annotations]
 ;
  
 annotation returns [ASTAnnotation n]:
-	AT name=IDENT {$n = new ASTAnnotation($name);} 
-	LPAREN 
+	AT name=IDENT {$n = new ASTAnnotation($name);}
+	LPAREN
 		values = annotationValues { $n.setValues($values.annoValues); }
 	RPAREN
 ;
@@ -627,7 +639,7 @@ capAnnotation returns [CAPAnnotation ann]
         (',' arg=capArg { args.add($arg.entry); })* )?
    ')'
    {
-       $ann = new CAPAnnotation($name.getText());
+       $ann = new CAPAnnotation($name.getText(), $name);
        for(Map.Entry<String,Object> e : args) {
            $ann.addArg(e.getKey(), e.getValue());
        }

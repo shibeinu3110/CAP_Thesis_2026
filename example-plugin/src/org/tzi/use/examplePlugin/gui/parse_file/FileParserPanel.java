@@ -1,12 +1,20 @@
 package org.tzi.use.examplePlugin.gui.parse_file;
 
+import org.antlr.runtime.ANTLRInputStream;
+import org.antlr.runtime.CommonTokenStream;
 import org.tzi.use.examplePlugin.ast.ASTInterface;
 import org.tzi.use.examplePlugin.parser.UseSpecSplitter;
 import org.tzi.use.examplePlugin.use.ASTToJSONConverter;
+import org.tzi.use.parser.ParseErrorHandler;
+import org.tzi.use.parser.use.ASTClass;
+import org.tzi.use.parser.use.ASTModel;
 import org.tzi.use.parser.use.CAPAnnotation;
-import org.tzi.use.parser.use.USECompiler;
+import org.tzi.use.parser.use.USELexer;
+import org.tzi.use.parser.use.USEParser;
 import org.tzi.use.uml.mm.MModel;
 import org.tzi.use.uml.mm.ModelFactory;
+
+import java.util.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,11 +22,14 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 
+import static org.tzi.use.examplePlugin.gui.parser.CapPaserPanel.generateNameFromAST;
 import static org.tzi.use.examplePlugin.util.FileUtils.cleanExcessiveBlankLines;
 import static org.tzi.use.examplePlugin.util.FileUtils.saveContentToFixedFile;
 import static org.tzi.use.examplePlugin.util.UseUtils.constraintExecutor;
 import static org.tzi.use.examplePlugin.util.UseUtils.mappingToASTInterface;
+import static org.tzi.use.parser.use.USECompiler.compileSpecification;
 
 public class FileParserPanel extends JPanel {
 
@@ -175,6 +186,20 @@ public class FileParserPanel extends JPanel {
     }
 
     String inputContainsAnnotation = leftTextArea.getText();
+    ASTModel astModel;
+    try {
+      astModel = parseAST(inputContainsAnnotation);
+      assignContext(astModel);
+      for (CAPAnnotation cap : astModel.getCapAnnotations()) {
+        System.out.println(
+            "Annotation: @" + cap.getName()
+                + " | contextClass = " + cap.getContextClass()
+                + " | line = " + cap.getToken().getLine()
+        );
+      }
+    } catch (Exception ex) {
+      throw new RuntimeException(ex);
+    }
 
     UseSpecSplitter.Result r =
         UseSpecSplitter.split(leftTextArea.getText());
@@ -208,15 +233,15 @@ public class FileParserPanel extends JPanel {
     }
 
     // add each OCL into StringBuilder, then save to temp file for later merging
-    for (CAPAnnotation anno : model.getCapAnnotations()) {
+    for (CAPAnnotation anno : astModel.getCapAnnotations()) {
       System.out.println("Found annotation: " + anno.getName());
       ASTInterface ast = mappingToASTInterface(anno);
 
       // print the ASTInterface for debugging
       String ocl = constraintExecutor(ast,
           ASTToJSONConverter.toJsonObject(ast),
-          "ContextClass",
-          "ConstraintName");
+          anno.getContextClass() != null ? anno.getContextClass() : "ContextClass",
+          generateNameFromAST(ast, anno.getContextClass() != null ? anno.getContextClass() : "ContextClass"));
 
       sb.append(ocl).append("\n\n");
 
@@ -299,6 +324,7 @@ public class FileParserPanel extends JPanel {
 
   /**
    * Compile a USE model from a string, also validating it and showing errors.
+   *
    * @param useText
    * @return
    */
@@ -314,7 +340,7 @@ public class FileParserPanel extends JPanel {
         useText.getBytes(StandardCharsets.UTF_8)
     );
 
-    MModel model = USECompiler.compileSpecification(
+    MModel model = compileSpecification(
         in,
         "CAP_Input.use",
         err,
@@ -336,6 +362,7 @@ public class FileParserPanel extends JPanel {
 
   /**
    * Check if the MModel contains any OCL constraints (class invariants).
+   *
    * @param mModel
    * @return true if there is at least 1 class invariant, false otherwise
    */
@@ -387,6 +414,7 @@ public class FileParserPanel extends JPanel {
   /**
    * detect the index of the "constraints" keyword in the USE spec, if not found, return -1
    * the "constraints" keyword is used to determine where to append the OCL generated from annotation, if there is no "constraints" keyword, we will add it before appending OCL
+   *
    * @param useSpec
    * @return
    */
@@ -418,5 +446,71 @@ public class FileParserPanel extends JPanel {
     }
 
     return -1;
+  }
+
+  private ASTModel parseAST(String useText) throws Exception {
+
+    ANTLRInputStream input =
+        new ANTLRInputStream(new ByteArrayInputStream(useText.getBytes()));
+
+    USELexer lexer = new USELexer(input);
+    CommonTokenStream tokens = new CommonTokenStream(lexer);
+
+    USEParser parser = new USEParser(tokens);
+
+    ParseErrorHandler errHandler = new ParseErrorHandler(
+        "input", new PrintWriter(System.err));
+
+    parser.init(errHandler);
+
+    ASTModel ast = parser.model();
+
+    if (errHandler.errorCount() > 0) {
+      throw new RuntimeException("Parse errors");
+    }
+
+    return ast;
+  }
+
+  public void assignContext(ASTModel model) {
+
+    List<CAPAnnotation> caps = model.getCapAnnotations();
+    List<ASTClass> classes = model.getClasses();
+    List<String> errors = new ArrayList<>();
+
+    for (CAPAnnotation cap : caps) {
+
+      int annLine = cap.getToken().getLine();
+      ASTClass nearest = null;
+      int minDist = Integer.MAX_VALUE;
+
+      for (ASTClass cls : classes) {
+
+        int classLine = cls.getName().getLine();
+
+        if (classLine > annLine) {
+          int dist = classLine - annLine;
+
+          if (dist < minDist) {
+            minDist = dist;
+            nearest = cls;
+          }
+        }
+      }
+
+      if (nearest == null) {
+        errors.add("CAP annotation at line " + annLine + " is not attached to any class.");
+        continue;
+      }
+
+      cap.setContextClass(nearest.getName().getText());
+    }
+    if (caps.stream().map(c -> c.getContextClass()).anyMatch(Objects::isNull)) {
+      JOptionPane.showMessageDialog(
+          this,
+          String.join("\n", errors),
+          "Error",
+          JOptionPane.ERROR_MESSAGE);
+    }
   }
 }

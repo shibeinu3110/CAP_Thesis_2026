@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 CAP.g 2026-03-09 22:00:18
+// $ANTLR 3.5.2 CAP.g 2026-03-15 21:44:08
 
 package org.tzi.use.examplePlugin.parser;
 
@@ -12,17 +12,22 @@ import java.util.ArrayList;
 public class CAPLexer extends Lexer {
 	public static final int EOF=-1;
 	public static final int AT=4;
-	public static final int COMMA=5;
-	public static final int EQ=6;
-	public static final int IDENT=7;
-	public static final int LBRACE=8;
-	public static final int LPAREN=9;
-	public static final int NUMBER=10;
-	public static final int QUALIFIED_IDENT=11;
-	public static final int RBRACE=12;
-	public static final int RPAREN=13;
-	public static final int STRING=14;
-	public static final int WS=15;
+	public static final int ATTRIBUTES=5;
+	public static final int BOOLEAN=6;
+	public static final int CLASS=7;
+	public static final int COLON=8;
+	public static final int COMMA=9;
+	public static final int END=10;
+	public static final int EQ=11;
+	public static final int IDENT=12;
+	public static final int LBRACE=13;
+	public static final int LPAREN=14;
+	public static final int NUMBER=15;
+	public static final int QUALIFIED_IDENT=16;
+	public static final int RBRACE=17;
+	public static final int RPAREN=18;
+	public static final int STRING=19;
+	public static final int WS=20;
 
 	// delegates
 	// delegators
@@ -39,13 +44,76 @@ public class CAPLexer extends Lexer {
 	}
 	@Override public String getGrammarFileName() { return "CAP.g"; }
 
+	// $ANTLR start "CLASS"
+	public final void mCLASS() throws RecognitionException {
+		try {
+			int _type = CLASS;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// CAP.g:172:12: ( 'class' )
+			// CAP.g:172:14: 'class'
+			{
+			match("class"); 
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "CLASS"
+
+	// $ANTLR start "ATTRIBUTES"
+	public final void mATTRIBUTES() throws RecognitionException {
+		try {
+			int _type = ATTRIBUTES;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// CAP.g:173:12: ( 'attributes' )
+			// CAP.g:173:14: 'attributes'
+			{
+			match("attributes"); 
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "ATTRIBUTES"
+
+	// $ANTLR start "END"
+	public final void mEND() throws RecognitionException {
+		try {
+			int _type = END;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// CAP.g:174:12: ( 'end' )
+			// CAP.g:174:14: 'end'
+			{
+			match("end"); 
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "END"
+
 	// $ANTLR start "AT"
 	public final void mAT() throws RecognitionException {
 		try {
 			int _type = AT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// CAP.g:111:9: ( '@' )
-			// CAP.g:111:11: '@'
+			// CAP.g:176:9: ( '@' )
+			// CAP.g:176:11: '@'
 			{
 			match('@'); 
 			}
@@ -64,8 +132,8 @@ public class CAPLexer extends Lexer {
 		try {
 			int _type = LPAREN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// CAP.g:112:9: ( '(' )
-			// CAP.g:112:11: '('
+			// CAP.g:177:9: ( '(' )
+			// CAP.g:177:11: '('
 			{
 			match('('); 
 			}
@@ -84,8 +152,8 @@ public class CAPLexer extends Lexer {
 		try {
 			int _type = RPAREN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// CAP.g:113:9: ( ')' )
-			// CAP.g:113:11: ')'
+			// CAP.g:178:9: ( ')' )
+			// CAP.g:178:11: ')'
 			{
 			match(')'); 
 			}
@@ -104,8 +172,8 @@ public class CAPLexer extends Lexer {
 		try {
 			int _type = LBRACE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// CAP.g:114:9: ( '{' )
-			// CAP.g:114:11: '{'
+			// CAP.g:179:9: ( '{' )
+			// CAP.g:179:11: '{'
 			{
 			match('{'); 
 			}
@@ -124,8 +192,8 @@ public class CAPLexer extends Lexer {
 		try {
 			int _type = RBRACE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// CAP.g:115:9: ( '}' )
-			// CAP.g:115:11: '}'
+			// CAP.g:180:9: ( '}' )
+			// CAP.g:180:11: '}'
 			{
 			match('}'); 
 			}
@@ -144,8 +212,8 @@ public class CAPLexer extends Lexer {
 		try {
 			int _type = COMMA;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// CAP.g:116:9: ( ',' )
-			// CAP.g:116:11: ','
+			// CAP.g:181:9: ( ',' )
+			// CAP.g:181:11: ','
 			{
 			match(','); 
 			}
@@ -164,8 +232,8 @@ public class CAPLexer extends Lexer {
 		try {
 			int _type = EQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// CAP.g:117:9: ( '=' )
-			// CAP.g:117:11: '='
+			// CAP.g:182:9: ( '=' )
+			// CAP.g:182:11: '='
 			{
 			match('='); 
 			}
@@ -179,23 +247,90 @@ public class CAPLexer extends Lexer {
 	}
 	// $ANTLR end "EQ"
 
+	// $ANTLR start "COLON"
+	public final void mCOLON() throws RecognitionException {
+		try {
+			int _type = COLON;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// CAP.g:183:9: ( ':' )
+			// CAP.g:183:11: ':'
+			{
+			match(':'); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "COLON"
+
+	// $ANTLR start "BOOLEAN"
+	public final void mBOOLEAN() throws RecognitionException {
+		try {
+			int _type = BOOLEAN;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// CAP.g:186:5: ( 'true' | 'false' )
+			int alt1=2;
+			int LA1_0 = input.LA(1);
+			if ( (LA1_0=='t') ) {
+				alt1=1;
+			}
+			else if ( (LA1_0=='f') ) {
+				alt1=2;
+			}
+
+			else {
+				NoViableAltException nvae =
+					new NoViableAltException("", 1, 0, input);
+				throw nvae;
+			}
+
+			switch (alt1) {
+				case 1 :
+					// CAP.g:186:7: 'true'
+					{
+					match("true"); 
+
+					}
+					break;
+				case 2 :
+					// CAP.g:187:7: 'false'
+					{
+					match("false"); 
+
+					}
+					break;
+
+			}
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "BOOLEAN"
+
 	// $ANTLR start "NUMBER"
 	public final void mNUMBER() throws RecognitionException {
 		try {
 			int _type = NUMBER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// CAP.g:120:5: ( ( '-' )? ( '0' .. '9' )+ ( '.' ( '0' .. '9' )+ )? )
-			// CAP.g:120:7: ( '-' )? ( '0' .. '9' )+ ( '.' ( '0' .. '9' )+ )?
+			// CAP.g:191:5: ( ( '-' )? ( '0' .. '9' )+ ( '.' ( '0' .. '9' )+ )? )
+			// CAP.g:191:7: ( '-' )? ( '0' .. '9' )+ ( '.' ( '0' .. '9' )+ )?
 			{
-			// CAP.g:120:7: ( '-' )?
-			int alt1=2;
-			int LA1_0 = input.LA(1);
-			if ( (LA1_0=='-') ) {
-				alt1=1;
+			// CAP.g:191:7: ( '-' )?
+			int alt2=2;
+			int LA2_0 = input.LA(1);
+			if ( (LA2_0=='-') ) {
+				alt2=1;
 			}
-			switch (alt1) {
+			switch (alt2) {
 				case 1 :
-					// CAP.g:120:7: '-'
+					// CAP.g:191:7: '-'
 					{
 					match('-'); 
 					}
@@ -203,17 +338,17 @@ public class CAPLexer extends Lexer {
 
 			}
 
-			// CAP.g:120:12: ( '0' .. '9' )+
-			int cnt2=0;
-			loop2:
+			// CAP.g:191:12: ( '0' .. '9' )+
+			int cnt3=0;
+			loop3:
 			while (true) {
-				int alt2=2;
-				int LA2_0 = input.LA(1);
-				if ( ((LA2_0 >= '0' && LA2_0 <= '9')) ) {
-					alt2=1;
+				int alt3=2;
+				int LA3_0 = input.LA(1);
+				if ( ((LA3_0 >= '0' && LA3_0 <= '9')) ) {
+					alt3=1;
 				}
 
-				switch (alt2) {
+				switch (alt3) {
 				case 1 :
 					// CAP.g:
 					{
@@ -229,35 +364,35 @@ public class CAPLexer extends Lexer {
 					break;
 
 				default :
-					if ( cnt2 >= 1 ) break loop2;
-					EarlyExitException eee = new EarlyExitException(2, input);
+					if ( cnt3 >= 1 ) break loop3;
+					EarlyExitException eee = new EarlyExitException(3, input);
 					throw eee;
 				}
-				cnt2++;
+				cnt3++;
 			}
 
-			// CAP.g:120:24: ( '.' ( '0' .. '9' )+ )?
-			int alt4=2;
-			int LA4_0 = input.LA(1);
-			if ( (LA4_0=='.') ) {
-				alt4=1;
+			// CAP.g:191:24: ( '.' ( '0' .. '9' )+ )?
+			int alt5=2;
+			int LA5_0 = input.LA(1);
+			if ( (LA5_0=='.') ) {
+				alt5=1;
 			}
-			switch (alt4) {
+			switch (alt5) {
 				case 1 :
-					// CAP.g:120:25: '.' ( '0' .. '9' )+
+					// CAP.g:191:25: '.' ( '0' .. '9' )+
 					{
 					match('.'); 
-					// CAP.g:120:29: ( '0' .. '9' )+
-					int cnt3=0;
-					loop3:
+					// CAP.g:191:29: ( '0' .. '9' )+
+					int cnt4=0;
+					loop4:
 					while (true) {
-						int alt3=2;
-						int LA3_0 = input.LA(1);
-						if ( ((LA3_0 >= '0' && LA3_0 <= '9')) ) {
-							alt3=1;
+						int alt4=2;
+						int LA4_0 = input.LA(1);
+						if ( ((LA4_0 >= '0' && LA4_0 <= '9')) ) {
+							alt4=1;
 						}
 
-						switch (alt3) {
+						switch (alt4) {
 						case 1 :
 							// CAP.g:
 							{
@@ -273,11 +408,11 @@ public class CAPLexer extends Lexer {
 							break;
 
 						default :
-							if ( cnt3 >= 1 ) break loop3;
-							EarlyExitException eee = new EarlyExitException(3, input);
+							if ( cnt4 >= 1 ) break loop4;
+							EarlyExitException eee = new EarlyExitException(4, input);
 							throw eee;
 						}
-						cnt3++;
+						cnt4++;
 					}
 
 					}
@@ -301,8 +436,8 @@ public class CAPLexer extends Lexer {
 		try {
 			int _type = QUALIFIED_IDENT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// CAP.g:124:5: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )* ( '::' ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )* )+ )
-			// CAP.g:124:7: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )* ( '::' ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )* )+
+			// CAP.g:195:5: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )* ( '::' ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )* )+ )
+			// CAP.g:195:7: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )* ( '::' ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )* )+
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 				input.consume();
@@ -312,16 +447,16 @@ public class CAPLexer extends Lexer {
 				recover(mse);
 				throw mse;
 			}
-			// CAP.g:125:7: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )*
-			loop5:
+			// CAP.g:196:7: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )*
+			loop6:
 			while (true) {
-				int alt5=2;
-				int LA5_0 = input.LA(1);
-				if ( (LA5_0=='.'||(LA5_0 >= '0' && LA5_0 <= '9')||(LA5_0 >= 'A' && LA5_0 <= 'Z')||LA5_0=='_'||(LA5_0 >= 'a' && LA5_0 <= 'z')) ) {
-					alt5=1;
+				int alt6=2;
+				int LA6_0 = input.LA(1);
+				if ( (LA6_0=='.'||(LA6_0 >= '0' && LA6_0 <= '9')||(LA6_0 >= 'A' && LA6_0 <= 'Z')||LA6_0=='_'||(LA6_0 >= 'a' && LA6_0 <= 'z')) ) {
+					alt6=1;
 				}
 
-				switch (alt5) {
+				switch (alt6) {
 				case 1 :
 					// CAP.g:
 					{
@@ -337,23 +472,23 @@ public class CAPLexer extends Lexer {
 					break;
 
 				default :
-					break loop5;
+					break loop6;
 				}
 			}
 
-			// CAP.g:126:7: ( '::' ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )* )+
-			int cnt7=0;
-			loop7:
+			// CAP.g:197:7: ( '::' ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )* )+
+			int cnt8=0;
+			loop8:
 			while (true) {
-				int alt7=2;
-				int LA7_0 = input.LA(1);
-				if ( (LA7_0==':') ) {
-					alt7=1;
+				int alt8=2;
+				int LA8_0 = input.LA(1);
+				if ( (LA8_0==':') ) {
+					alt8=1;
 				}
 
-				switch (alt7) {
+				switch (alt8) {
 				case 1 :
-					// CAP.g:126:8: '::' ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )*
+					// CAP.g:197:8: '::' ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )*
 					{
 					match("::"); 
 
@@ -365,16 +500,16 @@ public class CAPLexer extends Lexer {
 						recover(mse);
 						throw mse;
 					}
-					// CAP.g:128:9: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )*
-					loop6:
+					// CAP.g:199:9: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )*
+					loop7:
 					while (true) {
-						int alt6=2;
-						int LA6_0 = input.LA(1);
-						if ( (LA6_0=='.'||(LA6_0 >= '0' && LA6_0 <= '9')||(LA6_0 >= 'A' && LA6_0 <= 'Z')||LA6_0=='_'||(LA6_0 >= 'a' && LA6_0 <= 'z')) ) {
-							alt6=1;
+						int alt7=2;
+						int LA7_0 = input.LA(1);
+						if ( (LA7_0=='.'||(LA7_0 >= '0' && LA7_0 <= '9')||(LA7_0 >= 'A' && LA7_0 <= 'Z')||LA7_0=='_'||(LA7_0 >= 'a' && LA7_0 <= 'z')) ) {
+							alt7=1;
 						}
 
-						switch (alt6) {
+						switch (alt7) {
 						case 1 :
 							// CAP.g:
 							{
@@ -390,7 +525,7 @@ public class CAPLexer extends Lexer {
 							break;
 
 						default :
-							break loop6;
+							break loop7;
 						}
 					}
 
@@ -398,11 +533,11 @@ public class CAPLexer extends Lexer {
 					break;
 
 				default :
-					if ( cnt7 >= 1 ) break loop7;
-					EarlyExitException eee = new EarlyExitException(7, input);
+					if ( cnt8 >= 1 ) break loop8;
+					EarlyExitException eee = new EarlyExitException(8, input);
 					throw eee;
 				}
-				cnt7++;
+				cnt8++;
 			}
 
 			}
@@ -421,8 +556,8 @@ public class CAPLexer extends Lexer {
 		try {
 			int _type = IDENT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// CAP.g:133:5: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )* )
-			// CAP.g:133:7: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )*
+			// CAP.g:204:5: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )* )
+			// CAP.g:204:7: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )*
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 				input.consume();
@@ -432,16 +567,16 @@ public class CAPLexer extends Lexer {
 				recover(mse);
 				throw mse;
 			}
-			// CAP.g:134:7: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )*
-			loop8:
+			// CAP.g:205:7: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )*
+			loop9:
 			while (true) {
-				int alt8=2;
-				int LA8_0 = input.LA(1);
-				if ( (LA8_0=='.'||(LA8_0 >= '0' && LA8_0 <= '9')||(LA8_0 >= 'A' && LA8_0 <= 'Z')||LA8_0=='_'||(LA8_0 >= 'a' && LA8_0 <= 'z')) ) {
-					alt8=1;
+				int alt9=2;
+				int LA9_0 = input.LA(1);
+				if ( (LA9_0=='.'||(LA9_0 >= '0' && LA9_0 <= '9')||(LA9_0 >= 'A' && LA9_0 <= 'Z')||LA9_0=='_'||(LA9_0 >= 'a' && LA9_0 <= 'z')) ) {
+					alt9=1;
 				}
 
-				switch (alt8) {
+				switch (alt9) {
 				case 1 :
 					// CAP.g:
 					{
@@ -457,7 +592,7 @@ public class CAPLexer extends Lexer {
 					break;
 
 				default :
-					break loop8;
+					break loop9;
 				}
 			}
 
@@ -477,25 +612,25 @@ public class CAPLexer extends Lexer {
 		try {
 			int _type = STRING;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// CAP.g:138:5: ( '\\'' (~ ( '\\'' | '\\\\' ) | '\\\\' . )* '\\'' )
-			// CAP.g:138:7: '\\'' (~ ( '\\'' | '\\\\' ) | '\\\\' . )* '\\''
+			// CAP.g:209:5: ( '\\'' (~ ( '\\'' | '\\\\' ) | '\\\\' . )* '\\'' )
+			// CAP.g:209:7: '\\'' (~ ( '\\'' | '\\\\' ) | '\\\\' . )* '\\''
 			{
 			match('\''); 
-			// CAP.g:138:12: (~ ( '\\'' | '\\\\' ) | '\\\\' . )*
-			loop9:
+			// CAP.g:209:12: (~ ( '\\'' | '\\\\' ) | '\\\\' . )*
+			loop10:
 			while (true) {
-				int alt9=3;
-				int LA9_0 = input.LA(1);
-				if ( ((LA9_0 >= '\u0000' && LA9_0 <= '&')||(LA9_0 >= '(' && LA9_0 <= '[')||(LA9_0 >= ']' && LA9_0 <= '\uFFFF')) ) {
-					alt9=1;
+				int alt10=3;
+				int LA10_0 = input.LA(1);
+				if ( ((LA10_0 >= '\u0000' && LA10_0 <= '&')||(LA10_0 >= '(' && LA10_0 <= '[')||(LA10_0 >= ']' && LA10_0 <= '\uFFFF')) ) {
+					alt10=1;
 				}
-				else if ( (LA9_0=='\\') ) {
-					alt9=2;
+				else if ( (LA10_0=='\\') ) {
+					alt10=2;
 				}
 
-				switch (alt9) {
+				switch (alt10) {
 				case 1 :
-					// CAP.g:138:14: ~ ( '\\'' | '\\\\' )
+					// CAP.g:209:14: ~ ( '\\'' | '\\\\' )
 					{
 					if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '&')||(input.LA(1) >= '(' && input.LA(1) <= '[')||(input.LA(1) >= ']' && input.LA(1) <= '\uFFFF') ) {
 						input.consume();
@@ -508,7 +643,7 @@ public class CAPLexer extends Lexer {
 					}
 					break;
 				case 2 :
-					// CAP.g:138:31: '\\\\' .
+					// CAP.g:209:31: '\\\\' .
 					{
 					match('\\'); 
 					matchAny(); 
@@ -516,7 +651,7 @@ public class CAPLexer extends Lexer {
 					break;
 
 				default :
-					break loop9;
+					break loop10;
 				}
 			}
 
@@ -537,20 +672,20 @@ public class CAPLexer extends Lexer {
 		try {
 			int _type = WS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// CAP.g:142:5: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-			// CAP.g:142:7: ( ' ' | '\\t' | '\\r' | '\\n' )+
+			// CAP.g:213:5: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+			// CAP.g:213:7: ( ' ' | '\\t' | '\\r' | '\\n' )+
 			{
-			// CAP.g:142:7: ( ' ' | '\\t' | '\\r' | '\\n' )+
-			int cnt10=0;
-			loop10:
+			// CAP.g:213:7: ( ' ' | '\\t' | '\\r' | '\\n' )+
+			int cnt11=0;
+			loop11:
 			while (true) {
-				int alt10=2;
-				int LA10_0 = input.LA(1);
-				if ( ((LA10_0 >= '\t' && LA10_0 <= '\n')||LA10_0=='\r'||LA10_0==' ') ) {
-					alt10=1;
+				int alt11=2;
+				int LA11_0 = input.LA(1);
+				if ( ((LA11_0 >= '\t' && LA11_0 <= '\n')||LA11_0=='\r'||LA11_0==' ') ) {
+					alt11=1;
 				}
 
-				switch (alt10) {
+				switch (alt11) {
 				case 1 :
 					// CAP.g:
 					{
@@ -566,11 +701,11 @@ public class CAPLexer extends Lexer {
 					break;
 
 				default :
-					if ( cnt10 >= 1 ) break loop10;
-					EarlyExitException eee = new EarlyExitException(10, input);
+					if ( cnt11 >= 1 ) break loop11;
+					EarlyExitException eee = new EarlyExitException(11, input);
 					throw eee;
 				}
-				cnt10++;
+				cnt11++;
 			}
 
 			skip();
@@ -587,89 +722,124 @@ public class CAPLexer extends Lexer {
 
 	@Override
 	public void mTokens() throws RecognitionException {
-		// CAP.g:1:8: ( AT | LPAREN | RPAREN | LBRACE | RBRACE | COMMA | EQ | NUMBER | QUALIFIED_IDENT | IDENT | STRING | WS )
-		int alt11=12;
-		alt11 = dfa11.predict(input);
-		switch (alt11) {
+		// CAP.g:1:8: ( CLASS | ATTRIBUTES | END | AT | LPAREN | RPAREN | LBRACE | RBRACE | COMMA | EQ | COLON | BOOLEAN | NUMBER | QUALIFIED_IDENT | IDENT | STRING | WS )
+		int alt12=17;
+		alt12 = dfa12.predict(input);
+		switch (alt12) {
 			case 1 :
-				// CAP.g:1:10: AT
+				// CAP.g:1:10: CLASS
+				{
+				mCLASS(); 
+
+				}
+				break;
+			case 2 :
+				// CAP.g:1:16: ATTRIBUTES
+				{
+				mATTRIBUTES(); 
+
+				}
+				break;
+			case 3 :
+				// CAP.g:1:27: END
+				{
+				mEND(); 
+
+				}
+				break;
+			case 4 :
+				// CAP.g:1:31: AT
 				{
 				mAT(); 
 
 				}
 				break;
-			case 2 :
-				// CAP.g:1:13: LPAREN
+			case 5 :
+				// CAP.g:1:34: LPAREN
 				{
 				mLPAREN(); 
 
 				}
 				break;
-			case 3 :
-				// CAP.g:1:20: RPAREN
+			case 6 :
+				// CAP.g:1:41: RPAREN
 				{
 				mRPAREN(); 
 
 				}
 				break;
-			case 4 :
-				// CAP.g:1:27: LBRACE
+			case 7 :
+				// CAP.g:1:48: LBRACE
 				{
 				mLBRACE(); 
 
 				}
 				break;
-			case 5 :
-				// CAP.g:1:34: RBRACE
+			case 8 :
+				// CAP.g:1:55: RBRACE
 				{
 				mRBRACE(); 
 
 				}
 				break;
-			case 6 :
-				// CAP.g:1:41: COMMA
+			case 9 :
+				// CAP.g:1:62: COMMA
 				{
 				mCOMMA(); 
 
 				}
 				break;
-			case 7 :
-				// CAP.g:1:47: EQ
+			case 10 :
+				// CAP.g:1:68: EQ
 				{
 				mEQ(); 
 
 				}
 				break;
-			case 8 :
-				// CAP.g:1:50: NUMBER
+			case 11 :
+				// CAP.g:1:71: COLON
+				{
+				mCOLON(); 
+
+				}
+				break;
+			case 12 :
+				// CAP.g:1:77: BOOLEAN
+				{
+				mBOOLEAN(); 
+
+				}
+				break;
+			case 13 :
+				// CAP.g:1:85: NUMBER
 				{
 				mNUMBER(); 
 
 				}
 				break;
-			case 9 :
-				// CAP.g:1:57: QUALIFIED_IDENT
+			case 14 :
+				// CAP.g:1:92: QUALIFIED_IDENT
 				{
 				mQUALIFIED_IDENT(); 
 
 				}
 				break;
-			case 10 :
-				// CAP.g:1:73: IDENT
+			case 15 :
+				// CAP.g:1:108: IDENT
 				{
 				mIDENT(); 
 
 				}
 				break;
-			case 11 :
-				// CAP.g:1:79: STRING
+			case 16 :
+				// CAP.g:1:114: STRING
 				{
 				mSTRING(); 
 
 				}
 				break;
-			case 12 :
-				// CAP.g:1:86: WS
+			case 17 :
+				// CAP.g:1:121: WS
 				{
 				mWS(); 
 
@@ -680,24 +850,34 @@ public class CAPLexer extends Lexer {
 	}
 
 
-	protected DFA11 dfa11 = new DFA11(this);
-	static final String DFA11_eotS =
-		"\11\uffff\1\16\2\uffff\1\16\2\uffff";
-	static final String DFA11_eofS =
-		"\17\uffff";
-	static final String DFA11_minS =
-		"\1\11\10\uffff\1\56\2\uffff\1\56\2\uffff";
-	static final String DFA11_maxS =
-		"\1\175\10\uffff\1\172\2\uffff\1\172\2\uffff";
-	static final String DFA11_acceptS =
-		"\1\uffff\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\uffff\1\13\1\14\1\uffff\1"+
-		"\11\1\12";
-	static final String DFA11_specialS =
-		"\17\uffff}>";
-	static final String[] DFA11_transitionS = {
-			"\2\13\2\uffff\1\13\22\uffff\1\13\6\uffff\1\12\1\2\1\3\2\uffff\1\6\1\10"+
-			"\2\uffff\12\10\3\uffff\1\7\2\uffff\1\1\32\11\4\uffff\1\11\1\uffff\32"+
-			"\11\1\4\1\uffff\1\5",
+	protected DFA12 dfa12 = new DFA12(this);
+	static final String DFA12_eotS =
+		"\1\uffff\3\25\10\uffff\2\25\1\uffff\1\25\2\uffff\2\25\2\uffff\6\25\1\41"+
+		"\4\25\1\uffff\1\46\1\25\1\50\1\25\1\uffff\1\46\1\uffff\4\25\1\56\1\uffff";
+	static final String DFA12_eofS =
+		"\57\uffff";
+	static final String DFA12_minS =
+		"\1\11\3\56\10\uffff\2\56\1\uffff\1\56\2\uffff\2\56\2\uffff\13\56\1\uffff"+
+		"\4\56\1\uffff\1\56\1\uffff\5\56\1\uffff";
+	static final String DFA12_maxS =
+		"\1\175\3\172\10\uffff\2\172\1\uffff\1\172\2\uffff\2\172\2\uffff\13\172"+
+		"\1\uffff\4\172\1\uffff\1\172\1\uffff\5\172\1\uffff";
+	static final String DFA12_acceptS =
+		"\4\uffff\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\2\uffff\1\15\1\uffff\1\20"+
+		"\1\21\2\uffff\1\16\1\17\13\uffff\1\3\4\uffff\1\14\1\uffff\1\1\5\uffff"+
+		"\1\2";
+	static final String DFA12_specialS =
+		"\57\uffff}>";
+	static final String[] DFA12_transitionS = {
+			"\2\21\2\uffff\1\21\22\uffff\1\21\6\uffff\1\20\1\5\1\6\2\uffff\1\11\1"+
+			"\16\2\uffff\12\16\1\13\2\uffff\1\12\2\uffff\1\4\32\17\4\uffff\1\17\1"+
+			"\uffff\1\2\1\17\1\1\1\17\1\3\1\15\15\17\1\14\6\17\1\7\1\uffff\1\10",
+			"\1\23\1\uffff\12\23\1\24\6\uffff\32\23\4\uffff\1\23\1\uffff\13\23\1"+
+			"\22\16\23",
+			"\1\23\1\uffff\12\23\1\24\6\uffff\32\23\4\uffff\1\23\1\uffff\23\23\1"+
+			"\26\6\23",
+			"\1\23\1\uffff\12\23\1\24\6\uffff\32\23\4\uffff\1\23\1\uffff\15\23\1"+
+			"\27\14\23",
 			"",
 			"",
 			"",
@@ -706,46 +886,94 @@ public class CAPLexer extends Lexer {
 			"",
 			"",
 			"",
-			"\1\14\1\uffff\12\14\1\15\6\uffff\32\14\4\uffff\1\14\1\uffff\32\14",
+			"\1\23\1\uffff\12\23\1\24\6\uffff\32\23\4\uffff\1\23\1\uffff\21\23\1"+
+			"\30\10\23",
+			"\1\23\1\uffff\12\23\1\24\6\uffff\32\23\4\uffff\1\23\1\uffff\1\31\31"+
+			"\23",
+			"",
+			"\1\23\1\uffff\12\23\1\24\6\uffff\32\23\4\uffff\1\23\1\uffff\32\23",
 			"",
 			"",
-			"\1\14\1\uffff\12\14\1\15\6\uffff\32\14\4\uffff\1\14\1\uffff\32\14",
+			"\1\23\1\uffff\12\23\1\24\6\uffff\32\23\4\uffff\1\23\1\uffff\1\32\31"+
+			"\23",
+			"\1\23\1\uffff\12\23\1\24\6\uffff\32\23\4\uffff\1\23\1\uffff\32\23",
 			"",
+			"",
+			"\1\23\1\uffff\12\23\1\24\6\uffff\32\23\4\uffff\1\23\1\uffff\23\23\1"+
+			"\33\6\23",
+			"\1\23\1\uffff\12\23\1\24\6\uffff\32\23\4\uffff\1\23\1\uffff\3\23\1\34"+
+			"\26\23",
+			"\1\23\1\uffff\12\23\1\24\6\uffff\32\23\4\uffff\1\23\1\uffff\24\23\1"+
+			"\35\5\23",
+			"\1\23\1\uffff\12\23\1\24\6\uffff\32\23\4\uffff\1\23\1\uffff\13\23\1"+
+			"\36\16\23",
+			"\1\23\1\uffff\12\23\1\24\6\uffff\32\23\4\uffff\1\23\1\uffff\22\23\1"+
+			"\37\7\23",
+			"\1\23\1\uffff\12\23\1\24\6\uffff\32\23\4\uffff\1\23\1\uffff\21\23\1"+
+			"\40\10\23",
+			"\1\23\1\uffff\12\23\1\24\6\uffff\32\23\4\uffff\1\23\1\uffff\32\23",
+			"\1\23\1\uffff\12\23\1\24\6\uffff\32\23\4\uffff\1\23\1\uffff\4\23\1\42"+
+			"\25\23",
+			"\1\23\1\uffff\12\23\1\24\6\uffff\32\23\4\uffff\1\23\1\uffff\22\23\1"+
+			"\43\7\23",
+			"\1\23\1\uffff\12\23\1\24\6\uffff\32\23\4\uffff\1\23\1\uffff\22\23\1"+
+			"\44\7\23",
+			"\1\23\1\uffff\12\23\1\24\6\uffff\32\23\4\uffff\1\23\1\uffff\10\23\1"+
+			"\45\21\23",
+			"",
+			"\1\23\1\uffff\12\23\1\24\6\uffff\32\23\4\uffff\1\23\1\uffff\32\23",
+			"\1\23\1\uffff\12\23\1\24\6\uffff\32\23\4\uffff\1\23\1\uffff\4\23\1\47"+
+			"\25\23",
+			"\1\23\1\uffff\12\23\1\24\6\uffff\32\23\4\uffff\1\23\1\uffff\32\23",
+			"\1\23\1\uffff\12\23\1\24\6\uffff\32\23\4\uffff\1\23\1\uffff\1\23\1\51"+
+			"\30\23",
+			"",
+			"\1\23\1\uffff\12\23\1\24\6\uffff\32\23\4\uffff\1\23\1\uffff\32\23",
+			"",
+			"\1\23\1\uffff\12\23\1\24\6\uffff\32\23\4\uffff\1\23\1\uffff\24\23\1"+
+			"\52\5\23",
+			"\1\23\1\uffff\12\23\1\24\6\uffff\32\23\4\uffff\1\23\1\uffff\23\23\1"+
+			"\53\6\23",
+			"\1\23\1\uffff\12\23\1\24\6\uffff\32\23\4\uffff\1\23\1\uffff\4\23\1\54"+
+			"\25\23",
+			"\1\23\1\uffff\12\23\1\24\6\uffff\32\23\4\uffff\1\23\1\uffff\22\23\1"+
+			"\55\7\23",
+			"\1\23\1\uffff\12\23\1\24\6\uffff\32\23\4\uffff\1\23\1\uffff\32\23",
 			""
 	};
 
-	static final short[] DFA11_eot = DFA.unpackEncodedString(DFA11_eotS);
-	static final short[] DFA11_eof = DFA.unpackEncodedString(DFA11_eofS);
-	static final char[] DFA11_min = DFA.unpackEncodedStringToUnsignedChars(DFA11_minS);
-	static final char[] DFA11_max = DFA.unpackEncodedStringToUnsignedChars(DFA11_maxS);
-	static final short[] DFA11_accept = DFA.unpackEncodedString(DFA11_acceptS);
-	static final short[] DFA11_special = DFA.unpackEncodedString(DFA11_specialS);
-	static final short[][] DFA11_transition;
+	static final short[] DFA12_eot = DFA.unpackEncodedString(DFA12_eotS);
+	static final short[] DFA12_eof = DFA.unpackEncodedString(DFA12_eofS);
+	static final char[] DFA12_min = DFA.unpackEncodedStringToUnsignedChars(DFA12_minS);
+	static final char[] DFA12_max = DFA.unpackEncodedStringToUnsignedChars(DFA12_maxS);
+	static final short[] DFA12_accept = DFA.unpackEncodedString(DFA12_acceptS);
+	static final short[] DFA12_special = DFA.unpackEncodedString(DFA12_specialS);
+	static final short[][] DFA12_transition;
 
 	static {
-		int numStates = DFA11_transitionS.length;
-		DFA11_transition = new short[numStates][];
+		int numStates = DFA12_transitionS.length;
+		DFA12_transition = new short[numStates][];
 		for (int i=0; i<numStates; i++) {
-			DFA11_transition[i] = DFA.unpackEncodedString(DFA11_transitionS[i]);
+			DFA12_transition[i] = DFA.unpackEncodedString(DFA12_transitionS[i]);
 		}
 	}
 
-	protected class DFA11 extends DFA {
+	protected class DFA12 extends DFA {
 
-		public DFA11(BaseRecognizer recognizer) {
+		public DFA12(BaseRecognizer recognizer) {
 			this.recognizer = recognizer;
-			this.decisionNumber = 11;
-			this.eot = DFA11_eot;
-			this.eof = DFA11_eof;
-			this.min = DFA11_min;
-			this.max = DFA11_max;
-			this.accept = DFA11_accept;
-			this.special = DFA11_special;
-			this.transition = DFA11_transition;
+			this.decisionNumber = 12;
+			this.eot = DFA12_eot;
+			this.eof = DFA12_eof;
+			this.min = DFA12_min;
+			this.max = DFA12_max;
+			this.accept = DFA12_accept;
+			this.special = DFA12_special;
+			this.transition = DFA12_transition;
 		}
 		@Override
 		public String getDescription() {
-			return "1:1: Tokens : ( AT | LPAREN | RPAREN | LBRACE | RBRACE | COMMA | EQ | NUMBER | QUALIFIED_IDENT | IDENT | STRING | WS );";
+			return "1:1: Tokens : ( CLASS | ATTRIBUTES | END | AT | LPAREN | RPAREN | LBRACE | RBRACE | COMMA | EQ | COLON | BOOLEAN | NUMBER | QUALIFIED_IDENT | IDENT | STRING | WS );";
 		}
 	}
 

@@ -1,0 +1,40 @@
+context Person
+inv SumConstraint_Person_7449:
+  let s : Integer =
+      self.enrolments
+          ->select(e | e.offering.semester = self.currentSemester)
+          ->collect(e | e.course.credits)
+          ->sum()
+  in
+      s = self.totalCredits
+
+context Person
+inv SumConstraint_Person_6411:
+  let s : Integer =
+      self.enrolments
+          ->select(e | e.offering.semester = self.currentSemester)
+          ->collect(e | e.course.credits)
+          ->sum()
+  in
+      s = self.totalCredits
+
+context Company
+inv SumConstraint_Company_9850:
+  let s : Integer =
+      self.enrolments
+          ->select(e | e.offering.semester = self.currentSemester)
+          ->collect(e | e.course.credits)
+          ->sum()
+  in
+      s = self.totalCredits
+
+context ContextClass
+inv SumConstraint_ContextClass_6617:
+  let s : Integer =
+      self.enrolments
+          ->select(e | e.offering.semester = self.currentSemester)
+          ->collect(e | e.course.credits)
+          ->sum()
+  in
+      s = self.totalCredits
+

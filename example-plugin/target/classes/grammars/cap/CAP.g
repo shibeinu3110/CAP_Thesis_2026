@@ -2,6 +2,7 @@ grammar CAP;
 
 @header {
 package org.tzi.use.examplePlugin.parser;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
@@ -19,24 +20,75 @@ package org.tzi.use.examplePlugin.parser;
     }
 }
 
-/* =======================
+/* =====================================================
    ENTRY
-======================= */
+===================================================== */
 
 annotationFile returns [ASTInterface ann]
 @init { $ann = null; }
     :
-      a=annotation EOF
-      { $ann = $a.n; }
+      a=annotation
+      ctx=contextBlock?
+      EOF
+      {
+        $ann = $a.n;
+
+        if($ctx.c != null){
+            $ann.contextClass = $ctx.c;
+        }
+      }
     ;
 
-/* =======================
+/* =====================================================
+   CONTEXT BLOCK (class Course ...)
+===================================================== */
+
+contextBlock returns [String c]
+@init { $c = null; }
+    :
+      cls=classDecl
+      {
+        $c = $cls.name;
+      }
+    ;
+
+/* =====================================================
+   CLASS DECLARATION
+===================================================== */
+
+classDecl returns [String name]
+@init { $name = null; }
+    :
+      CLASS cname=IDENT
+      attr=attributesBlock?
+      END?
+      {
+        $name = $cname.getText();
+      }
+    ;
+
+/* =====================================================
+   ATTRIBUTES
+===================================================== */
+
+attributesBlock
+    :
+      ATTRIBUTES
+      attribute*
+    ;
+
+attribute
+    :
+      IDENT COLON IDENT
+    ;
+
+/* =====================================================
    ANNOTATION
-======================= */
+===================================================== */
 
 annotation returns [ASTInterface n]
 @init {
-    $n = new ASTInterface(); // <-- MUST be concrete class
+    $n = new ASTInterface();
 }
     :
       (AT name=IDENT | name=IDENT)
@@ -48,9 +100,9 @@ annotation returns [ASTInterface n]
       RPAREN
     ;
 
-/* =======================
+/* =====================================================
    ARGUMENTS
-======================= */
+===================================================== */
 
 arguments[ASTInterface ann]
     :
@@ -65,35 +117,44 @@ argument[ASTInterface ann]
       }
     ;
 
-/* =======================
+/* =====================================================
    VALUES
-======================= */
+===================================================== */
 
 value returns [Object val]
     :
       s=STRING
         { $val = stripQuotes($s.getText()); }
-    | n=NUMBER {
-        String txt = $n.getText();
-        if (txt.contains(".")) {
-            $val = Double.parseDouble(txt);
-        } else {
-            $val = Integer.parseInt(txt);
+
+    | n=NUMBER
+        {
+            String txt = $n.getText();
+            if (txt.contains(".")) {
+                $val = Double.parseDouble(txt);
+            } else {
+                $val = Integer.parseInt(txt);
+            }
         }
-    }
+
+    | b=BOOLEAN
+        { $val = Boolean.parseBoolean($b.getText()); }
+
     | q=QUALIFIED_IDENT
         { $val = $q.getText(); }
+
     | i=IDENT
         { $val = $i.getText(); }
+
     | a=annotation
         { $val = $a.n; }
+
     | arr=array
         { $val = $arr.list; }
     ;
 
-/* =======================
+/* =====================================================
    ARRAY
-======================= */
+===================================================== */
 
 array returns [List<Object> list]
 @init { $list = new ArrayList<Object>(); }
@@ -104,9 +165,13 @@ array returns [List<Object> list]
       RBRACE
     ;
 
-/* =======================
+/* =====================================================
    LEXER
-======================= */
+===================================================== */
+
+CLASS      : 'class';
+ATTRIBUTES : 'attributes';
+END        : 'end';
 
 AT      : '@' ;
 LPAREN  : '(' ;
@@ -115,6 +180,12 @@ LBRACE  : '{' ;
 RBRACE  : '}' ;
 COMMA   : ',' ;
 EQ      : '=' ;
+COLON   : ':' ;
+
+BOOLEAN
+    : 'true'
+    | 'false'
+    ;
 
 NUMBER
     : '-'? ('0'..'9')+ ('.' ('0'..'9')+ )?

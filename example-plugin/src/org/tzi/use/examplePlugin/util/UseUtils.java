@@ -219,8 +219,10 @@ public class UseUtils {
    * @return the ASTInterface representation of the CAPAnnotation, it will have the same structure and data as the original CAPAnnotation, but in a more convenient format for our plugin
    */
   public static ASTInterface mappingToASTInterface(CAPAnnotation capAnnotation) {
+    System.out.println("CapAnnotation Context Class: " + capAnnotation.contextClass);
     ASTInterface ast = new ASTInterface();
     ast.setName(capAnnotation.getName());
+    ast.setContextClass(capAnnotation.contextClass);
 
     Map<String, Object> mappedArgs = new LinkedHashMap<>();
     for (Map.Entry<String, Object> e : capAnnotation.getCapArgs().entrySet()) {

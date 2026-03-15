@@ -507,7 +507,7 @@ public class CapPaserPanel extends JPanel {
    * @param ast
    * @return
    */
-  private String generateNameFromAST(ASTInterface ast, String context) {
+  public static String generateNameFromAST(ASTInterface ast, String context) {
 
     String type = ASTToJSONConverter.toJsonObject(ast)
         .get(CommonAttributes.TYPE).toString();
