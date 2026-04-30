@@ -11,8 +11,11 @@ public class SumConstraintType2 implements SumConstraintInterface {
   String matchAttr;
   String sumAttr;
 
-  BoundType boundType;
-  String boundValue;
+  BoundType lowerBoundType;
+  String lowerBoundValue;
+
+  BoundType upperBoundType;
+  String upperBoundValue;
 
   String ifAttr;
   IfFixType ifFixType;

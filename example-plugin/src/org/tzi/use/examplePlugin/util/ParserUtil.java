@@ -298,4 +298,24 @@ public class ParserUtil {
 
     return attrConds;
   }
+
+  public static Number parseNumber(Object scale) {
+    if (scale instanceof Number) {
+      return (Number) scale;
+    } else if (scale instanceof String) {
+      try {
+        if (((String) scale).contains(".")) {
+          return Double.parseDouble((String) scale);
+        } else {
+          return Integer.parseInt((String) scale);
+        }
+      } catch (NumberFormatException e) {
+        System.err.println("Failed to parse number from string: " + scale);
+        return null;
+      }
+    } else {
+      System.err.println("Unsupported type for scale: " + scale.getClass());
+      return null;
+    }
+  }
 }

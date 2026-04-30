@@ -55,6 +55,11 @@ public class SizeConstraintType1Parser implements SizeConstraintParser<SizeConst
     parseBound(args, sc1);
     System.out.println("After parsing bounds, bounds: " + sc1.bounds);
 
+    // scale
+    if (args.containsKey("scale")) {
+      sc1.scale = ParserUtil.parseNumber(args.get("scale"));
+    }
+
     return sc1;
   }
 

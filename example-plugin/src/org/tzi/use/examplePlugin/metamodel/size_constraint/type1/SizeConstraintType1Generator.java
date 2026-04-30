@@ -17,7 +17,7 @@ public class SizeConstraintType1Generator implements SizeConstraintGenerator<Siz
 
     // if part
     String ifCond = buildIfCondition(sc1.ifParts, null);
-    String impliesPart = (ifCond == null) ? "" : ifCond + " implies\n  ";
+    String impliesPart = (ifCond == null) ? "" : ifCond + " implies  ";
     System.out.println("Implies Part: " + impliesPart);
     boolean hasIfPart = impliesPart != null && !impliesPart.isBlank();
 
@@ -47,6 +47,15 @@ public class SizeConstraintType1Generator implements SizeConstraintGenerator<Siz
                 selectPart
             ))
             .collect(Collectors.joining(" and "));
+
+    // scale
+    // if has scale, then we need to multiply the size by the scale factor
+    String scale = "";
+    if (sc1.scale != null) {
+      System.out.println("Scale: " + sc1.scale);
+      scale = "->size() * " + sc1.scale + " ";
+      bound = bound.concat(scale);
+    }
 
     String body =
         hasIfPart

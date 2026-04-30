@@ -47,6 +47,9 @@ public class SumConstraintType2Generator implements SumConstraintGenerator<SumCo
           cond = "self." + sc.ifAttr + " = " + sc.ifFixValue;
       case FIX_STR ->
           cond = "self." + sc.ifAttr + " = '" + sc.ifFixValue + "'";
+
+      case MAX, MAX_LIM_ATTR, MAX_LIM, MAX_VALUE -> cond = "self." + sc.ifAttr + " <= " + sc.ifFixValue;
+      case MIN, MIN_LIM_ATTR, MIN_LIM, MIN_VALUE -> cond = "self." + sc.ifAttr + " >= " + sc.ifFixValue;
       default ->
           throw new RuntimeException("Invalid ifPart");
     }
@@ -55,24 +58,36 @@ public class SumConstraintType2Generator implements SumConstraintGenerator<SumCo
   }
 
   private static String buildBound(SumConstraintType2 sc) {
-    return switch (sc.boundType) {
-      case MAX ->
-          "v < " + sc.boundValue;
-      case MAX_LIM ->
-          "v <= " + sc.boundValue;
-      case MIN ->
-          "v >= " + sc.boundValue;
-      case MIN_LIM ->
-          "v > " + sc.boundValue;
-      case MAX_ATTR ->
-          "v <= self." + sc.boundValue;
-      case MAX_LIM_ATTR ->
-          "v < self." + sc.boundValue;
-      case MIN_ATTR ->
-          "v >= self." + sc.boundValue;
-      case MIN_LIM_ATTR ->
-          "v > self." + sc.boundValue;
-      case EQUALS -> null;
+    String lower = buildLower(sc);
+    String upper = buildUpper(sc);
+
+    if (lower != null && upper != null) {
+      return lower + " and " + upper;
+    }
+    return lower != null ? lower : upper;
+  }
+
+  private static String buildLower(SumConstraintType2 sc) {
+    if (sc.lowerBoundType == null) return null;
+
+    return switch (sc.lowerBoundType) {
+      case MIN -> "v >= " + sc.lowerBoundValue;
+      case MIN_LIM -> "v > " + sc.lowerBoundValue;
+      case MIN_ATTR -> "v >= self." + sc.lowerBoundValue;
+      case MIN_LIM_ATTR -> "v > self." + sc.lowerBoundValue;
+      default -> null;
     };
   }
+  private static String buildUpper(SumConstraintType2 sc) {
+    if (sc.upperBoundType == null) return null;
+
+    return switch (sc.upperBoundType) {
+      case MAX -> "v < " + sc.upperBoundValue;
+      case MAX_LIM -> "v <= " + sc.upperBoundValue;
+      case MAX_ATTR -> "v <= self." + sc.upperBoundValue;
+      case MAX_LIM_ATTR -> "v < self." + sc.upperBoundValue;
+      default -> null;
+    };
+  }
+
 }

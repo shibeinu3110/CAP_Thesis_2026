@@ -18,4 +18,6 @@ public class SizeConstraintType1 implements SizeConstraintInterface {
   List<AttrCondPro> filters;
 
   List<Bound> bounds;
+
+  Number scale;
 }
