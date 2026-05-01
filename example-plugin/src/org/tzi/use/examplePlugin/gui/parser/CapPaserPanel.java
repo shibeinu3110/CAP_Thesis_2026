@@ -225,6 +225,8 @@ import org.tzi.use.examplePlugin.ast.ASTInterface;
 import org.tzi.use.examplePlugin.metamodel.eligibility_constraint.EligibilityConstraintDetector;
 import org.tzi.use.examplePlugin.metamodel.eligibility_constraint.EligibilityConstraintExecutor;
 import org.tzi.use.examplePlugin.metamodel.eligibility_constraint.EligibilityConstraintType;
+import org.tzi.use.examplePlugin.metamodel.prerequisite_constraint.PrerequisiteConstraintDetector;
+import org.tzi.use.examplePlugin.metamodel.prerequisite_constraint.PrerequisiteConstraintType;
 import org.tzi.use.examplePlugin.metamodel.retake_constraint.RetakeConstraintDetector;
 import org.tzi.use.examplePlugin.metamodel.retake_constraint.RetakeConstraintExecutor;
 import org.tzi.use.examplePlugin.metamodel.retake_constraint.RetakeConstraintType;
@@ -471,6 +473,12 @@ public class CapPaserPanel extends JPanel {
           StructuralConstraintDetector structuralConstraintDetector = new StructuralConstraintDetector();
           StructuralConstraintType structuralType = structuralConstraintDetector.detectType(ast);
           typeLabel.setText("StructuralConstraint: " + structuralType);
+        }
+
+        case PREREQUISITE -> {
+          PrerequisiteConstraintDetector prerequisiteConstraintDetector = new PrerequisiteConstraintDetector();
+          PrerequisiteConstraintType prerequisiteType = prerequisiteConstraintDetector.detectType(ast);
+          typeLabel.setText("PrerequisiteConstraint: " + prerequisiteType);
         }
 
         default -> {

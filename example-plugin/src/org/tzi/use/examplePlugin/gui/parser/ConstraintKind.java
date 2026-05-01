@@ -9,5 +9,6 @@ public enum ConstraintKind {
   STATUS,
   RETAKE,
   STRUCTURAL,
+  PREREQUISITE,
   UNKNOWN,
 }
