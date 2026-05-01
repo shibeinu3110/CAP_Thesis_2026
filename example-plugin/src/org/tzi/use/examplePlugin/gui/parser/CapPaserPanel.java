@@ -226,6 +226,7 @@ import org.tzi.use.examplePlugin.metamodel.eligibility_constraint.EligibilityCon
 import org.tzi.use.examplePlugin.metamodel.eligibility_constraint.EligibilityConstraintExecutor;
 import org.tzi.use.examplePlugin.metamodel.eligibility_constraint.EligibilityConstraintType;
 import org.tzi.use.examplePlugin.metamodel.prerequisite_constraint.PrerequisiteConstraintDetector;
+import org.tzi.use.examplePlugin.metamodel.prerequisite_constraint.PrerequisiteConstraintExecutor;
 import org.tzi.use.examplePlugin.metamodel.prerequisite_constraint.PrerequisiteConstraintType;
 import org.tzi.use.examplePlugin.metamodel.retake_constraint.RetakeConstraintDetector;
 import org.tzi.use.examplePlugin.metamodel.retake_constraint.RetakeConstraintExecutor;
@@ -657,6 +658,17 @@ public class CapPaserPanel extends JPanel {
     if (type.equalsIgnoreCase(ConstraintType.STRUCTURAL_CONSTRAINT)) {
       System.out.println("This is a Structural Constraint.");
       return StructuralConstraintExecutor.execute(
+          astInterface,
+          ASTToJSONConverter.toJsonObject(astInterface),
+          context,
+          name
+      );
+    }
+
+    // Prerequisite Constraint
+    if (type.equalsIgnoreCase(ConstraintType.PREREQUISITE_CONSTRAINT)) {
+      System.out.println("This is a Prerequisite Constraint.");
+      return PrerequisiteConstraintExecutor.execute(
           astInterface,
           ASTToJSONConverter.toJsonObject(astInterface),
           context,

@@ -9,9 +9,5 @@ import java.util.List;
 public class PrerequisiteConstraintType2 implements PrerequisiteConstraintInterface {
   String assocCls;
   String rolePath;
-  String targetAssoc;
-
-  List<AttrCondPro> filters;
-  String sumAttr;
-  Integer max;
+  String checkedRole;
 }

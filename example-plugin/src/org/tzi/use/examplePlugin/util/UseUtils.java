@@ -2,6 +2,7 @@ package org.tzi.use.examplePlugin.util;
 
 import org.tzi.use.examplePlugin.ast.ASTInterface;
 import org.tzi.use.examplePlugin.metamodel.eligibility_constraint.EligibilityConstraintExecutor;
+import org.tzi.use.examplePlugin.metamodel.prerequisite_constraint.PrerequisiteConstraintExecutor;
 import org.tzi.use.examplePlugin.metamodel.retake_constraint.RetakeConstraintExecutor;
 import org.tzi.use.examplePlugin.metamodel.schedule_constraint.ScheduleConstraintExecutor;
 import org.tzi.use.examplePlugin.metamodel.size_constraint.SizeConstraintExecutor;
@@ -352,6 +353,17 @@ public class UseUtils {
     if (type.equalsIgnoreCase(ConstraintType.STRUCTURAL_CONSTRAINT)) {
       System.out.println("This is a Structural Constraint.");
       return StructuralConstraintExecutor.execute(
+          astInterface,
+          ASTToJSONConverter.toJsonObject(astInterface),
+          context,
+          name
+      );
+    }
+
+    // Prerequisite constraint
+    if (type.equalsIgnoreCase(ConstraintType.PREREQUISITE_CONSTRAINT)) {
+      System.out.println("This is a Prerequisite Constraint.");
+      return PrerequisiteConstraintExecutor.execute(
           astInterface,
           ASTToJSONConverter.toJsonObject(astInterface),
           context,

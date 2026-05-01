@@ -10,50 +10,22 @@ import static org.tzi.use.examplePlugin.util.GeneratorUtils.buildAllowedConditio
 
 public class PrerequisiteConstraintType2Generator implements PrerequisiteConstraintGenerator<PrerequisiteConstraintType2> {
   @Override
-  public String generate(String contextClass, String invariantName, PrerequisiteConstraintType2 rc1) {
+  public String generate(String contextClass, String invariantName, PrerequisiteConstraintType2 pr2) {
 
-    System.out.println("Generating RetakeConstraintType1...");
+    System.out.println("Generating PrerequisiteConstraintType2...");
 
-
-    // collect part
-    String allowedCond1 = null;
-    String allowedCond2 = null;
-
-    if (rc1.filters != null && !rc1.filters.isEmpty()) {
-
-      // forAll(1)
-      allowedCond1 =
-          buildAllowedCondition(
-              List.of(rc1.filters.get(0)),
-              RootScope.NONE,
-              null
-          );
-
-      // forAll(2)
-      if (rc1.filters.size() > 1) {
-        allowedCond2 =
-            buildAllowedCondition(
-                rc1.filters.subList(1, rc1.filters.size()),
-                RootScope.FIRST_ONLY,
-                "a"
-            );
-      }
-    }
-
-    System.out.println("Check forAll(1): " + allowedCond1);
-    System.out.println("Check forAll(2): " + allowedCond2);
-
+    String firstRolePath = pr2.rolePath.concat(".").concat(pr2.checkedRole);
 
     return """
-        context %s inv %s:
-          self.%s->forAll(e | %s(self)
-            ->forAll(a | %s))
+        context %s
+        inv %s:
+          self.%s->forAll(e1, e2 | e1.%s -> excludes(e2.%s))
         """.formatted(
         contextClass,
         invariantName,
-        rc1.targetAssoc,
-        allowedCond1,
-        allowedCond2
+        pr2.assocCls,
+        firstRolePath,
+        pr2.rolePath
     );
   }
 }

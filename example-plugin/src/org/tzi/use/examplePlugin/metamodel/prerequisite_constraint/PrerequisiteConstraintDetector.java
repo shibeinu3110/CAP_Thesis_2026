@@ -2,6 +2,7 @@ package org.tzi.use.examplePlugin.metamodel.prerequisite_constraint;
 
 import org.tzi.use.examplePlugin.ast.ASTInterface;
 
+import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CHECKED_ROLE;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CHECK_FOR_EXI;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CHECK_FOR_EXI2;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.COLLECT;
@@ -20,6 +21,10 @@ public class PrerequisiteConstraintDetector {
 
     System.out.println("Detecting prerequisite constraint type...");
 
-    return PrerequisiteConstraintType.TYPE2;
+    if (hasSpecificKey(astInterface, CHECKED_ROLE)) {
+      System.out.println("Detected PrerequisiteConstraintType2 based on presence of CHECKED_ROLE");
+      return PrerequisiteConstraintType.TYPE2;
+    }
+    return PrerequisiteConstraintType.UNSUPPORTED;
   }
 }

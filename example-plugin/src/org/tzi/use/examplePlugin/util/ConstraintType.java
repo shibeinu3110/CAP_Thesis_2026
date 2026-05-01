@@ -9,4 +9,5 @@ public class ConstraintType {
   public static final String STATUS_CONSTRAINT = "StatusConstraint";
   public static final String RETAKE_CONSTRAINT = "RetakeConstraint";
   public static final String STRUCTURAL_CONSTRAINT = "StructuralConstraint";
+  public static final String PREREQUISITE_CONSTRAINT = "PrerequisiteConstraint";
 }
