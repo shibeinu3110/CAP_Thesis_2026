@@ -34,6 +34,7 @@ public class CommonAttributes {
   public static final String BASE_TIME = "baseTime";
   public static final String DURATION = "duration";
   public static final String UNIT = "unit";
+  public static final String TARGET_ATTR = "targetAttr";
 
   // size constraint specific
   public static final String TARGET_COLLECTION = "targetCollection";
