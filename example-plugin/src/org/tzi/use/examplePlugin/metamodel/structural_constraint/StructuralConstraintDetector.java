@@ -2,6 +2,7 @@ package org.tzi.use.examplePlugin.metamodel.structural_constraint;
 
 import org.tzi.use.examplePlugin.ast.ASTInterface;
 
+import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ASSOC_CLS;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CHECK_FOR_EXI;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CHECK_STRUCTURE;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.COLLECT;
@@ -21,7 +22,9 @@ import static org.tzi.use.examplePlugin.util.UseUtils.hasSpecificKey;
 public class StructuralConstraintDetector {
 
   public StructuralConstraintType detectType(ASTInterface astInterface) {
-    if (hasParamsLengthEqualsTo(astInterface, CHECK_STRUCTURE, 1)
+    if (astInterface.args.size() == 1 && astInterface.args.containsKey(ASSOC_CLS)) {
+      return StructuralConstraintType.TYPE3;
+    } else if (hasParamsLengthEqualsTo(astInterface, CHECK_STRUCTURE, 1)
         && hasKeyEqualsToValueInSpecificParam(astInterface, EXCLUDE_SELF, "true", CHECK_STRUCTURE)) {
       // if checkStructure has only 1 param and that param has excludesSelf == "true", then it's type 1
       return StructuralConstraintType.TYPE1;
