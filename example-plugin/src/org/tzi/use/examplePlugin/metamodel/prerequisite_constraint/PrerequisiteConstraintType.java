@@ -4,6 +4,9 @@ import org.tzi.use.examplePlugin.metamodel.prerequisite_constraint.type2.Prerequ
 import org.tzi.use.examplePlugin.metamodel.prerequisite_constraint.type2.PrerequisiteType2Parser;
 import org.tzi.use.examplePlugin.metamodel.prerequisite_constraint.type3.PrerequisiteConstraintType3Generator;
 import org.tzi.use.examplePlugin.metamodel.prerequisite_constraint.type3.PrerequisiteType3Parser;
+import org.tzi.use.examplePlugin.metamodel.prerequisite_constraint.type7.PrerequisiteConstraintType7;
+import org.tzi.use.examplePlugin.metamodel.prerequisite_constraint.type7.PrerequisiteConstraintType7Generator;
+import org.tzi.use.examplePlugin.metamodel.prerequisite_constraint.type7.PrerequisiteType7Parser;
 import org.tzi.use.examplePlugin.metamodel.retake_constraint.type1.RetakeConstraintType1Generator;
 import org.tzi.use.examplePlugin.metamodel.retake_constraint.type1.RetakeConstraintType1Parser;
 import org.tzi.use.examplePlugin.metamodel.retake_constraint.type2.RetakeConstraintType2Generator;
@@ -18,6 +21,10 @@ public enum PrerequisiteConstraintType {
   TYPE2(new PrerequisiteType2Parser(), new PrerequisiteConstraintType2Generator()),
   TYPE3(new PrerequisiteType3Parser(), new PrerequisiteConstraintType3Generator()),
   TYPE4(null, null),
+  TYPE5(null, null),
+  TYPE6(null, null),
+  TYPE7(new PrerequisiteType7Parser(), new PrerequisiteConstraintType7Generator()),
+  TYPE8(null, null),
   UNSUPPORTED(null, null);
 
   public final PrerequisiteConstraintParser<?> parser;

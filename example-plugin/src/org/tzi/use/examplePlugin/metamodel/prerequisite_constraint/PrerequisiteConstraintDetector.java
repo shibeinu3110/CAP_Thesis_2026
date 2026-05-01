@@ -9,6 +9,7 @@ import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.COLLECT;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.IF_PART;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.MATCH_ATTR;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.MAX;
+import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.NO_SELF;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.REQUIRES;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.SUM_ATTR;
 import static org.tzi.use.examplePlugin.util.UseUtils.hasKeyEqualsToValue;
@@ -22,11 +23,12 @@ public class PrerequisiteConstraintDetector {
 
     System.out.println("Detecting prerequisite constraint type...");
 
-    if (hasSpecificKey(astInterface, CHECKED_ROLE) && !hasSpecificKey(astInterface, REQUIRES)) {
+    if (hasSpecificKey(astInterface, CHECKED_ROLE) && !hasSpecificKey(astInterface, REQUIRES) && !hasSpecificKey(astInterface, NO_SELF)) {
       return PrerequisiteConstraintType.TYPE2;
     } else if (hasSpecificKey(astInterface, CHECKED_ROLE) && hasSpecificKey(astInterface, REQUIRES)) {
       return PrerequisiteConstraintType.TYPE3;
-
+    } else if (hasSpecificKey(astInterface, NO_SELF)) {
+      return PrerequisiteConstraintType.TYPE7;
     }
     return PrerequisiteConstraintType.UNSUPPORTED;
   }

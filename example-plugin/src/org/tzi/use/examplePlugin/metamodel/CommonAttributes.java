@@ -55,4 +55,5 @@ public class CommonAttributes {
   public static final String CHECKED_ROLE = "checkedRole";
   public static final String REQUIRES = "requires";
   public static final String REF_ATTR = "refAttr";
+  public static final String NO_SELF = "noSelf";
 }
