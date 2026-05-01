@@ -6,12 +6,15 @@ import org.tzi.use.examplePlugin.metamodel.time_constraint.type2.TimeConstraintT
 import org.tzi.use.examplePlugin.metamodel.time_constraint.type2.TimeConstraintType2Parser;
 import org.tzi.use.examplePlugin.metamodel.time_constraint.type4.TimeConstraintType4Generator;
 import org.tzi.use.examplePlugin.metamodel.time_constraint.type4.TimeConstraintType4Parser;
+import org.tzi.use.examplePlugin.metamodel.time_constraint.type5.TimeConstraintType5Generator;
+import org.tzi.use.examplePlugin.metamodel.time_constraint.type5.TimeConstraintType5Parser;
 
 public enum TimeConstraintType {
   TYPE1(new TimeConstraintType1Parser(), new TimeConstraintType1Generator()),
   TYPE2(new TimeConstraintType2Parser(), new TimeConstraintType2Generator()),
   TYPE3(null, null),
   TYPE4(new TimeConstraintType4Parser(), new TimeConstraintType4Generator()),
+  TYPE5(new TimeConstraintType5Parser(), new TimeConstraintType5Generator()),
   UNSUPPORTED(null, null);
 
   public final TimeConstraintParser<?> parser;

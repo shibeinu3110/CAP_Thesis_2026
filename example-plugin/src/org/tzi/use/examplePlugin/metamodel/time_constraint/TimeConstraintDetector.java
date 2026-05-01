@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.IF_PART;
+import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.MAX;
+import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.SUM_ATTR;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.WINDOW;
 import static org.tzi.use.examplePlugin.util.UseUtils.hasKeyIn;
 import static org.tzi.use.examplePlugin.util.UseUtils.hasKeyInCheckForExi;
@@ -19,7 +21,7 @@ public class TimeConstraintDetector {
         .map(e -> e.name().toLowerCase())
         .toList();
 
-    if (!hasKeyInCheckForExi(astInterface, keys) && !hasKeyIn(astInterface, keys, IF_PART)) {
+    if (!hasKeyInCheckForExi(astInterface, keys) && !hasKeyIn(astInterface, keys, IF_PART) && !(hasSpecificKey(astInterface, MAX) && hasSpecificKey(astInterface, SUM_ATTR))) {
       return TimeConstraintType.TYPE1;
     } else if (hasKeyInCheckForExi(astInterface, keys)) {
       // type 2, 3, 5 is the same, so we only need to use 1 parser and generator for both of them
@@ -28,6 +30,9 @@ public class TimeConstraintDetector {
       return TimeConstraintType.TYPE4;
     } else if (hasSpecificKey(astInterface, WINDOW)) {
       return TimeConstraintType.TYPE3;
+    } else if (hasSpecificKey(astInterface, MAX) && hasSpecificKey(astInterface, SUM_ATTR)) {
+      return TimeConstraintType.TYPE5;
+
     }
     // Placeholder implementation
     return TimeConstraintType.UNSUPPORTED;

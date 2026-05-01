@@ -16,7 +16,7 @@ public class TimeConstraintType1Parser implements TimeConstraintParser<TimeConst
   public TimeConstraintType1 parse(Map<String, Object> astJson) {
     TimeConstraintType1 tc1 = new TimeConstraintType1();
 
-    System.out.println("Parsing ScheduleConstraintType1...");
+    System.out.println("Parsing TimeConstraintType1...");
 
     // ---- root args ----
     Map<String, Object> args = (Map<String, Object>) astJson.get(ARGS);
