@@ -17,6 +17,7 @@ import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CHECK_FOR_EXI
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.EXCLUDE_SELF;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.IS_UNDEFINED;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.RATIO;
+import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.REF_ATTR;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.SCALE;
 import static org.tzi.use.examplePlugin.util.CommonAttributes.FIX_ATTR;
 import static org.tzi.use.examplePlugin.util.CommonAttributes.FIX_BOOL;
@@ -236,6 +237,7 @@ public class ParserUtil {
       c.isUndefined  = Boolean.parseBoolean(
           String.valueOf(condArgs.get(IS_UNDEFINED))
       );
+      c.refAttr = asString(condArgs.get(REF_ATTR));
 
       // scale or ratio
       Object scale = condArgs.get(SCALE);

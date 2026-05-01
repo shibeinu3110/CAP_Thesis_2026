@@ -20,6 +20,9 @@ public class AttrCondPro {
   public boolean excludesSelf;
   public boolean isUndefined;
 
+  // for purpose like forAll(refAttr | abc.xyz >= refAttr.someAttr)
+  public String refAttr;
+
   public enum Type {
     MIN_LIM,
     MAX_LIM,

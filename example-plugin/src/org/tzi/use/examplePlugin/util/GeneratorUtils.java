@@ -263,7 +263,11 @@ public class GeneratorUtils {
       // in case matchAttr is a number or it's a limit, we treat it as a value, not a path
       right = c.matchAttr.toString();
     } else {
-      right = root + "." + c.matchAttr;
+      String rightRoot = (c.refAttr != null && !c.refAttr.isEmpty())
+          ? c.refAttr
+          : root;
+
+      right = rightRoot + "." + c.matchAttr;
     }
 
     // build left hand side path: self.course.credits or e.course.credits
@@ -276,9 +280,9 @@ public class GeneratorUtils {
 
     String cond;
     switch (c.type) {
-      case MIN_LIM, MIN_LIM_ATTR, MIN, MIN_ATTR -> cond = path + " < " + right;
+      case MIN_LIM, MIN_LIM_ATTR, MIN, MIN_ATTR -> cond = path + " > " + right;
 
-      case MAX_LIM, MAX_LIM_ATTR, MAX, MAX_ATTR -> cond = path + " > " + right;
+      case MAX_LIM, MAX_LIM_ATTR, MAX, MAX_ATTR -> cond = path + " < " + right;
 
       case MATCH_ATTR ->  cond = path + " = " + right;
 
