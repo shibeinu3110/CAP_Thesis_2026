@@ -3,6 +3,7 @@ package org.tzi.use.examplePlugin.metamodel.retake_constraint;
 import org.tzi.use.examplePlugin.ast.ASTInterface;
 
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CHECK_FOR_EXI;
+import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CHECK_FOR_EXI2;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.COLLECT;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.IF_PART;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.MATCH_ATTR;
@@ -36,6 +37,9 @@ public class RetakeConstraintDetector {
         && hasParamsLengthEqualsTo(astInterface, COLLECT, 1)
         && !hasSpecificKey(astInterface, IF_PART)) {
       return RetakeConstraintType.TYPE3;
+    } else if (hasSpecificKey(astInterface, CHECK_FOR_EXI2)) {
+      return RetakeConstraintType.TYPE4;
+
     } else {
       System.out.println("Could not detect a specific RetakeConstraintType based on AST attributes. Defaulting to UNSUPPORTED.");
     }

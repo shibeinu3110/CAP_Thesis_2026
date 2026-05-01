@@ -6,13 +6,14 @@ import org.tzi.use.examplePlugin.metamodel.retake_constraint.type2.RetakeConstra
 import org.tzi.use.examplePlugin.metamodel.retake_constraint.type2.RetakeConstraintType2Parser;
 import org.tzi.use.examplePlugin.metamodel.retake_constraint.type3.RetakeConstraintType3Generator;
 import org.tzi.use.examplePlugin.metamodel.retake_constraint.type3.RetakeConstraintType3Parser;
+import org.tzi.use.examplePlugin.metamodel.retake_constraint.type4.RetakeConstraintType4Generator;
+import org.tzi.use.examplePlugin.metamodel.retake_constraint.type4.RetakeConstraintType4Parser;
 
 public enum RetakeConstraintType {
   TYPE1(new RetakeConstraintType1Parser(), new RetakeConstraintType1Generator()),
   TYPE2(new RetakeConstraintType2Parser(), new RetakeConstraintType2Generator()),
   TYPE3(new RetakeConstraintType3Parser(), new RetakeConstraintType3Generator()),
-  TYPE4(null, null),
-  TYPE5(null, null),
+  TYPE4(new RetakeConstraintType4Parser(), new RetakeConstraintType4Generator()),
   UNSUPPORTED(null, null);
 
   public final RetakeConstraintParser<?> parser;
