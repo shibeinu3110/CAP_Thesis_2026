@@ -9,6 +9,7 @@ import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.COLLECT;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.IF_PART;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.MATCH_ATTR;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.MAX;
+import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.MAX_DEPTH_LIMIT;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.NO_SELF;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.REQUIRES;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.SUM_ATTR;
@@ -23,12 +24,14 @@ public class PrerequisiteConstraintDetector {
 
     System.out.println("Detecting prerequisite constraint type...");
 
-    if (hasSpecificKey(astInterface, CHECKED_ROLE) && !hasSpecificKey(astInterface, REQUIRES) && !hasSpecificKey(astInterface, NO_SELF)) {
+    if (hasSpecificKey(astInterface, CHECKED_ROLE) && !hasSpecificKey(astInterface, REQUIRES) && !hasSpecificKey(astInterface, NO_SELF) && !hasSpecificKey(astInterface, MAX_DEPTH_LIMIT)) {
       return PrerequisiteConstraintType.TYPE2;
     } else if (hasSpecificKey(astInterface, CHECKED_ROLE) && hasSpecificKey(astInterface, REQUIRES)) {
       return PrerequisiteConstraintType.TYPE3;
     } else if (hasSpecificKey(astInterface, NO_SELF)) {
       return PrerequisiteConstraintType.TYPE7;
+    } else if (hasSpecificKey(astInterface, MAX_DEPTH_LIMIT)) {
+      return PrerequisiteConstraintType.TYPE9;
     }
     return PrerequisiteConstraintType.UNSUPPORTED;
   }
