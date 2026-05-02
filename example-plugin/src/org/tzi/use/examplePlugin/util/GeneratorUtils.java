@@ -4,6 +4,7 @@ import org.jetbrains.annotations.Nullable;
 import org.tzi.use.examplePlugin.metamodel.AttrCondPro;
 import org.tzi.use.examplePlugin.metamodel.IfPart;
 import org.tzi.use.examplePlugin.metamodel.OperatorValue;
+import org.tzi.use.examplePlugin.metamodel.RelationCond;
 import org.tzi.use.examplePlugin.metamodel.eligibility_constraint.RootScope;
 
 import java.util.List;
@@ -571,6 +572,32 @@ public class GeneratorUtils {
     String attrs = buildAttrPath(c.attrs, null);
 
     return attrs + " <> self";
+  }
+
+
+  /**
+   * Builds a relation condition string from the given RelationCond object.
+   * E.g: self.course = e.course
+   * @param r
+   * @return
+   */
+  public static String buildRelation(RelationCond r) {
+    String left = r.leftRoot + "." + r.leftPath;
+
+    String right = r.rightRoot;
+    if (r.rightPath != null && !r.rightPath.isEmpty()) {
+      right += "." + r.rightPath;
+    }
+
+    return left + " " + r.operator + " " + right;
+  }
+
+
+
+  public static String buildRelationConditions(List<RelationCond> conds) {
+    return conds.stream()
+        .map(GeneratorUtils::buildRelation)
+        .collect(Collectors.joining(" and "));
   }
 
 

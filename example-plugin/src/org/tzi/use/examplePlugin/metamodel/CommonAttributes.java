@@ -57,4 +57,5 @@ public class CommonAttributes {
   public static final String REF_ATTR = "refAttr";
   public static final String NO_SELF = "noSelf";
   public static final String MAX_DEPTH_LIMIT = "maxDepthLimit";
+  public static final String RELATIONS = "relations";
 }

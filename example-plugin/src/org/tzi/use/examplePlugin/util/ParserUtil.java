@@ -4,6 +4,7 @@ import org.tzi.use.examplePlugin.CaculatorEnum;
 import org.tzi.use.examplePlugin.metamodel.AttrCondPro;
 import org.tzi.use.examplePlugin.metamodel.IfPart;
 import org.tzi.use.examplePlugin.metamodel.OperatorValue;
+import org.tzi.use.examplePlugin.metamodel.RelationCond;
 import org.tzi.use.examplePlugin.util.enumarate.IfFixType;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.EXCLUDE_SELF;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.IS_UNDEFINED;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.RATIO;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.REF_ATTR;
+import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.RELATIONS;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.SCALE;
 import static org.tzi.use.examplePlugin.util.CommonAttributes.FIX_ATTR;
 import static org.tzi.use.examplePlugin.util.CommonAttributes.FIX_BOOL;
@@ -25,7 +27,6 @@ import static org.tzi.use.examplePlugin.util.CommonAttributes.FIX_ENUM;
 import static org.tzi.use.examplePlugin.util.CommonAttributes.FIX_NUM;
 import static org.tzi.use.examplePlugin.util.CommonAttributes.FIX_STR;
 import static org.tzi.use.examplePlugin.util.CommonAttributes.MATCH_ATTR;
-import static org.tzi.use.examplePlugin.util.CommonAttributes.MAX_ATTR;
 import static org.tzi.use.examplePlugin.util.CommonAttributes.MAX_LIM;
 import static org.tzi.use.examplePlugin.util.CommonAttributes.MAX_LIM_ATTR;
 import static org.tzi.use.examplePlugin.util.CommonAttributes.MAX_VALUE;
@@ -319,5 +320,51 @@ public class ParserUtil {
       System.err.println("Unsupported type for scale: " + scale.getClass());
       return null;
     }
+  }
+
+
+  /**
+   * Parse relation conditions from the given arguments. It looks for a list of relations under the "relations" key and converts each relation into a RelationCond object.
+   * @param args
+   * @return
+   */
+  public static List<RelationCond> parseRelationConds(Map<String, Object> args) {
+
+    List<Map<String, Object>> rels =
+        (List<Map<String, Object>>) args.get(RELATIONS);
+
+    if (rels == null || rels.isEmpty()) return List.of();
+
+    List<RelationCond> result = new ArrayList<>();
+
+    for (Map<String, Object> rel : rels) {
+
+      Map<String, Object> condArgs =
+          (Map<String, Object>) rel.get("args");
+
+      String left = asString(condArgs.get("left"));
+      String op   = asString(condArgs.get("op"));
+      String right= asString(condArgs.get("right"));
+
+      // split left
+      String[] leftParts = left.split("\\.", 2);
+      String leftRoot = leftParts[0];
+      String leftPath = leftParts.length > 1 ? leftParts[1] : "";
+
+      // split right
+      String[] rightParts = right.split("\\.", 2);
+      String rightRoot = rightParts[0];
+      String rightPath = rightParts.length > 1 ? rightParts[1] : "";
+
+      result.add(new RelationCond(
+          leftRoot,
+          leftPath,
+          op,
+          rightRoot,
+          rightPath
+      ));
+    }
+
+    return result;
   }
 }
