@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 CAP.g 2026-05-02 13:20:43
+// $ANTLR 3.5.2 CAP.g 2026-05-01 21:22:19
 
 package org.tzi.use.examplePlugin.parser;
 
@@ -479,7 +479,7 @@ public class CAPParser extends Parser {
 
 
 	// $ANTLR start "value"
-	// CAP.g:124:1: value returns [Object val] : (s= STRING |n= NUMBER |b= BOOLEAN |q= QUALIFIED_IDENT |i= IDENT |eq= EQ |a= annotation |arr= array );
+	// CAP.g:124:1: value returns [Object val] : (s= STRING |n= NUMBER |b= BOOLEAN |q= QUALIFIED_IDENT |i= IDENT |a= annotation |arr= array );
 	public final Object value() throws RecognitionException {
 		Object val = null;
 
@@ -489,13 +489,12 @@ public class CAPParser extends Parser {
 		Token b=null;
 		Token q=null;
 		Token i=null;
-		Token eq=null;
 		ASTInterface a =null;
 		List<Object> arr =null;
 
 		try {
-			// CAP.g:125:5: (s= STRING |n= NUMBER |b= BOOLEAN |q= QUALIFIED_IDENT |i= IDENT |eq= EQ |a= annotation |arr= array )
-			int alt8=8;
+			// CAP.g:125:5: (s= STRING |n= NUMBER |b= BOOLEAN |q= QUALIFIED_IDENT |i= IDENT |a= annotation |arr= array )
+			int alt8=7;
 			switch ( input.LA(1) ) {
 			case STRING:
 				{
@@ -524,7 +523,7 @@ public class CAPParser extends Parser {
 					alt8=5;
 				}
 				else if ( (LA8_5==LPAREN) ) {
-					alt8=7;
+					alt8=6;
 				}
 
 				else {
@@ -541,19 +540,14 @@ public class CAPParser extends Parser {
 
 				}
 				break;
-			case EQ:
+			case AT:
 				{
 				alt8=6;
 				}
 				break;
-			case AT:
-				{
-				alt8=7;
-				}
-				break;
 			case LBRACE:
 				{
-				alt8=8;
+				alt8=7;
 				}
 				break;
 			default:
@@ -605,26 +599,19 @@ public class CAPParser extends Parser {
 					}
 					break;
 				case 6 :
-					// CAP.g:148:7: eq= EQ
+					// CAP.g:148:7: a= annotation
 					{
-					eq=(Token)match(input,EQ,FOLLOW_EQ_in_value552); 
-					 val = eq.getText(); 
-					}
-					break;
-				case 7 :
-					// CAP.g:151:7: a= annotation
-					{
-					pushFollow(FOLLOW_annotation_in_value573);
+					pushFollow(FOLLOW_annotation_in_value552);
 					a=annotation();
 					state._fsp--;
 
 					 val = a; 
 					}
 					break;
-				case 8 :
-					// CAP.g:154:7: arr= array
+				case 7 :
+					// CAP.g:151:7: arr= array
 					{
-					pushFollow(FOLLOW_array_in_value594);
+					pushFollow(FOLLOW_array_in_value573);
 					arr=array();
 					state._fsp--;
 
@@ -648,7 +635,7 @@ public class CAPParser extends Parser {
 
 
 	// $ANTLR start "array"
-	// CAP.g:162:1: array returns [List<Object> list] : LBRACE v= value ( COMMA v= value )* RBRACE ;
+	// CAP.g:159:1: array returns [List<Object> list] : LBRACE v= value ( COMMA v= value )* RBRACE ;
 	public final List<Object> array() throws RecognitionException {
 		List<Object> list = null;
 
@@ -657,16 +644,16 @@ public class CAPParser extends Parser {
 
 		 list = new ArrayList<Object>(); 
 		try {
-			// CAP.g:164:5: ( LBRACE v= value ( COMMA v= value )* RBRACE )
-			// CAP.g:165:7: LBRACE v= value ( COMMA v= value )* RBRACE
+			// CAP.g:161:5: ( LBRACE v= value ( COMMA v= value )* RBRACE )
+			// CAP.g:162:7: LBRACE v= value ( COMMA v= value )* RBRACE
 			{
-			match(input,LBRACE,FOLLOW_LBRACE_in_array639); 
-			pushFollow(FOLLOW_value_in_array651);
+			match(input,LBRACE,FOLLOW_LBRACE_in_array618); 
+			pushFollow(FOLLOW_value_in_array630);
 			v=value();
 			state._fsp--;
 
 			 list.add(v); 
-			// CAP.g:167:9: ( COMMA v= value )*
+			// CAP.g:164:9: ( COMMA v= value )*
 			loop9:
 			while (true) {
 				int alt9=2;
@@ -677,10 +664,10 @@ public class CAPParser extends Parser {
 
 				switch (alt9) {
 				case 1 :
-					// CAP.g:167:10: COMMA v= value
+					// CAP.g:164:10: COMMA v= value
 					{
-					match(input,COMMA,FOLLOW_COMMA_in_array664); 
-					pushFollow(FOLLOW_value_in_array668);
+					match(input,COMMA,FOLLOW_COMMA_in_array643); 
+					pushFollow(FOLLOW_value_in_array647);
 					v=value();
 					state._fsp--;
 
@@ -693,7 +680,7 @@ public class CAPParser extends Parser {
 				}
 			}
 
-			match(input,RBRACE,FOLLOW_RBRACE_in_array680); 
+			match(input,RBRACE,FOLLOW_RBRACE_in_array659); 
 			}
 
 		}
@@ -735,19 +722,18 @@ public class CAPParser extends Parser {
 	public static final BitSet FOLLOW_COMMA_in_arguments370 = new BitSet(new long[]{0x0000000000001000L});
 	public static final BitSet FOLLOW_argument_in_arguments372 = new BitSet(new long[]{0x0000000000000202L});
 	public static final BitSet FOLLOW_IDENT_in_argument401 = new BitSet(new long[]{0x0000000000000800L});
-	public static final BitSet FOLLOW_EQ_in_argument403 = new BitSet(new long[]{0x000000000009B850L});
+	public static final BitSet FOLLOW_EQ_in_argument403 = new BitSet(new long[]{0x000000000009B050L});
 	public static final BitSet FOLLOW_value_in_argument407 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_STRING_in_value447 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_NUMBER_in_value468 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_BOOLEAN_in_value489 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_QUALIFIED_IDENT_in_value510 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_IDENT_in_value531 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_EQ_in_value552 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_annotation_in_value573 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_array_in_value594 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_LBRACE_in_array639 = new BitSet(new long[]{0x000000000009B850L});
-	public static final BitSet FOLLOW_value_in_array651 = new BitSet(new long[]{0x0000000000020200L});
-	public static final BitSet FOLLOW_COMMA_in_array664 = new BitSet(new long[]{0x000000000009B850L});
-	public static final BitSet FOLLOW_value_in_array668 = new BitSet(new long[]{0x0000000000020200L});
-	public static final BitSet FOLLOW_RBRACE_in_array680 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_annotation_in_value552 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_array_in_value573 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LBRACE_in_array618 = new BitSet(new long[]{0x000000000009B050L});
+	public static final BitSet FOLLOW_value_in_array630 = new BitSet(new long[]{0x0000000000020200L});
+	public static final BitSet FOLLOW_COMMA_in_array643 = new BitSet(new long[]{0x000000000009B050L});
+	public static final BitSet FOLLOW_value_in_array647 = new BitSet(new long[]{0x0000000000020200L});
+	public static final BitSet FOLLOW_RBRACE_in_array659 = new BitSet(new long[]{0x0000000000000002L});
 }
