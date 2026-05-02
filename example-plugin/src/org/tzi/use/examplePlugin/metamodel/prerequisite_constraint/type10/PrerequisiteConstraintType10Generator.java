@@ -31,12 +31,12 @@ public class PrerequisiteConstraintType10Generator implements PrerequisiteConstr
       """.formatted(
         contextClass,
         invariantName,
-        pr10.assocCls,   // enrolments
-        ite,            // e
-        ite,            // e
-        pr10.rolePath,   // course
-        pr10.checkedRole,// requiredPreviousCourse
-        ite2,            // p
+        pr10.assocCls,
+        ite,
+        ite,
+        pr10.rolePath,
+        pr10.checkedRole,
+        ite2,
         existsExpr
     );
   }

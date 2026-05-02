@@ -59,4 +59,5 @@ public class CommonAttributes {
   public static final String MAX_DEPTH_LIMIT = "maxDepthLimit";
   public static final String RELATIONS = "relations";
   public static final String REQUIRE_EXIST = "requireExists";
+  public static final String CHECK_EXEC = "checkExec";
 }

@@ -3,9 +3,11 @@ package org.tzi.use.examplePlugin.metamodel.prerequisite_constraint;
 import org.tzi.use.examplePlugin.ast.ASTInterface;
 
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CHECKED_ROLE;
+import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CHECK_EXEC;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CHECK_FOR_EXI;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CHECK_FOR_EXI2;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.COLLECT;
+import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CROSS_REFERENCE;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.IF_PART;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.MATCH_ATTR;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.MAX;
@@ -31,7 +33,8 @@ public class PrerequisiteConstraintDetector {
         && !hasSpecificKey(astInterface, NO_SELF)
         && !hasSpecificKey(astInterface, MAX_DEPTH_LIMIT)
         && !hasSpecificKey(astInterface, RELATIONS)
-        && !hasSpecificKey(astInterface, REQUIRE_EXIST)) {
+        && !hasSpecificKey(astInterface, REQUIRE_EXIST)
+        && !hasSpecificKey(astInterface, CROSS_REFERENCE)) {
       return PrerequisiteConstraintType.TYPE2;
     } else if (hasSpecificKey(astInterface, CHECKED_ROLE)
         && hasSpecificKey(astInterface, REQUIRES)) {
@@ -44,6 +47,8 @@ public class PrerequisiteConstraintDetector {
       return PrerequisiteConstraintType.TYPE5;
     } else if (hasSpecificKey(astInterface, REQUIRE_EXIST)) {
       return PrerequisiteConstraintType.TYPE10;
+    } else if (hasSpecificKey(astInterface, CROSS_REFERENCE) && hasSpecificKey(astInterface, CHECK_EXEC)) {
+      return PrerequisiteConstraintType.TYPE11;
     }
     return PrerequisiteConstraintType.UNSUPPORTED;
   }

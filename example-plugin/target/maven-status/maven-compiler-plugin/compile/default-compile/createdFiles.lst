@@ -93,6 +93,7 @@ org\tzi\use\examplePlugin\metamodel\size_constraint\SizeConstraintInterface.clas
 org\tzi\use\examplePlugin\model\CAPSelect.class
 org\tzi\use\examplePlugin\metamodel\schedule_constraint\type2\ScheduleConstraintType2Generator.class
 org\tzi\use\examplePlugin\gui\other\CapTableModel.class
+org\tzi\use\examplePlugin\metamodel\prerequisite_constraint\type11\PrerequisiteConstraintType11.class
 org\tzi\use\examplePlugin\metamodel\schedule_constraint\type3\ScheduleConstraintType3Generator.class
 org\tzi\use\examplePlugin\metamodel\structural_constraint\StructuralConstraintExecutor.class
 org\tzi\use\examplePlugin\gui\parse_file\FileParserPanel.class
@@ -148,6 +149,7 @@ org\tzi\use\examplePlugin\parser\CAPParser.class
 org\tzi\use\examplePlugin\util\GUIUtils.class
 org\tzi\use\examplePlugin\metamodel\prerequisite_constraint\type6\PrerequisiteConstraintType6Generator.class
 org\tzi\use\examplePlugin\metamodel\time_constraint\type4\TimeConstraintType4.class
+org\tzi\use\examplePlugin\metamodel\prerequisite_constraint\type11\PrerequisiteConstraintType11Generator.class
 org\tzi\use\examplePlugin\metamodel\retake_constraint\type2\RetakeConstraintType2Parser.class
 org\tzi\use\examplePlugin\metamodel\retake_constraint\RetakeConstraintDetector.class
 org\tzi\use\examplePlugin\gui\create_type\TypeCreatePanel.class
@@ -221,6 +223,7 @@ org\tzi\use\examplePlugin\metamodel\schedule_constraint\ScheduleConstraintExecut
 org\tzi\use\examplePlugin\util\ParserUtil.class
 org\tzi\use\examplePlugin\metamodel\sum_constraint\SumConstraintParser.class
 org\tzi\use\examplePlugin\metamodel\retake_constraint\type1\RetakeConstraintType1Parser.class
+org\tzi\use\examplePlugin\metamodel\prerequisite_constraint\type11\PrerequisiteType11Parser.class
 org\tzi\use\examplePlugin\metamodel\sum_constraint\SumConstraintType.class
 org\tzi\use\examplePlugin\metamodel\prerequisite_constraint\PrerequisiteConstraintParser.class
 org\tzi\use\examplePlugin\ExamplePluginService.class
