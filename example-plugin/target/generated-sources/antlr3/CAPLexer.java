@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 CAP.g 2026-05-01 21:22:19
+// $ANTLR 3.5.2 CAP.g 2026-05-02 13:20:43
 
 package org.tzi.use.examplePlugin.parser;
 
@@ -49,8 +49,8 @@ public class CAPLexer extends Lexer {
 		try {
 			int _type = CLASS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// CAP.g:172:12: ( 'class' )
-			// CAP.g:172:14: 'class'
+			// CAP.g:175:12: ( 'class' )
+			// CAP.g:175:14: 'class'
 			{
 			match("class"); 
 
@@ -70,8 +70,8 @@ public class CAPLexer extends Lexer {
 		try {
 			int _type = ATTRIBUTES;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// CAP.g:173:12: ( 'attributes' )
-			// CAP.g:173:14: 'attributes'
+			// CAP.g:176:12: ( 'attributes' )
+			// CAP.g:176:14: 'attributes'
 			{
 			match("attributes"); 
 
@@ -91,8 +91,8 @@ public class CAPLexer extends Lexer {
 		try {
 			int _type = END;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// CAP.g:174:12: ( 'end' )
-			// CAP.g:174:14: 'end'
+			// CAP.g:177:12: ( 'end' )
+			// CAP.g:177:14: 'end'
 			{
 			match("end"); 
 
@@ -112,8 +112,8 @@ public class CAPLexer extends Lexer {
 		try {
 			int _type = AT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// CAP.g:176:9: ( '@' )
-			// CAP.g:176:11: '@'
+			// CAP.g:179:9: ( '@' )
+			// CAP.g:179:11: '@'
 			{
 			match('@'); 
 			}
@@ -132,8 +132,8 @@ public class CAPLexer extends Lexer {
 		try {
 			int _type = LPAREN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// CAP.g:177:9: ( '(' )
-			// CAP.g:177:11: '('
+			// CAP.g:180:9: ( '(' )
+			// CAP.g:180:11: '('
 			{
 			match('('); 
 			}
@@ -152,8 +152,8 @@ public class CAPLexer extends Lexer {
 		try {
 			int _type = RPAREN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// CAP.g:178:9: ( ')' )
-			// CAP.g:178:11: ')'
+			// CAP.g:181:9: ( ')' )
+			// CAP.g:181:11: ')'
 			{
 			match(')'); 
 			}
@@ -172,8 +172,8 @@ public class CAPLexer extends Lexer {
 		try {
 			int _type = LBRACE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// CAP.g:179:9: ( '{' )
-			// CAP.g:179:11: '{'
+			// CAP.g:182:9: ( '{' )
+			// CAP.g:182:11: '{'
 			{
 			match('{'); 
 			}
@@ -192,8 +192,8 @@ public class CAPLexer extends Lexer {
 		try {
 			int _type = RBRACE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// CAP.g:180:9: ( '}' )
-			// CAP.g:180:11: '}'
+			// CAP.g:183:9: ( '}' )
+			// CAP.g:183:11: '}'
 			{
 			match('}'); 
 			}
@@ -212,8 +212,8 @@ public class CAPLexer extends Lexer {
 		try {
 			int _type = COMMA;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// CAP.g:181:9: ( ',' )
-			// CAP.g:181:11: ','
+			// CAP.g:184:9: ( ',' )
+			// CAP.g:184:11: ','
 			{
 			match(','); 
 			}
@@ -232,8 +232,8 @@ public class CAPLexer extends Lexer {
 		try {
 			int _type = EQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// CAP.g:182:9: ( '=' )
-			// CAP.g:182:11: '='
+			// CAP.g:185:9: ( '=' )
+			// CAP.g:185:11: '='
 			{
 			match('='); 
 			}
@@ -252,8 +252,8 @@ public class CAPLexer extends Lexer {
 		try {
 			int _type = COLON;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// CAP.g:183:9: ( ':' )
-			// CAP.g:183:11: ':'
+			// CAP.g:186:9: ( ':' )
+			// CAP.g:186:11: ':'
 			{
 			match(':'); 
 			}
@@ -272,7 +272,7 @@ public class CAPLexer extends Lexer {
 		try {
 			int _type = BOOLEAN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// CAP.g:186:5: ( 'true' | 'false' )
+			// CAP.g:189:5: ( 'true' | 'false' )
 			int alt1=2;
 			int LA1_0 = input.LA(1);
 			if ( (LA1_0=='t') ) {
@@ -290,14 +290,14 @@ public class CAPLexer extends Lexer {
 
 			switch (alt1) {
 				case 1 :
-					// CAP.g:186:7: 'true'
+					// CAP.g:189:7: 'true'
 					{
 					match("true"); 
 
 					}
 					break;
 				case 2 :
-					// CAP.g:187:7: 'false'
+					// CAP.g:190:7: 'false'
 					{
 					match("false"); 
 
@@ -319,10 +319,10 @@ public class CAPLexer extends Lexer {
 		try {
 			int _type = NUMBER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// CAP.g:191:5: ( ( '-' )? ( '0' .. '9' )+ ( '.' ( '0' .. '9' )+ )? )
-			// CAP.g:191:7: ( '-' )? ( '0' .. '9' )+ ( '.' ( '0' .. '9' )+ )?
+			// CAP.g:194:5: ( ( '-' )? ( '0' .. '9' )+ ( '.' ( '0' .. '9' )+ )? )
+			// CAP.g:194:7: ( '-' )? ( '0' .. '9' )+ ( '.' ( '0' .. '9' )+ )?
 			{
-			// CAP.g:191:7: ( '-' )?
+			// CAP.g:194:7: ( '-' )?
 			int alt2=2;
 			int LA2_0 = input.LA(1);
 			if ( (LA2_0=='-') ) {
@@ -330,7 +330,7 @@ public class CAPLexer extends Lexer {
 			}
 			switch (alt2) {
 				case 1 :
-					// CAP.g:191:7: '-'
+					// CAP.g:194:7: '-'
 					{
 					match('-'); 
 					}
@@ -338,7 +338,7 @@ public class CAPLexer extends Lexer {
 
 			}
 
-			// CAP.g:191:12: ( '0' .. '9' )+
+			// CAP.g:194:12: ( '0' .. '9' )+
 			int cnt3=0;
 			loop3:
 			while (true) {
@@ -371,7 +371,7 @@ public class CAPLexer extends Lexer {
 				cnt3++;
 			}
 
-			// CAP.g:191:24: ( '.' ( '0' .. '9' )+ )?
+			// CAP.g:194:24: ( '.' ( '0' .. '9' )+ )?
 			int alt5=2;
 			int LA5_0 = input.LA(1);
 			if ( (LA5_0=='.') ) {
@@ -379,10 +379,10 @@ public class CAPLexer extends Lexer {
 			}
 			switch (alt5) {
 				case 1 :
-					// CAP.g:191:25: '.' ( '0' .. '9' )+
+					// CAP.g:194:25: '.' ( '0' .. '9' )+
 					{
 					match('.'); 
-					// CAP.g:191:29: ( '0' .. '9' )+
+					// CAP.g:194:29: ( '0' .. '9' )+
 					int cnt4=0;
 					loop4:
 					while (true) {
@@ -436,8 +436,8 @@ public class CAPLexer extends Lexer {
 		try {
 			int _type = QUALIFIED_IDENT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// CAP.g:195:5: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )* ( '::' ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )* )+ )
-			// CAP.g:195:7: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )* ( '::' ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )* )+
+			// CAP.g:198:5: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )* ( '::' ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )* )+ )
+			// CAP.g:198:7: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )* ( '::' ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )* )+
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 				input.consume();
@@ -447,7 +447,7 @@ public class CAPLexer extends Lexer {
 				recover(mse);
 				throw mse;
 			}
-			// CAP.g:196:7: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )*
+			// CAP.g:199:7: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )*
 			loop6:
 			while (true) {
 				int alt6=2;
@@ -476,7 +476,7 @@ public class CAPLexer extends Lexer {
 				}
 			}
 
-			// CAP.g:197:7: ( '::' ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )* )+
+			// CAP.g:200:7: ( '::' ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )* )+
 			int cnt8=0;
 			loop8:
 			while (true) {
@@ -488,7 +488,7 @@ public class CAPLexer extends Lexer {
 
 				switch (alt8) {
 				case 1 :
-					// CAP.g:197:8: '::' ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )*
+					// CAP.g:200:8: '::' ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )*
 					{
 					match("::"); 
 
@@ -500,7 +500,7 @@ public class CAPLexer extends Lexer {
 						recover(mse);
 						throw mse;
 					}
-					// CAP.g:199:9: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )*
+					// CAP.g:202:9: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )*
 					loop7:
 					while (true) {
 						int alt7=2;
@@ -556,8 +556,8 @@ public class CAPLexer extends Lexer {
 		try {
 			int _type = IDENT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// CAP.g:204:5: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )* )
-			// CAP.g:204:7: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )*
+			// CAP.g:207:5: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )* )
+			// CAP.g:207:7: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )*
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 				input.consume();
@@ -567,7 +567,7 @@ public class CAPLexer extends Lexer {
 				recover(mse);
 				throw mse;
 			}
-			// CAP.g:205:7: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )*
+			// CAP.g:208:7: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' )*
 			loop9:
 			while (true) {
 				int alt9=2;
@@ -612,11 +612,11 @@ public class CAPLexer extends Lexer {
 		try {
 			int _type = STRING;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// CAP.g:209:5: ( '\\'' (~ ( '\\'' | '\\\\' ) | '\\\\' . )* '\\'' )
-			// CAP.g:209:7: '\\'' (~ ( '\\'' | '\\\\' ) | '\\\\' . )* '\\''
+			// CAP.g:212:5: ( '\\'' (~ ( '\\'' | '\\\\' ) | '\\\\' . )* '\\'' )
+			// CAP.g:212:7: '\\'' (~ ( '\\'' | '\\\\' ) | '\\\\' . )* '\\''
 			{
 			match('\''); 
-			// CAP.g:209:12: (~ ( '\\'' | '\\\\' ) | '\\\\' . )*
+			// CAP.g:212:12: (~ ( '\\'' | '\\\\' ) | '\\\\' . )*
 			loop10:
 			while (true) {
 				int alt10=3;
@@ -630,7 +630,7 @@ public class CAPLexer extends Lexer {
 
 				switch (alt10) {
 				case 1 :
-					// CAP.g:209:14: ~ ( '\\'' | '\\\\' )
+					// CAP.g:212:14: ~ ( '\\'' | '\\\\' )
 					{
 					if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '&')||(input.LA(1) >= '(' && input.LA(1) <= '[')||(input.LA(1) >= ']' && input.LA(1) <= '\uFFFF') ) {
 						input.consume();
@@ -643,7 +643,7 @@ public class CAPLexer extends Lexer {
 					}
 					break;
 				case 2 :
-					// CAP.g:209:31: '\\\\' .
+					// CAP.g:212:31: '\\\\' .
 					{
 					match('\\'); 
 					matchAny(); 
@@ -672,10 +672,10 @@ public class CAPLexer extends Lexer {
 		try {
 			int _type = WS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// CAP.g:213:5: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-			// CAP.g:213:7: ( ' ' | '\\t' | '\\r' | '\\n' )+
+			// CAP.g:216:5: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+			// CAP.g:216:7: ( ' ' | '\\t' | '\\r' | '\\n' )+
 			{
-			// CAP.g:213:7: ( ' ' | '\\t' | '\\r' | '\\n' )+
+			// CAP.g:216:7: ( ' ' | '\\t' | '\\r' | '\\n' )+
 			int cnt11=0;
 			loop11:
 			while (true) {
