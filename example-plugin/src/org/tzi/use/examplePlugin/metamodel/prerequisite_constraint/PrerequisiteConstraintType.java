@@ -1,5 +1,7 @@
 package org.tzi.use.examplePlugin.metamodel.prerequisite_constraint;
 
+import org.tzi.use.examplePlugin.metamodel.prerequisite_constraint.type10.PrerequisiteConstraintType10Generator;
+import org.tzi.use.examplePlugin.metamodel.prerequisite_constraint.type10.PrerequisiteType10Parser;
 import org.tzi.use.examplePlugin.metamodel.prerequisite_constraint.type2.PrerequisiteConstraintType2Generator;
 import org.tzi.use.examplePlugin.metamodel.prerequisite_constraint.type2.PrerequisiteType2Parser;
 import org.tzi.use.examplePlugin.metamodel.prerequisite_constraint.type3.PrerequisiteConstraintType3Generator;
@@ -29,6 +31,7 @@ public enum PrerequisiteConstraintType {
   TYPE6(null, null),
   TYPE7(new PrerequisiteType7Parser(), new PrerequisiteConstraintType7Generator()),
   TYPE9(new PrerequisiteType9Parser(), new PrerequisiteConstraintType9Generator()),
+  TYPE10(new PrerequisiteType10Parser(), new PrerequisiteConstraintType10Generator()),
   UNSUPPORTED(null, null);
 
   public final PrerequisiteConstraintParser<?> parser;

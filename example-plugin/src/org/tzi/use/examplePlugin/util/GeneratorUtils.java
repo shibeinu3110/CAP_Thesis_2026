@@ -293,6 +293,8 @@ public class GeneratorUtils {
 
       case MATCH_STR, FIX_ENUM, FIX_STR -> cond = path + " = '" + c.matchAttr + "'";
 
+      case MATCH_OBJECT -> cond = path + " = " + c.matchAttr;
+
       default -> throw new RuntimeException("Unsupported AttrCondPro type: " + c.type);
     }
 
@@ -303,20 +305,24 @@ public class GeneratorUtils {
   /**
    * Builds an OCL exists condition for the given collection and attribute conditions.
    * self.enrolments->exists(e | e.course.isThesis and e.course.credits > 5)
+   *
    * @param collection
    * @param conds
+   * @param iterator
    * @return
    */
   public static String buildExistsCheckCondition(
       String collection,
-      List<AttrCondPro> conds
-  ) {
+      List<AttrCondPro> conds,
+      String iterator) {
     if (conds == null || conds.isEmpty()) {
       return "true";
     }
 
-    String body = buildAllowedCondition(conds, RootScope.NONE, null);
-    return "self." + collection + "->exists(e | " + body + ")";
+    String iter = (iterator == null || iterator.isBlank()) ? "e" : iterator;
+
+    String body = buildAllowedCondition(conds, RootScope.NONE, !iterator.equals("e") ? iterator : null);
+    return "self." + collection + "->exists(" + iter + " | " + body + ")";
   }
 
   /**

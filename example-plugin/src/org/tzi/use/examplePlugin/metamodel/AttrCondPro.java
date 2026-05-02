@@ -37,6 +37,7 @@ public class AttrCondPro {
     FIX_ENUM,
     MAX_ATTR,
     MIN_ATTR,
-    MATCH_ATTR
+    MATCH_ATTR,
+    MATCH_OBJECT
   }
 }

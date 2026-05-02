@@ -1,14 +1,7 @@
 package org.tzi.use.examplePlugin.metamodel.retake_constraint.type2;
 
-import org.tzi.use.examplePlugin.metamodel.eligibility_constraint.RootScope;
 import org.tzi.use.examplePlugin.metamodel.retake_constraint.RetakeConstraintGenerator;
 
-import java.util.List;
-
-import static org.tzi.use.examplePlugin.util.GeneratorUtils.buildAllowedCondition;
-import static org.tzi.use.examplePlugin.util.GeneratorUtils.buildExistsCheckCondition;
-import static org.tzi.use.examplePlugin.util.GeneratorUtils.buildExistsIfCondition;
-import static org.tzi.use.examplePlugin.util.GeneratorUtils.buildIfCondition;
 import static org.tzi.use.examplePlugin.util.GeneratorUtilsV2.buildExistsCheckConditionForRetake;
 import static org.tzi.use.examplePlugin.util.GeneratorUtilsV2.buildIfConditionWithReference;
 

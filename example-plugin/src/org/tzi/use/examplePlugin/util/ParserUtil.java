@@ -294,6 +294,9 @@ public class ParserUtil {
       } else if (condArgs.containsKey("matchAttr")) {
         c.type = AttrCondPro.Type.MATCH_ATTR;
         c.matchAttr = String.valueOf(condArgs.get("matchAttr"));
+      } else if (condArgs.containsKey("matchObject")) {
+        c.type = AttrCondPro.Type.MATCH_OBJECT;
+        c.matchAttr = String.valueOf(condArgs.get("matchObject"));
       }
 
       attrConds.add(c);

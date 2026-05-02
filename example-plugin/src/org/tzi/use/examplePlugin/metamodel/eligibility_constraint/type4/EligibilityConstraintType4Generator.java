@@ -11,7 +11,7 @@ public class EligibilityConstraintType4Generator implements EligibilityConstrain
     System.out.println("Generating EligibilityConstraintType4...");
 
     String ifExists = buildExistsIfCondition(ec.targetAssoc, ec.ifParts);
-    String checkExists = buildExistsCheckCondition(ec.targetAssoc, ec.checkForExi);
+    String checkExists = buildExistsCheckCondition(ec.targetAssoc, ec.checkForExi, null);
 
     return """
         context %s

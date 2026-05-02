@@ -145,6 +145,9 @@ value returns [Object val]
     | i=IDENT
         { $val = $i.getText(); }
 
+    | eq=EQ
+        { $val = $eq.getText(); }
+
     | a=annotation
         { $val = $a.n; }
 
