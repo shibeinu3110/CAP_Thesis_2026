@@ -36,9 +36,8 @@ public class PrerequisiteConstraintDetector {
         && !hasSpecificKey(astInterface, REQUIRE_EXIST)
         && !hasSpecificKey(astInterface, CROSS_REFERENCE)) {
       return PrerequisiteConstraintType.TYPE2;
-    } else if (hasSpecificKey(astInterface, CHECKED_ROLE)
-        && hasSpecificKey(astInterface, REQUIRES)) {
-      return PrerequisiteConstraintType.TYPE3;
+    } else if (hasSpecificKey(astInterface, REQUIRES)) {
+      return hasSpecificKey(astInterface, CHECKED_ROLE) ? PrerequisiteConstraintType.TYPE3 : PrerequisiteConstraintType.TYPE12;
     } else if (hasSpecificKey(astInterface, NO_SELF)) {
       return PrerequisiteConstraintType.TYPE7;
     } else if (hasSpecificKey(astInterface, MAX_DEPTH_LIMIT)) {

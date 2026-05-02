@@ -65,6 +65,7 @@ org\tzi\use\examplePlugin\metamodel\prerequisite_constraint\type5\PrerequisiteTy
 org\tzi\use\examplePlugin\metamodel\eligibility_constraint\type4\EligibilityConstraintType4.class
 org\tzi\use\examplePlugin\metamodel\structural_constraint\type2\StructuralConstraintType2Generator.class
 org\tzi\use\examplePlugin\metamodel\status_constraint\type1\StatusConstraintType1Generator.class
+org\tzi\use\examplePlugin\metamodel\prerequisite_constraint\type12\PrerequisiteConstraintType12.class
 org\tzi\use\examplePlugin\metamodel\structural_constraint\type3\StructuralConstraintType3Parser.class
 org\tzi\use\examplePlugin\metamodel\structural_constraint\type3\StructuralConstraintType3Generator.class
 org\tzi\use\examplePlugin\metamodel\sum_constraint\type3_4\SumConstraintType3_4.class
@@ -127,6 +128,7 @@ org\tzi\use\examplePlugin\metamodel\prerequisite_constraint\PrerequisiteConstrai
 org\tzi\use\examplePlugin\metamodel\schedule_constraint\type2\ScheduleConstraintType2Parser.class
 org\tzi\use\examplePlugin\util\ASTPrinter.class
 org\tzi\use\examplePlugin\gui\management\CapDiagramView.class
+org\tzi\use\examplePlugin\metamodel\prerequisite_constraint\type12\PrerequisiteType12Parser.class
 org\tzi\use\examplePlugin\metamodel\prerequisite_constraint\type7\PrerequisiteConstraintType7.class
 org\tzi\use\examplePlugin\metamodel\schedule_constraint\type3\ScheduleConstraintType3.class
 org\tzi\use\examplePlugin\metamodel\structural_constraint\type1\StructuralConstraintType1Parser.class
@@ -156,6 +158,7 @@ org\tzi\use\examplePlugin\gui\create_type\TypeCreatePanel.class
 org\tzi\use\examplePlugin\metamodel\sum_constraint\type3_4\SumConstraintType3_4Generator$1.class
 org\tzi\use\examplePlugin\gui\type\CapTypePopup$1.class
 org\tzi\use\examplePlugin\metamodel\eligibility_constraint\EligibilityConstraintParser.class
+org\tzi\use\examplePlugin\metamodel\prerequisite_constraint\type12\PrerequisiteConstraintType12Generator.class
 org\tzi\use\examplePlugin\metamodel\status_constraint\StatusConstraintInterface.class
 org\tzi\use\examplePlugin\gui\management\CapManageView.class
 org\tzi\use\examplePlugin\metamodel\retake_constraint\RetakeConstraintType.class
