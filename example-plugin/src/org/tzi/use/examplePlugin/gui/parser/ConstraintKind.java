@@ -10,5 +10,6 @@ public enum ConstraintKind {
   RETAKE,
   STRUCTURAL,
   PREREQUISITE,
+  SUM_PRODUCT,
   UNKNOWN,
 }

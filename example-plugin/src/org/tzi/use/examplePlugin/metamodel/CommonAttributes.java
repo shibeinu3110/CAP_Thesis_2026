@@ -60,4 +60,11 @@ public class CommonAttributes {
   public static final String RELATIONS = "relations";
   public static final String REQUIRE_EXIST = "requireExists";
   public static final String CHECK_EXEC = "checkExec";
+
+  // sum/product constraint specific
+  public static final String DERIVE = "derive";
+  public static final String RESULT = "result";
+  public static final String FILTERS = "filters";
+  public static final String SUM_ATTR1 = "sumAttr1";
+  public static final String SUM_ATTR2 = "sumAttr2";
 }

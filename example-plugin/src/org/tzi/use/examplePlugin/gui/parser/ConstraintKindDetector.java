@@ -15,6 +15,7 @@ public class ConstraintKindDetector {
       case "retakeconstraint" -> ConstraintKind.RETAKE;
       case "structuralconstraint" -> ConstraintKind.STRUCTURAL;
       case "prerequisiteconstraint" -> ConstraintKind.PREREQUISITE;
+      case "sumproductconstraint" -> ConstraintKind.SUM_PRODUCT;
 
       default -> ConstraintKind.UNKNOWN;
     };

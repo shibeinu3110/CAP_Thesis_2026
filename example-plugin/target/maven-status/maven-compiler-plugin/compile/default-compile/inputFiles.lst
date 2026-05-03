@@ -35,6 +35,7 @@ D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\gui\view_type\TypeViewP
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\gui\view_type\TypeViewView.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\AttrCond.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\AttrCondPro.java
+D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\Cacu.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\CommonAttributes.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\eligibility_constraint\EligibilityConstraintDetector.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\eligibility_constraint\EligibilityConstraintExecutor.java
@@ -190,6 +191,15 @@ D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\sum_constrain
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\sum_constraint\type3_4\SumConstraintType3_4.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\sum_constraint\type3_4\SumConstraintType3_4Generator.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\sum_constraint\type3_4\SumConstraintType3_4Parser.java
+D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\sumproduct_constraint\SumProductConstraintDetector.java
+D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\sumproduct_constraint\SumProductConstraintExecutor.java
+D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\sumproduct_constraint\SumProductConstraintGenerator.java
+D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\sumproduct_constraint\SumProductConstraintInterface.java
+D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\sumproduct_constraint\SumProductConstraintParser.java
+D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\sumproduct_constraint\SumProductConstraintType.java
+D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\sumproduct_constraint\type1\SumProductConstraintType1.java
+D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\sumproduct_constraint\type1\SumProductConstraintType1Generator.java
+D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\sumproduct_constraint\type1\SumProductConstraintType1Parser.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\time_constraint\TimeConstraintDetector.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\time_constraint\TimeConstraintExecutor.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\time_constraint\TimeConstraintGenerator.java

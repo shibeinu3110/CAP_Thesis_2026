@@ -8,6 +8,7 @@ org\tzi\use\examplePlugin\metamodel\retake_constraint\RetakeConstraintParser.cla
 org\tzi\use\examplePlugin\metamodel\structural_constraint\type4\StructuralConstraintType4Parser.class
 org\tzi\use\examplePlugin\metamodel\schedule_constraint\type4\ScheduleConstraintType4Parser.class
 org\tzi\use\examplePlugin\metamodel\eligibility_constraint\type4\EligibilityConstraintType4Generator.class
+org\tzi\use\examplePlugin\metamodel\Cacu.class
 org\tzi\use\examplePlugin\metamodel\retake_constraint\type3\RetakeConstraintType3Parser.class
 org\tzi\use\examplePlugin\metamodel\sum_constraint\SumConstraintDetector.class
 org\tzi\use\examplePlugin\metamodel\time_constraint\type2\TimeConstraintType2Parser.class
@@ -40,6 +41,8 @@ org\tzi\use\examplePlugin\metamodel\size_constraint\SizeConstraintExecutor.class
 org\tzi\use\examplePlugin\metamodel\schedule_constraint\ScheduleConstraintParser.class
 org\tzi\use\examplePlugin\metamodel\status_constraint\StatusConstraintParser.class
 org\tzi\use\examplePlugin\gui\create_type\TypeCreateView.class
+org\tzi\use\examplePlugin\metamodel\sumproduct_constraint\type1\SumProductConstraintType1Parser.class
+org\tzi\use\examplePlugin\metamodel\sumproduct_constraint\SumProductConstraintInterface.class
 org\tzi\use\examplePlugin\metamodel\time_constraint\TimeConstraintExecutor.class
 org\tzi\use\examplePlugin\metamodel\size_constraint\SizeConstraintGenerator.class
 org\tzi\use\examplePlugin\gui\CapCrudView.class
@@ -98,6 +101,7 @@ org\tzi\use\examplePlugin\metamodel\prerequisite_constraint\type11\PrerequisiteC
 org\tzi\use\examplePlugin\metamodel\schedule_constraint\type3\ScheduleConstraintType3Generator.class
 org\tzi\use\examplePlugin\metamodel\structural_constraint\StructuralConstraintExecutor.class
 org\tzi\use\examplePlugin\gui\parse_file\FileParserPanel.class
+org\tzi\use\examplePlugin\metamodel\sumproduct_constraint\SumProductConstraintType.class
 org\tzi\use\examplePlugin\metamodel\structural_constraint\StructuralConstraintParser.class
 org\tzi\use\examplePlugin\gui\other\QuadConsumer.class
 org\tzi\use\examplePlugin\metamodel\prerequisite_constraint\type10\PrerequisiteType10Parser.class
@@ -107,16 +111,19 @@ org\tzi\use\examplePlugin\model\CAPExpr.class
 org\tzi\use\examplePlugin\metamodel\structural_constraint\StructuralConstraintType.class
 org\tzi\use\examplePlugin\metamodel\eligibility_constraint\type1\EligibilityConstraintType1.class
 org\tzi\use\examplePlugin\util\CommonVar.class
+org\tzi\use\examplePlugin\metamodel\sumproduct_constraint\type1\SumProductConstraintType1Generator.class
 org\tzi\use\examplePlugin\metamodel\time_constraint\type1\TimeConstraintType1Parser.class
 org\tzi\use\examplePlugin\util\GeneratorUtils.class
 org\tzi\use\examplePlugin\metamodel\schedule_constraint\type3\ScheduleConstraintType3Parser.class
 org\tzi\use\examplePlugin\metamodel\time_constraint\TimeConstraintInterface.class
 org\tzi\use\examplePlugin\metamodel\prerequisite_constraint\type2\PrerequisiteConstraintType2.class
 org\tzi\use\examplePlugin\metamodel\eligibility_constraint\type3\EligibilityConstraintType3Generator.class
+org\tzi\use\examplePlugin\metamodel\sumproduct_constraint\SumProductConstraintExecutor.class
 org\tzi\use\examplePlugin\metamodel\IfPart.class
 org\tzi\use\examplePlugin\util\UseUtils.class
 org\tzi\use\examplePlugin\enumarate\Phase.class
 org\tzi\use\examplePlugin\metamodel\retake_constraint\type3\RetakeConstraintType3Generator.class
+org\tzi\use\examplePlugin\metamodel\sumproduct_constraint\type1\SumProductConstraintType1.class
 org\tzi\use\examplePlugin\util\enumarate\BoundType.class
 org\tzi\use\examplePlugin\CaculatorEnum.class
 org\tzi\use\examplePlugin\metamodel\sum_constraint\type3_4\SumConstraintType3_4Parser.class
@@ -185,12 +192,12 @@ org\tzi\use\examplePlugin\use\ASTToJSONConverter.class
 org\tzi\use\examplePlugin\model\CAPCompare.class
 org\tzi\use\examplePlugin\metamodel\sum_constraint\type2\SumConstraintType2Generator.class
 org\tzi\use\examplePlugin\metamodel\prerequisite_constraint\type3\PrerequisiteConstraintType3Generator.class
-org\tzi\use\examplePlugin\parser\CAPLexer$DFA12.class
 org\tzi\use\examplePlugin\metamodel\eligibility_constraint\EligibilityConstraintDetector.class
 org\tzi\use\examplePlugin\metamodel\OperatorEnum.class
 org\tzi\use\examplePlugin\metamodel\prerequisite_constraint\PrerequisiteConstraintExecutor.class
 org\tzi\use\examplePlugin\metamodel\structural_constraint\StructuralConstraintGenerator.class
 org\tzi\use\examplePlugin\metamodel\prerequisite_constraint\PrerequisiteConstraintType.class
+org\tzi\use\examplePlugin\metamodel\sumproduct_constraint\SumProductConstraintParser.class
 org\tzi\use\examplePlugin\metamodel\schedule_constraint\ScheduleConstraintGenerator.class
 org\tzi\use\examplePlugin\metamodel\schedule_constraint\ScheduleConstraintType.class
 org\tzi\use\examplePlugin\metamodel\schedule_constraint\type3\LimitAttribute.class
@@ -205,6 +212,7 @@ org\tzi\use\examplePlugin\metamodel\time_constraint\type1\TimeConstraintType1.cl
 org\tzi\use\examplePlugin\metamodel\retake_constraint\type3\RetakeConstraintType3.class
 org\tzi\use\examplePlugin\util\ConstraintType.class
 org\tzi\use\examplePlugin\metamodel\time_constraint\type4\TimeConstraintType4Generator.class
+org\tzi\use\examplePlugin\parser\CAPLexer$DFA14.class
 org\tzi\use\examplePlugin\metamodel\schedule_constraint\type4\ScheduleConstraintType4Generator.class
 org\tzi\use\examplePlugin\parser\UseSpecSplitter.class
 org\tzi\use\examplePlugin\gui\other\ActionCellRenderer.class
@@ -212,6 +220,7 @@ org\tzi\use\examplePlugin\util\enumarate\IfFixType.class
 org\tzi\use\examplePlugin\metamodel\time_constraint\type5\TimeConstraintType5Parser.class
 org\tzi\use\examplePlugin\metamodel\eligibility_constraint\EligibilityConstraintExecutor.class
 org\tzi\use\examplePlugin\metamodel\RelationCond.class
+org\tzi\use\examplePlugin\metamodel\sumproduct_constraint\SumProductConstraintDetector.class
 org\tzi\use\examplePlugin\metamodel\sum_constraint\SumConstraintExecutor.class
 org\tzi\use\examplePlugin\gui\type\CapTypeEditorPanel.class
 org\tzi\use\examplePlugin\metamodel\schedule_constraint\type2\ScheduleConstraintType2.class
@@ -250,5 +259,6 @@ org\tzi\use\examplePlugin\metamodel\eligibility_constraint\EligibilityConstraint
 org\tzi\use\examplePlugin\metamodel\eligibility_constraint\type3\EligibilityConstraintType3.class
 org\tzi\use\examplePlugin\metamodel\status_constraint\StatusConstraintDetector.class
 org\tzi\use\examplePlugin\metamodel\retake_constraint\type2\RetakeConstraintType2.class
+org\tzi\use\examplePlugin\metamodel\sumproduct_constraint\SumProductConstraintGenerator.class
 org\tzi\use\examplePlugin\metamodel\status_constraint\type1\StatusConstraintType1.class
 org\tzi\use\examplePlugin\metamodel\retake_constraint\type1\RetakeConstraintType1.class

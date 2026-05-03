@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 CAP.g 2026-05-02 16:54:47
+// $ANTLR 3.5.2 CAP.g 2026-05-03 12:56:02
 
 package org.tzi.use.examplePlugin.parser;
 
@@ -612,52 +612,117 @@ public class CAPLexer extends Lexer {
 		try {
 			int _type = STRING;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// CAP.g:212:5: ( '\\'' (~ ( '\\'' | '\\\\' ) | '\\\\' . )* '\\'' )
-			// CAP.g:212:7: '\\'' (~ ( '\\'' | '\\\\' ) | '\\\\' . )* '\\''
-			{
-			match('\''); 
-			// CAP.g:212:12: (~ ( '\\'' | '\\\\' ) | '\\\\' . )*
-			loop10:
-			while (true) {
-				int alt10=3;
-				int LA10_0 = input.LA(1);
-				if ( ((LA10_0 >= '\u0000' && LA10_0 <= '&')||(LA10_0 >= '(' && LA10_0 <= '[')||(LA10_0 >= ']' && LA10_0 <= '\uFFFF')) ) {
-					alt10=1;
-				}
-				else if ( (LA10_0=='\\') ) {
-					alt10=2;
-				}
+			// CAP.g:212:5: ( '\"' (~ ( '\"' | '\\\\' ) | '\\\\' . )* '\"' | '\\'' (~ ( '\\'' | '\\\\' ) | '\\\\' . )* '\\'' )
+			int alt12=2;
+			int LA12_0 = input.LA(1);
+			if ( (LA12_0=='\"') ) {
+				alt12=1;
+			}
+			else if ( (LA12_0=='\'') ) {
+				alt12=2;
+			}
 
-				switch (alt10) {
+			else {
+				NoViableAltException nvae =
+					new NoViableAltException("", 12, 0, input);
+				throw nvae;
+			}
+
+			switch (alt12) {
 				case 1 :
-					// CAP.g:212:14: ~ ( '\\'' | '\\\\' )
+					// CAP.g:212:7: '\"' (~ ( '\"' | '\\\\' ) | '\\\\' . )* '\"'
 					{
-					if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '&')||(input.LA(1) >= '(' && input.LA(1) <= '[')||(input.LA(1) >= ']' && input.LA(1) <= '\uFFFF') ) {
-						input.consume();
+					match('\"'); 
+					// CAP.g:212:11: (~ ( '\"' | '\\\\' ) | '\\\\' . )*
+					loop10:
+					while (true) {
+						int alt10=3;
+						int LA10_0 = input.LA(1);
+						if ( ((LA10_0 >= '\u0000' && LA10_0 <= '!')||(LA10_0 >= '#' && LA10_0 <= '[')||(LA10_0 >= ']' && LA10_0 <= '\uFFFF')) ) {
+							alt10=1;
+						}
+						else if ( (LA10_0=='\\') ) {
+							alt10=2;
+						}
+
+						switch (alt10) {
+						case 1 :
+							// CAP.g:212:13: ~ ( '\"' | '\\\\' )
+							{
+							if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '!')||(input.LA(1) >= '#' && input.LA(1) <= '[')||(input.LA(1) >= ']' && input.LA(1) <= '\uFFFF') ) {
+								input.consume();
+							}
+							else {
+								MismatchedSetException mse = new MismatchedSetException(null,input);
+								recover(mse);
+								throw mse;
+							}
+							}
+							break;
+						case 2 :
+							// CAP.g:212:29: '\\\\' .
+							{
+							match('\\'); 
+							matchAny(); 
+							}
+							break;
+
+						default :
+							break loop10;
+						}
 					}
-					else {
-						MismatchedSetException mse = new MismatchedSetException(null,input);
-						recover(mse);
-						throw mse;
-					}
+
+					match('\"'); 
 					}
 					break;
 				case 2 :
-					// CAP.g:212:31: '\\\\' .
+					// CAP.g:213:7: '\\'' (~ ( '\\'' | '\\\\' ) | '\\\\' . )* '\\''
 					{
-					match('\\'); 
-					matchAny(); 
+					match('\''); 
+					// CAP.g:213:12: (~ ( '\\'' | '\\\\' ) | '\\\\' . )*
+					loop11:
+					while (true) {
+						int alt11=3;
+						int LA11_0 = input.LA(1);
+						if ( ((LA11_0 >= '\u0000' && LA11_0 <= '&')||(LA11_0 >= '(' && LA11_0 <= '[')||(LA11_0 >= ']' && LA11_0 <= '\uFFFF')) ) {
+							alt11=1;
+						}
+						else if ( (LA11_0=='\\') ) {
+							alt11=2;
+						}
+
+						switch (alt11) {
+						case 1 :
+							// CAP.g:213:14: ~ ( '\\'' | '\\\\' )
+							{
+							if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '&')||(input.LA(1) >= '(' && input.LA(1) <= '[')||(input.LA(1) >= ']' && input.LA(1) <= '\uFFFF') ) {
+								input.consume();
+							}
+							else {
+								MismatchedSetException mse = new MismatchedSetException(null,input);
+								recover(mse);
+								throw mse;
+							}
+							}
+							break;
+						case 2 :
+							// CAP.g:213:31: '\\\\' .
+							{
+							match('\\'); 
+							matchAny(); 
+							}
+							break;
+
+						default :
+							break loop11;
+						}
+					}
+
+					match('\''); 
 					}
 					break;
 
-				default :
-					break loop10;
-				}
 			}
-
-			match('\''); 
-			}
-
 			state.type = _type;
 			state.channel = _channel;
 		}
@@ -672,20 +737,20 @@ public class CAPLexer extends Lexer {
 		try {
 			int _type = WS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// CAP.g:216:5: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-			// CAP.g:216:7: ( ' ' | '\\t' | '\\r' | '\\n' )+
+			// CAP.g:217:5: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+			// CAP.g:217:7: ( ' ' | '\\t' | '\\r' | '\\n' )+
 			{
-			// CAP.g:216:7: ( ' ' | '\\t' | '\\r' | '\\n' )+
-			int cnt11=0;
-			loop11:
+			// CAP.g:217:7: ( ' ' | '\\t' | '\\r' | '\\n' )+
+			int cnt13=0;
+			loop13:
 			while (true) {
-				int alt11=2;
-				int LA11_0 = input.LA(1);
-				if ( ((LA11_0 >= '\t' && LA11_0 <= '\n')||LA11_0=='\r'||LA11_0==' ') ) {
-					alt11=1;
+				int alt13=2;
+				int LA13_0 = input.LA(1);
+				if ( ((LA13_0 >= '\t' && LA13_0 <= '\n')||LA13_0=='\r'||LA13_0==' ') ) {
+					alt13=1;
 				}
 
-				switch (alt11) {
+				switch (alt13) {
 				case 1 :
 					// CAP.g:
 					{
@@ -701,11 +766,11 @@ public class CAPLexer extends Lexer {
 					break;
 
 				default :
-					if ( cnt11 >= 1 ) break loop11;
-					EarlyExitException eee = new EarlyExitException(11, input);
+					if ( cnt13 >= 1 ) break loop13;
+					EarlyExitException eee = new EarlyExitException(13, input);
 					throw eee;
 				}
-				cnt11++;
+				cnt13++;
 			}
 
 			skip();
@@ -723,9 +788,9 @@ public class CAPLexer extends Lexer {
 	@Override
 	public void mTokens() throws RecognitionException {
 		// CAP.g:1:8: ( CLASS | ATTRIBUTES | END | AT | LPAREN | RPAREN | LBRACE | RBRACE | COMMA | EQ | COLON | BOOLEAN | NUMBER | QUALIFIED_IDENT | IDENT | STRING | WS )
-		int alt12=17;
-		alt12 = dfa12.predict(input);
-		switch (alt12) {
+		int alt14=17;
+		alt14 = dfa14.predict(input);
+		switch (alt14) {
 			case 1 :
 				// CAP.g:1:10: CLASS
 				{
@@ -850,28 +915,29 @@ public class CAPLexer extends Lexer {
 	}
 
 
-	protected DFA12 dfa12 = new DFA12(this);
-	static final String DFA12_eotS =
+	protected DFA14 dfa14 = new DFA14(this);
+	static final String DFA14_eotS =
 		"\1\uffff\3\25\10\uffff\2\25\1\uffff\1\25\2\uffff\2\25\2\uffff\6\25\1\41"+
 		"\4\25\1\uffff\1\46\1\25\1\50\1\25\1\uffff\1\46\1\uffff\4\25\1\56\1\uffff";
-	static final String DFA12_eofS =
+	static final String DFA14_eofS =
 		"\57\uffff";
-	static final String DFA12_minS =
+	static final String DFA14_minS =
 		"\1\11\3\56\10\uffff\2\56\1\uffff\1\56\2\uffff\2\56\2\uffff\13\56\1\uffff"+
 		"\4\56\1\uffff\1\56\1\uffff\5\56\1\uffff";
-	static final String DFA12_maxS =
+	static final String DFA14_maxS =
 		"\1\175\3\172\10\uffff\2\172\1\uffff\1\172\2\uffff\2\172\2\uffff\13\172"+
 		"\1\uffff\4\172\1\uffff\1\172\1\uffff\5\172\1\uffff";
-	static final String DFA12_acceptS =
+	static final String DFA14_acceptS =
 		"\4\uffff\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\2\uffff\1\15\1\uffff\1\20"+
 		"\1\21\2\uffff\1\16\1\17\13\uffff\1\3\4\uffff\1\14\1\uffff\1\1\5\uffff"+
 		"\1\2";
-	static final String DFA12_specialS =
+	static final String DFA14_specialS =
 		"\57\uffff}>";
-	static final String[] DFA12_transitionS = {
-			"\2\21\2\uffff\1\21\22\uffff\1\21\6\uffff\1\20\1\5\1\6\2\uffff\1\11\1"+
-			"\16\2\uffff\12\16\1\13\2\uffff\1\12\2\uffff\1\4\32\17\4\uffff\1\17\1"+
-			"\uffff\1\2\1\17\1\1\1\17\1\3\1\15\15\17\1\14\6\17\1\7\1\uffff\1\10",
+	static final String[] DFA14_transitionS = {
+			"\2\21\2\uffff\1\21\22\uffff\1\21\1\uffff\1\20\4\uffff\1\20\1\5\1\6\2"+
+			"\uffff\1\11\1\16\2\uffff\12\16\1\13\2\uffff\1\12\2\uffff\1\4\32\17\4"+
+			"\uffff\1\17\1\uffff\1\2\1\17\1\1\1\17\1\3\1\15\15\17\1\14\6\17\1\7\1"+
+			"\uffff\1\10",
 			"\1\23\1\uffff\12\23\1\24\6\uffff\32\23\4\uffff\1\23\1\uffff\13\23\1"+
 			"\22\16\23",
 			"\1\23\1\uffff\12\23\1\24\6\uffff\32\23\4\uffff\1\23\1\uffff\23\23\1"+
@@ -942,34 +1008,34 @@ public class CAPLexer extends Lexer {
 			""
 	};
 
-	static final short[] DFA12_eot = DFA.unpackEncodedString(DFA12_eotS);
-	static final short[] DFA12_eof = DFA.unpackEncodedString(DFA12_eofS);
-	static final char[] DFA12_min = DFA.unpackEncodedStringToUnsignedChars(DFA12_minS);
-	static final char[] DFA12_max = DFA.unpackEncodedStringToUnsignedChars(DFA12_maxS);
-	static final short[] DFA12_accept = DFA.unpackEncodedString(DFA12_acceptS);
-	static final short[] DFA12_special = DFA.unpackEncodedString(DFA12_specialS);
-	static final short[][] DFA12_transition;
+	static final short[] DFA14_eot = DFA.unpackEncodedString(DFA14_eotS);
+	static final short[] DFA14_eof = DFA.unpackEncodedString(DFA14_eofS);
+	static final char[] DFA14_min = DFA.unpackEncodedStringToUnsignedChars(DFA14_minS);
+	static final char[] DFA14_max = DFA.unpackEncodedStringToUnsignedChars(DFA14_maxS);
+	static final short[] DFA14_accept = DFA.unpackEncodedString(DFA14_acceptS);
+	static final short[] DFA14_special = DFA.unpackEncodedString(DFA14_specialS);
+	static final short[][] DFA14_transition;
 
 	static {
-		int numStates = DFA12_transitionS.length;
-		DFA12_transition = new short[numStates][];
+		int numStates = DFA14_transitionS.length;
+		DFA14_transition = new short[numStates][];
 		for (int i=0; i<numStates; i++) {
-			DFA12_transition[i] = DFA.unpackEncodedString(DFA12_transitionS[i]);
+			DFA14_transition[i] = DFA.unpackEncodedString(DFA14_transitionS[i]);
 		}
 	}
 
-	protected class DFA12 extends DFA {
+	protected class DFA14 extends DFA {
 
-		public DFA12(BaseRecognizer recognizer) {
+		public DFA14(BaseRecognizer recognizer) {
 			this.recognizer = recognizer;
-			this.decisionNumber = 12;
-			this.eot = DFA12_eot;
-			this.eof = DFA12_eof;
-			this.min = DFA12_min;
-			this.max = DFA12_max;
-			this.accept = DFA12_accept;
-			this.special = DFA12_special;
-			this.transition = DFA12_transition;
+			this.decisionNumber = 14;
+			this.eot = DFA14_eot;
+			this.eof = DFA14_eof;
+			this.min = DFA14_min;
+			this.max = DFA14_max;
+			this.accept = DFA14_accept;
+			this.special = DFA14_special;
+			this.transition = DFA14_transition;
 		}
 		@Override
 		public String getDescription() {

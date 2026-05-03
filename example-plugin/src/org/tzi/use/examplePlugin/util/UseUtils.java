@@ -9,6 +9,7 @@ import org.tzi.use.examplePlugin.metamodel.size_constraint.SizeConstraintExecuto
 import org.tzi.use.examplePlugin.metamodel.status_constraint.StatusConstraintExecutor;
 import org.tzi.use.examplePlugin.metamodel.structural_constraint.StructuralConstraintExecutor;
 import org.tzi.use.examplePlugin.metamodel.sum_constraint.SumConstraintExecutor;
+import org.tzi.use.examplePlugin.metamodel.sumproduct_constraint.SumProductConstraintExecutor;
 import org.tzi.use.examplePlugin.metamodel.time_constraint.TimeConstraintExecutor;
 import org.tzi.use.examplePlugin.parser.CAPCompiler;
 import org.tzi.use.examplePlugin.use.ASTToJSONConverter;
@@ -364,6 +365,17 @@ public class UseUtils {
     if (type.equalsIgnoreCase(ConstraintType.PREREQUISITE_CONSTRAINT)) {
       System.out.println("This is a Prerequisite Constraint.");
       return PrerequisiteConstraintExecutor.execute(
+          astInterface,
+          ASTToJSONConverter.toJsonObject(astInterface),
+          context,
+          name
+      );
+    }
+
+    // SumProduct constraint
+    if (type.equalsIgnoreCase(ConstraintType.SUM_PRODUCT_CONSTRAINT)) {
+      System.out.println("This is a SumProduct Constraint.");
+      return SumProductConstraintExecutor.execute(
           astInterface,
           ASTToJSONConverter.toJsonObject(astInterface),
           context,

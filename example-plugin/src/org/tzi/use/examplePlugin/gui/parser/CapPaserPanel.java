@@ -246,6 +246,9 @@ import org.tzi.use.examplePlugin.metamodel.structural_constraint.StructuralConst
 import org.tzi.use.examplePlugin.metamodel.sum_constraint.SumConstraintExecutor;
 import org.tzi.use.examplePlugin.metamodel.sum_constraint.SumConstraintType;
 import org.tzi.use.examplePlugin.metamodel.sum_constraint.SumConstraintDetector;
+import org.tzi.use.examplePlugin.metamodel.sumproduct_constraint.SumProductConstraintDetector;
+import org.tzi.use.examplePlugin.metamodel.sumproduct_constraint.SumProductConstraintExecutor;
+import org.tzi.use.examplePlugin.metamodel.sumproduct_constraint.SumProductConstraintType;
 import org.tzi.use.examplePlugin.metamodel.time_constraint.TimeConstraintDetector;
 import org.tzi.use.examplePlugin.metamodel.time_constraint.TimeConstraintExecutor;
 import org.tzi.use.examplePlugin.metamodel.time_constraint.TimeConstraintType;
@@ -427,6 +430,8 @@ public class CapPaserPanel extends JPanel {
       String type = ASTToJSONConverter.toJsonObject(ast).get(CommonAttributes.TYPE).toString();
       ConstraintKind kind = ConstraintKindDetector.detect(type);
 
+      System.out.println("Detected constraint kind: " + kind);
+
       switch (kind) {
         case TIME -> {
           TimeConstraintDetector detector = new TimeConstraintDetector();
@@ -480,6 +485,12 @@ public class CapPaserPanel extends JPanel {
           PrerequisiteConstraintDetector prerequisiteConstraintDetector = new PrerequisiteConstraintDetector();
           PrerequisiteConstraintType prerequisiteType = prerequisiteConstraintDetector.detectType(ast);
           typeLabel.setText("PrerequisiteConstraint: " + prerequisiteType);
+        }
+
+        case SUM_PRODUCT -> {
+          SumProductConstraintDetector sumProductConstraintDetector = new SumProductConstraintDetector();
+          SumProductConstraintType sumProductType = sumProductConstraintDetector.detectType(ast);
+          typeLabel.setText("SumProductConstraint: " + sumProductType);
         }
 
         default -> {
@@ -669,6 +680,17 @@ public class CapPaserPanel extends JPanel {
     if (type.equalsIgnoreCase(ConstraintType.PREREQUISITE_CONSTRAINT)) {
       System.out.println("This is a Prerequisite Constraint.");
       return PrerequisiteConstraintExecutor.execute(
+          astInterface,
+          ASTToJSONConverter.toJsonObject(astInterface),
+          context,
+          name
+      );
+    }
+
+    // SumProduct constraint
+    if (type.equalsIgnoreCase(ConstraintType.SUM_PRODUCT_CONSTRAINT)) {
+      System.out.println("This is a SumProduct Constraint.");
+      return SumProductConstraintExecutor.execute(
           astInterface,
           ASTToJSONConverter.toJsonObject(astInterface),
           context,

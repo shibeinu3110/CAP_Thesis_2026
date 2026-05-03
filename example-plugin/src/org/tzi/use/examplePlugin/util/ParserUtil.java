@@ -2,6 +2,7 @@ package org.tzi.use.examplePlugin.util;
 
 import org.tzi.use.examplePlugin.CaculatorEnum;
 import org.tzi.use.examplePlugin.metamodel.AttrCondPro;
+import org.tzi.use.examplePlugin.metamodel.Cacu;
 import org.tzi.use.examplePlugin.metamodel.IfPart;
 import org.tzi.use.examplePlugin.metamodel.OperatorValue;
 import org.tzi.use.examplePlugin.metamodel.RelationCond;
@@ -370,4 +371,22 @@ public class ParserUtil {
 
     return result;
   }
+
+  public static Cacu parseCacu(Map<String, Object> args, String attrKey) {
+    if (args == null || !args.containsKey(attrKey)) {
+      return null;
+    }
+
+    Map<String, Object> cacuPart = (Map<String, Object>) args.get(attrKey);
+
+    Map<String, Object> innerArgs = (Map<String, Object>) cacuPart.get("args");
+
+    Cacu c = new Cacu();
+    c.attr  = (String) innerArgs.get("attr");
+    c.attr2 = (String) innerArgs.get("attr2");
+
+    return c;
+  }
+
+
 }

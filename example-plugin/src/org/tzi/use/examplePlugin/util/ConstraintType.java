@@ -10,4 +10,5 @@ public class ConstraintType {
   public static final String RETAKE_CONSTRAINT = "RetakeConstraint";
   public static final String STRUCTURAL_CONSTRAINT = "StructuralConstraint";
   public static final String PREREQUISITE_CONSTRAINT = "PrerequisiteConstraint";
+  public static final String SUM_PRODUCT_CONSTRAINT = "SumProductConstraint";
 }
