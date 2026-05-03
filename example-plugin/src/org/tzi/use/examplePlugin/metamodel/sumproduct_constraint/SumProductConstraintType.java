@@ -4,6 +4,8 @@ import org.tzi.use.examplePlugin.metamodel.sumproduct_constraint.type1.SumProduc
 import org.tzi.use.examplePlugin.metamodel.sumproduct_constraint.type1.SumProductConstraintType1Parser;
 import org.tzi.use.examplePlugin.metamodel.sumproduct_constraint.type2.SumProductConstraintType2Generator;
 import org.tzi.use.examplePlugin.metamodel.sumproduct_constraint.type2.SumProductConstraintType2Parser;
+import org.tzi.use.examplePlugin.metamodel.sumproduct_constraint.type3.SumProductConstraintType3Generator;
+import org.tzi.use.examplePlugin.metamodel.sumproduct_constraint.type3.SumProductConstraintType3Parser;
 import org.tzi.use.examplePlugin.metamodel.time_constraint.type1.TimeConstraintType1Generator;
 import org.tzi.use.examplePlugin.metamodel.time_constraint.type1.TimeConstraintType1Parser;
 import org.tzi.use.examplePlugin.metamodel.time_constraint.type2.TimeConstraintType2Generator;
@@ -16,7 +18,7 @@ import org.tzi.use.examplePlugin.metamodel.time_constraint.type5.TimeConstraintT
 public enum SumProductConstraintType {
   TYPE1(new SumProductConstraintType1Parser(), new SumProductConstraintType1Generator()),
   TYPE2(new SumProductConstraintType2Parser(), new SumProductConstraintType2Generator()),
-  TYPE3(null, null),
+  TYPE3(new SumProductConstraintType3Parser(), new SumProductConstraintType3Generator()),
   TYPE4(null, null),
   UNSUPPORTED(null, null);
 

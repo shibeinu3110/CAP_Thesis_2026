@@ -29,6 +29,7 @@ org\tzi\use\examplePlugin\metamodel\sum_constraint\SumConstraintGenerator.class
 org\tzi\use\examplePlugin\metamodel\AttrCondPro.class
 org\tzi\use\examplePlugin\metamodel\prerequisite_constraint\type6\PrerequisiteConstraintType6.class
 org\tzi\use\examplePlugin\gui\create\CapCreateView.class
+org\tzi\use\examplePlugin\metamodel\sumproduct_constraint\type3\SumProductConstraintType3Generator.class
 org\tzi\use\examplePlugin\model\sum\CAPSum.class
 org\tzi\use\examplePlugin\gui\other\ActionCellEditor.class
 org\tzi\use\examplePlugin\metamodel\eligibility_constraint\EligibilityConstraintType.class
@@ -120,6 +121,7 @@ org\tzi\use\examplePlugin\metamodel\schedule_constraint\type3\ScheduleConstraint
 org\tzi\use\examplePlugin\metamodel\time_constraint\TimeConstraintInterface.class
 org\tzi\use\examplePlugin\metamodel\prerequisite_constraint\type2\PrerequisiteConstraintType2.class
 org\tzi\use\examplePlugin\metamodel\eligibility_constraint\type3\EligibilityConstraintType3Generator.class
+org\tzi\use\examplePlugin\metamodel\sumproduct_constraint\type3\SumProductConstraintType3Parser.class
 org\tzi\use\examplePlugin\metamodel\sumproduct_constraint\SumProductConstraintExecutor.class
 org\tzi\use\examplePlugin\metamodel\IfPart.class
 org\tzi\use\examplePlugin\util\UseUtils.class
@@ -129,6 +131,7 @@ org\tzi\use\examplePlugin\metamodel\sumproduct_constraint\type1\SumProductConstr
 org\tzi\use\examplePlugin\util\enumarate\BoundType.class
 org\tzi\use\examplePlugin\CaculatorEnum.class
 org\tzi\use\examplePlugin\metamodel\sumproduct_constraint\type2\SumProductConstraintType2.class
+org\tzi\use\examplePlugin\metamodel\sumproduct_constraint\type3\SumProductConstraintType3.class
 org\tzi\use\examplePlugin\metamodel\sum_constraint\type3_4\SumConstraintType3_4Parser.class
 org\tzi\use\examplePlugin\metamodel\prerequisite_constraint\type9\PrerequisiteConstraintType9Generator.class
 org\tzi\use\examplePlugin\metamodel\prerequisite_constraint\type2\PrerequisiteType2Parser.class

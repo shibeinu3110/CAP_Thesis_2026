@@ -25,6 +25,8 @@ public class SumProductConstraintDetector {
         return SumProductConstraintType.TYPE1;
       } else if (hasSpecificKey(astInterface, CACU)) {
         return SumProductConstraintType.TYPE2;
+      } else if (hasSpecificKey(astInterface, SUM_ATTR)) {
+        return SumProductConstraintType.TYPE3;
       }
 
     // Placeholder implementation
