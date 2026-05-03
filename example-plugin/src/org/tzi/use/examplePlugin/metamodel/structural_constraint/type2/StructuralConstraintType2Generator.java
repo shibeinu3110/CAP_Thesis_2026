@@ -15,7 +15,7 @@ public class StructuralConstraintType2Generator implements StructuralConstraintG
     System.out.println("Generating StructuralConstraintType2...");
 
 
-    String checkStructure = buildAllowedCondition(sc2.checkStructure, null, null);
+    String checkStructure = buildAllowedCondition(sc2.checkStructure, null, null, false);
     System.out.println("Generated checkStructure condition: " + checkStructure);
 
     // split into [A=1, and, B=2, or, C=3]

@@ -3,7 +3,6 @@ package org.tzi.use.examplePlugin.metamodel.time_constraint.type2;
 import org.tzi.use.examplePlugin.metamodel.eligibility_constraint.RootScope;
 import org.tzi.use.examplePlugin.metamodel.time_constraint.TimeConstraintGenerator;
 
-import static org.tzi.use.examplePlugin.util.GeneratorUtils.buildAllowedCondition;
 import static org.tzi.use.examplePlugin.util.GeneratorUtils.buildAllowedConditionWithOperator;
 import static org.tzi.use.examplePlugin.util.GeneratorUtils.buildIfCondition;
 

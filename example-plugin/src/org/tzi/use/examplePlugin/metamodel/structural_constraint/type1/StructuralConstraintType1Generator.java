@@ -1,6 +1,5 @@
 package org.tzi.use.examplePlugin.metamodel.structural_constraint.type1;
 
-import org.tzi.use.examplePlugin.metamodel.eligibility_constraint.RootScope;
 import org.tzi.use.examplePlugin.metamodel.structural_constraint.StructuralConstraintGenerator;
 
 import java.util.Arrays;
@@ -16,7 +15,7 @@ public class StructuralConstraintType1Generator implements StructuralConstraintG
     System.out.println("Generating StructuralConstraintType1...");
 
 
-    String checkStructure = buildAllowedCondition(sc1.checkStructure, null, null);
+    String checkStructure = buildAllowedCondition(sc1.checkStructure, null, null, false);
 
     // split into [A=1, and, B=2, or, C=3]
     List<String> tokens = Arrays.stream(checkStructure.split("(?<=\\s)(and|or)(?=\\s)|\\s+(?=and|or)|(?<=and|or)\\s+"))

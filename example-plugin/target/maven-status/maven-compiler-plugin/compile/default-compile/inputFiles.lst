@@ -200,6 +200,9 @@ D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\sumproduct_co
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\sumproduct_constraint\type1\SumProductConstraintType1.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\sumproduct_constraint\type1\SumProductConstraintType1Generator.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\sumproduct_constraint\type1\SumProductConstraintType1Parser.java
+D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\sumproduct_constraint\type2\SumProductConstraintType2.java
+D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\sumproduct_constraint\type2\SumProductConstraintType2Generator.java
+D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\sumproduct_constraint\type2\SumProductConstraintType2Parser.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\time_constraint\TimeConstraintDetector.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\time_constraint\TimeConstraintExecutor.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\time_constraint\TimeConstraintGenerator.java

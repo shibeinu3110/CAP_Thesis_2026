@@ -22,7 +22,8 @@ public class PrerequisiteConstraintType12Generator implements PrerequisiteConstr
     String requireCond = GeneratorUtils.buildAllowedCondition(
         pr12.requires,
         RootScope.ALL,
-        null
+        null,
+        false
     );
 
     String finalCond;

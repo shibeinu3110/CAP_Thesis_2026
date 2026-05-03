@@ -16,7 +16,7 @@ public class PrerequisiteConstraintType3Generator implements PrerequisiteConstra
     String refAttr = pr3.requires.get(0).refAttr;
 
     // inside forAll part
-    String insideForAll = buildAllowedCondition(pr3.requires, RootScope.LAST_ONLY, refAttr);
+    String insideForAll = buildAllowedCondition(pr3.requires, RootScope.LAST_ONLY, refAttr, false);
 
     System.out.println("Generated inside forAll condition:\n" + insideForAll);
 

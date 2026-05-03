@@ -11,6 +11,7 @@ org\tzi\use\examplePlugin\metamodel\eligibility_constraint\type4\EligibilityCons
 org\tzi\use\examplePlugin\metamodel\Cacu.class
 org\tzi\use\examplePlugin\metamodel\retake_constraint\type3\RetakeConstraintType3Parser.class
 org\tzi\use\examplePlugin\metamodel\sum_constraint\SumConstraintDetector.class
+org\tzi\use\examplePlugin\metamodel\sumproduct_constraint\type2\SumProductConstraintType2Parser.class
 org\tzi\use\examplePlugin\metamodel\time_constraint\type2\TimeConstraintType2Parser.class
 org\tzi\use\examplePlugin\metamodel\eligibility_constraint\RootScope.class
 org\tzi\use\examplePlugin\metamodel\structural_constraint\type1\StructuralConstraintType1.class
@@ -114,6 +115,7 @@ org\tzi\use\examplePlugin\util\CommonVar.class
 org\tzi\use\examplePlugin\metamodel\sumproduct_constraint\type1\SumProductConstraintType1Generator.class
 org\tzi\use\examplePlugin\metamodel\time_constraint\type1\TimeConstraintType1Parser.class
 org\tzi\use\examplePlugin\util\GeneratorUtils.class
+org\tzi\use\examplePlugin\metamodel\sumproduct_constraint\type2\SumProductConstraintType2Generator.class
 org\tzi\use\examplePlugin\metamodel\schedule_constraint\type3\ScheduleConstraintType3Parser.class
 org\tzi\use\examplePlugin\metamodel\time_constraint\TimeConstraintInterface.class
 org\tzi\use\examplePlugin\metamodel\prerequisite_constraint\type2\PrerequisiteConstraintType2.class
@@ -126,6 +128,7 @@ org\tzi\use\examplePlugin\metamodel\retake_constraint\type3\RetakeConstraintType
 org\tzi\use\examplePlugin\metamodel\sumproduct_constraint\type1\SumProductConstraintType1.class
 org\tzi\use\examplePlugin\util\enumarate\BoundType.class
 org\tzi\use\examplePlugin\CaculatorEnum.class
+org\tzi\use\examplePlugin\metamodel\sumproduct_constraint\type2\SumProductConstraintType2.class
 org\tzi\use\examplePlugin\metamodel\sum_constraint\type3_4\SumConstraintType3_4Parser.class
 org\tzi\use\examplePlugin\metamodel\prerequisite_constraint\type9\PrerequisiteConstraintType9Generator.class
 org\tzi\use\examplePlugin\metamodel\prerequisite_constraint\type2\PrerequisiteType2Parser.class

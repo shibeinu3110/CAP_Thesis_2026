@@ -13,7 +13,7 @@ public class EligibilityConstraintType2Generator implements EligibilityConstrain
     String ifCond = buildIfCondition(ec.ifParts, null);
     String impliesPart = (ifCond == null) ? "" : ifCond + " implies\n  ";
 
-    String checkForExi = buildAllowedCondition(ec.checkForExi, RootScope.ALL, null);
+    String checkForExi = buildAllowedCondition(ec.checkForExi, RootScope.ALL, null, false);
 
     return """
         context %s

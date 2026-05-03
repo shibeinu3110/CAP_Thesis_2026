@@ -10,9 +10,6 @@ import org.tzi.use.examplePlugin.util.GeneratorUtils;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import static org.tzi.use.examplePlugin.util.GeneratorUtils.buildAllowedCondition;
-import static org.tzi.use.examplePlugin.util.GeneratorUtils.buildIfCondition;
-
 public class SumProductConstraintType1Generator implements SumProductConstraintGenerator<SumProductConstraintType1> {
   @Override
   public String generate(String contextClass, String invariantName, SumProductConstraintType1 sp) {
@@ -51,7 +48,8 @@ public class SumProductConstraintType1Generator implements SumProductConstraintG
     return GeneratorUtils.buildAllowedCondition(
         filter,
         RootScope.NONE,
-        ite
+        ite,
+        false
     );
   }
 

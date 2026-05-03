@@ -162,15 +162,17 @@ public class GeneratorUtils {
    * Builds an OCL condition string from the given attribute conditions.
    * E.g: self.course.credits > 5 and self.course.isThesis = true
    * join with "and"
+   *
    * @param filters
    * @param scope
+   * @param isDerivedMode
    * @return
    */
   public static String buildAllowedCondition(
       List<AttrCondPro> filters,
       RootScope scope,
-      @Nullable String iterator
-  ) {
+      @Nullable String iterator,
+      boolean isDerivedMode) {
     System.out.println("Building allowed condition for filters: " + filters + " with scope: " + scope);
     int lastIndex = filters.size() - 1;
     System.out.println("Last index: " + lastIndex);
@@ -192,7 +194,8 @@ public class GeneratorUtils {
               scope != null ? scope : RootScope.ALL,
               i == lastIndex,
               i == 0,
-              iterator
+              iterator,
+              isDerivedMode
           );
         })
         .collect(Collectors.joining(" and "));
@@ -222,7 +225,8 @@ public class GeneratorUtils {
             scope,
             i == lastIndex,
             i == 0,
-            iterator
+            iterator,
+            false
         ))
         .collect(Collectors.joining(" or "));
   }
@@ -232,8 +236,8 @@ public class GeneratorUtils {
       RootScope scope,
       boolean isLast,
       boolean isFirst,
-      @Nullable String iterator
-  ) {
+      @Nullable String iterator,
+      boolean isDerivedMode) {
 
     System.out.println("Condition type is: " + c.type);
     String root;
@@ -257,7 +261,7 @@ public class GeneratorUtils {
 
     String right = "";
     if (c.scale != null && !c.scale.isEmpty()) {
-      right = c.scale + " * " + root + "." + c.attrs.get(0) + "." + c.matchAttr;
+      right = "(" + c.scale + " * " + root + "." + c.attrs.get(0) + "." + c.matchAttr + ")";
     } else if (isNumber(c.matchAttr)
         || c.type == AttrCondPro.Type.MIN_LIM
         || c.type == AttrCondPro.Type.MAX_LIM) {
@@ -272,7 +276,15 @@ public class GeneratorUtils {
     }
 
     // build left hand side path: self.course.credits or e.course.credits
-    String path = root + "." + String.join(".", c.attrs);
+    String path;
+
+    // derive is only for SumProduct constraint type 2
+    if (isDerivedMode && c.attrs.size() > 1) {
+      path = root + "." + String.join(".", c.attrs.subList(1, c.attrs.size()));
+    } else {
+      path = root + "." + String.join(".", c.attrs);
+    }
+
 
     // in case c.type is null, (like we only have attr=value and attr2=value2), we will treat it as path
     if (c.type == null) {
@@ -321,7 +333,7 @@ public class GeneratorUtils {
 
     String iter = (iterator == null || iterator.isBlank()) ? "e" : iterator;
 
-    String body = buildAllowedCondition(conds, RootScope.NONE, !iterator.equals("e") ? iterator : null);
+    String body = buildAllowedCondition(conds, RootScope.NONE, !iterator.equals("e") ? iterator : null, false);
     return "self." + collection + "->exists(" + iter + " | " + body + ")";
   }
 
@@ -344,7 +356,7 @@ public class GeneratorUtils {
 
     return conds.stream()
         .map(c -> {
-          String cond = buildSingleAllowedCondition(c, RootScope.NONE, true, false, null);
+          String cond = buildSingleAllowedCondition(c, RootScope.NONE, true, false, null, false);
           return "self." + collection + "->exists(e | " + cond + ")";
         })
         .collect(Collectors.joining(" " + joinOp + " "));

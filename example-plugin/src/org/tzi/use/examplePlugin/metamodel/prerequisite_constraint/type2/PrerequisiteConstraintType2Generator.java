@@ -1,12 +1,6 @@
 package org.tzi.use.examplePlugin.metamodel.prerequisite_constraint.type2;
 
-import org.tzi.use.examplePlugin.metamodel.eligibility_constraint.RootScope;
 import org.tzi.use.examplePlugin.metamodel.prerequisite_constraint.PrerequisiteConstraintGenerator;
-import org.tzi.use.examplePlugin.metamodel.retake_constraint.RetakeConstraintGenerator;
-
-import java.util.List;
-
-import static org.tzi.use.examplePlugin.util.GeneratorUtils.buildAllowedCondition;
 
 public class PrerequisiteConstraintType2Generator implements PrerequisiteConstraintGenerator<PrerequisiteConstraintType2> {
   @Override

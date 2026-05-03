@@ -1,9 +1,6 @@
 package org.tzi.use.examplePlugin.metamodel.prerequisite_constraint.type7;
 
-import org.tzi.use.examplePlugin.metamodel.eligibility_constraint.RootScope;
 import org.tzi.use.examplePlugin.metamodel.prerequisite_constraint.PrerequisiteConstraintGenerator;
-
-import static org.tzi.use.examplePlugin.util.GeneratorUtils.buildAllowedCondition;
 
 public class PrerequisiteConstraintType7Generator implements PrerequisiteConstraintGenerator<PrerequisiteConstraintType7> {
   @Override

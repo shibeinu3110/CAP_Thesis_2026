@@ -22,7 +22,7 @@ public class StatusConstraintType3Generator implements StatusConstraintGenerator
     // collect
     String allowedCond = null;
     if (sc3.filters != null) {
-      allowedCond = buildAllowedCondition(sc3.filters, RootScope.ALL, null);
+      allowedCond = buildAllowedCondition(sc3.filters, RootScope.ALL, null, false);
     }
     String selectPart = "";
     if (allowedCond != null && !allowedCond.isEmpty()) {

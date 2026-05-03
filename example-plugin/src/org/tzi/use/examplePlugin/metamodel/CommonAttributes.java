@@ -67,4 +67,5 @@ public class CommonAttributes {
   public static final String FILTERS = "filters";
   public static final String SUM_ATTR1 = "sumAttr1";
   public static final String SUM_ATTR2 = "sumAttr2";
+  public static final String CACU = "cacu";
 }

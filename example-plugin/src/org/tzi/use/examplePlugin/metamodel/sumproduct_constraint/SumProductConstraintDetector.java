@@ -6,6 +6,7 @@ import org.tzi.use.examplePlugin.ast.ASTInterface;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CACU;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.IF_PART;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.MAX;
 import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.SUM_ATTR;
@@ -19,13 +20,11 @@ import static org.tzi.use.examplePlugin.util.UseUtils.hasSpecificKey;
 public class SumProductConstraintDetector {
   public SumProductConstraintType detectType(ASTInterface astInterface) {
 
-    List<String> keys = Arrays.stream(CaculatorEnum.values())
-        .map(e -> e.name().toLowerCase())
-        .toList();
-
       if (hasSpecificKey(astInterface, SUM_ATTR1)
         && hasSpecificKey(astInterface, SUM_ATTR2)) {
         return SumProductConstraintType.TYPE1;
+      } else if (hasSpecificKey(astInterface, CACU)) {
+        return SumProductConstraintType.TYPE2;
       }
 
     // Placeholder implementation

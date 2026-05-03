@@ -2,12 +2,10 @@ package org.tzi.use.examplePlugin.metamodel.retake_constraint.type1;
 
 import org.tzi.use.examplePlugin.metamodel.eligibility_constraint.RootScope;
 import org.tzi.use.examplePlugin.metamodel.retake_constraint.RetakeConstraintGenerator;
-import org.tzi.use.examplePlugin.metamodel.status_constraint.StatusConstraintGenerator;
 
 import java.util.List;
 
 import static org.tzi.use.examplePlugin.util.GeneratorUtils.buildAllowedCondition;
-import static org.tzi.use.examplePlugin.util.GeneratorUtils.buildIfCondition;
 
 public class RetakeConstraintType1Generator implements RetakeConstraintGenerator<RetakeConstraintType1> {
   @Override
@@ -27,7 +25,8 @@ public class RetakeConstraintType1Generator implements RetakeConstraintGenerator
           buildAllowedCondition(
               List.of(rc1.filters.get(0)),
               RootScope.NONE,
-              null
+              null,
+              false
           );
 
       // forAll(2)
@@ -36,7 +35,8 @@ public class RetakeConstraintType1Generator implements RetakeConstraintGenerator
             buildAllowedCondition(
                 rc1.filters.subList(1, rc1.filters.size()),
                 RootScope.FIRST_ONLY,
-                "a"
+                "a",
+                false
             );
       }
     }

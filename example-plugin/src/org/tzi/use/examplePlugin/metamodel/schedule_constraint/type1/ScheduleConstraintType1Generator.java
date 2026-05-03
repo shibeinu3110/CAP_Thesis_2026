@@ -12,7 +12,7 @@ public class ScheduleConstraintType1Generator implements ScheduleConstraintGener
 
     String allowedCond = null;
     if (sc1.filters != null) {
-      allowedCond = buildAllowedCondition(sc1.filters, RootScope.NONE, null);
+      allowedCond = buildAllowedCondition(sc1.filters, RootScope.NONE, null, false);
     }
 
     String selectPart = "";

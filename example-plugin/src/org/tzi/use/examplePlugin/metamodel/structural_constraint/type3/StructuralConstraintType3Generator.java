@@ -2,12 +2,6 @@ package org.tzi.use.examplePlugin.metamodel.structural_constraint.type3;
 
 import org.tzi.use.examplePlugin.metamodel.structural_constraint.StructuralConstraintGenerator;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static org.tzi.use.examplePlugin.util.GeneratorUtils.buildAllowedCondition;
-
 public class StructuralConstraintType3Generator implements StructuralConstraintGenerator<StructuralConstraintType3> {
   @Override
   public String generate(String contextClass, String invariantName, StructuralConstraintType3 sc3) {
