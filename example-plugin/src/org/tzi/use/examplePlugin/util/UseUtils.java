@@ -24,9 +24,14 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CHECK_FOR_EXI;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.CHECK_FOR_EXI;
 
 public class UseUtils {
+  /**
+   * Parse ASTInterface from text, the text should be in the format of CAPAnnotation, which is the original format parsed from USE
+   * @param text the text in the format of CAPAnnotation, e.g:
+   * @return the ASTInterface
+   */
   public static ASTInterface parseASTFromText(String text) {
     PrintWriter err = new PrintWriter(System.err);
     try {
@@ -271,7 +276,7 @@ public class UseUtils {
    */
   public static String constraintExecutor(ASTInterface astInterface, Map<String, Object> astJson, String context, String name) {
 
-    String type = astJson.get(CommonAttributes.TYPE).toString();
+    String type = astJson.get(CommonComparationsAttributes.TYPE).toString();
 
     // Sum Constraint
     if (type.equalsIgnoreCase(ConstraintType.SUM_CONSTRAINT)) {

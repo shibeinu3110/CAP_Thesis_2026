@@ -154,6 +154,7 @@ org\tzi\use\examplePlugin\metamodel\retake_constraint\type4\RetakeConstraintType
 org\tzi\use\examplePlugin\metamodel\status_constraint\type5\StatusConstraintType5Parser.class
 org\tzi\use\examplePlugin\metamodel\time_constraint\type5\TimeConstraintType5Generator.class
 org\tzi\use\examplePlugin\metamodel\retake_constraint\type4\RetakeConstraintType4Parser.class
+org\tzi\use\examplePlugin\logic\ConstraintRegistry.class
 org\tzi\use\examplePlugin\metamodel\sum_constraint\type2\SumConstraintType2Generator$1.class
 org\tzi\use\examplePlugin\model\CAPCollect.class
 org\tzi\use\examplePlugin\metamodel\retake_constraint\RetakeConstraintExecutor.class
@@ -210,7 +211,6 @@ org\tzi\use\examplePlugin\metamodel\schedule_constraint\type3\LimitAttribute.cla
 org\tzi\use\examplePlugin\metamodel\time_constraint\TimeConstraintGenerator.class
 org\tzi\use\examplePlugin\metamodel\prerequisite_constraint\type9\PrerequisiteType9Parser.class
 org\tzi\use\examplePlugin\metamodel\prerequisite_constraint\type6\PrerequisiteType6Parser.class
-org\tzi\use\examplePlugin\gui\parser\CapPaserPanel$2.class
 org\tzi\use\examplePlugin\metamodel\OperatorValue.class
 org\tzi\use\examplePlugin\metamodel\time_constraint\TimeConstraintParser.class
 org\tzi\use\examplePlugin\metamodel\status_constraint\type5\StatusConstraintType5Generator.class
@@ -242,6 +242,7 @@ org\tzi\use\examplePlugin\util\ParserUtil.class
 org\tzi\use\examplePlugin\metamodel\sum_constraint\SumConstraintParser.class
 org\tzi\use\examplePlugin\metamodel\retake_constraint\type1\RetakeConstraintType1Parser.class
 org\tzi\use\examplePlugin\metamodel\prerequisite_constraint\type11\PrerequisiteType11Parser.class
+org\tzi\use\examplePlugin\logic\ConstraintHandler.class
 org\tzi\use\examplePlugin\metamodel\sum_constraint\SumConstraintType.class
 org\tzi\use\examplePlugin\metamodel\prerequisite_constraint\PrerequisiteConstraintParser.class
 org\tzi\use\examplePlugin\ExamplePluginService.class

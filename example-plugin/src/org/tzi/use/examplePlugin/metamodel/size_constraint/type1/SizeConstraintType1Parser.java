@@ -5,23 +5,17 @@ import org.tzi.use.examplePlugin.metamodel.OperatorEnum;
 import org.tzi.use.examplePlugin.metamodel.size_constraint.Bound;
 import org.tzi.use.examplePlugin.metamodel.size_constraint.SizeConstraintParser;
 import org.tzi.use.examplePlugin.util.ParserUtil;
-import org.tzi.use.examplePlugin.util.enumarate.BoundType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ARGS;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ASSOC_CLS;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.COLLECT;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CONFLICT_CHECK;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CROSS_REFERENCE;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.INTERSECTION_OP;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.MAX;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ROLE_PATH;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.TARGET_ASSOC;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.TARGET_COLLECTION;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.ARGS;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.ASSOC_CLS;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.COLLECT;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.ROLE_PATH;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.TARGET_COLLECTION;
 import static org.tzi.use.examplePlugin.util.ParserUtil.parseIfPart;
 import static org.tzi.use.examplePlugin.util.UseUtils.asString;
 

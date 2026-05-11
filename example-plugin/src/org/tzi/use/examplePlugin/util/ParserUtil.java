@@ -13,28 +13,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ARGS;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ATTR_EXISTS;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CHECK_FOR_EXI;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.EXCLUDE_SELF;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.IS_UNDEFINED;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.RATIO;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.REF_ATTR;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.RELATIONS;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.SCALE;
-import static org.tzi.use.examplePlugin.util.CommonAttributes.FIX_ATTR;
-import static org.tzi.use.examplePlugin.util.CommonAttributes.FIX_BOOL;
-import static org.tzi.use.examplePlugin.util.CommonAttributes.FIX_ENUM;
-import static org.tzi.use.examplePlugin.util.CommonAttributes.FIX_NUM;
-import static org.tzi.use.examplePlugin.util.CommonAttributes.FIX_STR;
-import static org.tzi.use.examplePlugin.util.CommonAttributes.MATCH_ATTR;
-import static org.tzi.use.examplePlugin.util.CommonAttributes.MAX_LIM;
-import static org.tzi.use.examplePlugin.util.CommonAttributes.MAX_LIM_ATTR;
-import static org.tzi.use.examplePlugin.util.CommonAttributes.MAX_VALUE;
-import static org.tzi.use.examplePlugin.util.CommonAttributes.MIN_LIM;
-import static org.tzi.use.examplePlugin.util.CommonAttributes.MIN_LIM_ATTR;
-import static org.tzi.use.examplePlugin.util.CommonAttributes.MIN_VALUE;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.*;
+import static org.tzi.use.examplePlugin.util.CommonComparationsAttributes.*;
+import static org.tzi.use.examplePlugin.util.CommonComparationsAttributes.FIX_ATTR;
+import static org.tzi.use.examplePlugin.util.CommonComparationsAttributes.MATCH_ATTR;
+import static org.tzi.use.examplePlugin.util.CommonComparationsAttributes.MAX;
+import static org.tzi.use.examplePlugin.util.CommonComparationsAttributes.MIN;
 import static org.tzi.use.examplePlugin.util.UseUtils.asString;
+import static org.tzi.use.examplePlugin.util.constant.GeneratorConstant.DOT;
+
 
 public class ParserUtil {
   public static List<IfPart> parseIfPart(Map<String, Object> astJson) {
@@ -46,7 +33,7 @@ public class ParserUtil {
 
     System.out.println();
 
-    if (args == null || !args.containsKey("ifPart")) {
+    if (args == null || !args.containsKey(IF_PART)) {
       System.out.println("No ifPart found in AST JSON.");
       return List.of();
     }
@@ -54,7 +41,7 @@ public class ParserUtil {
     System.out.println("Parsing ifPart from args: " + args);
 
     List<Map<String, Object>> ifParts =
-        (List<Map<String, Object>>) args.get("ifPart");
+        (List<Map<String, Object>>) args.get(IF_PART);
 
     System.out.println("Found ifParts: " + ifParts);
 
@@ -67,7 +54,7 @@ public class ParserUtil {
 
       // attrs
       List<String> attrs = condArgs.entrySet().stream()
-          .filter(e -> e.getKey().startsWith("attr"))
+          .filter(e -> e.getKey().startsWith(ATTR))
           .sorted(Map.Entry.comparingByKey())
           .map(e -> asString(e.getValue()))
           .toList();
@@ -78,13 +65,13 @@ public class ParserUtil {
 
       // refs
       List<String> refs = condArgs.entrySet().stream()
-          .filter(e -> e.getKey().startsWith("ref"))
+          .filter(e -> e.getKey().startsWith(REF))
           .sorted(Map.Entry.comparingByKey())
           .map(e -> asString(e.getValue()))
           .toList();
 
       if (!refs.isEmpty()) {
-        ip.refs = String.join(".", refs);
+        ip.refs = String.join(DOT, refs);
       }
 
       if (condArgs.containsKey(FIX_ATTR) || condArgs.containsKey(MATCH_ATTR)) {
@@ -120,12 +107,12 @@ public class ParserUtil {
       } else if (condArgs.containsKey(MIN_LIM_ATTR)) {
         ip.ifFixType = IfFixType.MIN_LIM_ATTR;
         ip.ifFixValue = asString(condArgs.get(MIN_LIM_ATTR));
-      } else if (condArgs.containsKey("min")) {
+      } else if (condArgs.containsKey(MIN)) {
         ip.ifFixType = IfFixType.MIN;
-        ip.ifFixValue = asString(condArgs.get("min"));
-      } else if (condArgs.containsKey("max")) {
+        ip.ifFixValue = asString(condArgs.get(MIN));
+      } else if (condArgs.containsKey(MAX)) {
         ip.ifFixType = IfFixType.MAX;
-        ip.ifFixValue = asString(condArgs.get("max"));
+        ip.ifFixValue = asString(condArgs.get(MAX));
       }
 
       // parsing plus=21 or minus=45 or times=42 or div=47...
@@ -157,7 +144,7 @@ public class ParserUtil {
   }
 
   /**
-   * Parse attributes from condition arguments. It looks for keys like "attr", "attr2", "attr3", etc. and collects their values in order.
+   * Parse attributes from condition arguments. It looks for keys like ATTR, "attr2", "attr3", etc. and collects their values in order.
    * @param condArgs
    * @return
    */
@@ -165,13 +152,13 @@ public class ParserUtil {
     System.out.println("Parsing attrs from condArgs: " + condArgs);
     List<String> attrs = new ArrayList<>();
 
-    if (condArgs.containsKey("attr")) {
-      attrs.add(asString(condArgs.get("attr")));
+    if (condArgs.containsKey(ATTR)) {
+      attrs.add(asString(condArgs.get(ATTR)));
     }
 
     int i = 2;
-    while (condArgs.containsKey("attr" + i)) {
-      attrs.add(asString(condArgs.get("attr" + i)));
+    while (condArgs.containsKey(ATTR + i)) {
+      attrs.add(asString(condArgs.get(ATTR + i)));
       i++;
     }
 
@@ -179,7 +166,7 @@ public class ParserUtil {
   }
 
   /**
-   * Parse references from condition arguments. It looks for keys like "ref", "ref2", "ref3", etc. and collects their values in order.
+   * Parse references from condition arguments. It looks for keys like REF, "ref2", "ref3", etc. and collects their values in order.
    * @param condArgs
    * @return
    */
@@ -187,13 +174,13 @@ public class ParserUtil {
     System.out.println("Parsing refs from condArgs: " + condArgs);
     List<String> refs = new ArrayList<>();
 
-    if (condArgs.containsKey("ref")) {
-      refs.add(asString(condArgs.get("ref")));
+    if (condArgs.containsKey(REF)) {
+      refs.add(asString(condArgs.get(REF)));
     }
 
     int i = 2;
-    while (condArgs.containsKey("ref" + i)) {
-      refs.add(asString(condArgs.get("ref" + i)));
+    while (condArgs.containsKey(REF + i)) {
+      refs.add(asString(condArgs.get(REF + i)));
       i++;
     }
 
@@ -259,45 +246,45 @@ public class ParserUtil {
                   new OperatorValue(e.symbol, condArgs.get(e.name))
           );
 
-      if (condArgs.containsKey("minLim")) {
+      if (condArgs.containsKey(MIN_LIM)) {
         c.type = AttrCondPro.Type.MIN_LIM;
-        c.matchAttr = String.valueOf(condArgs.get("minLim"));
-      } else if (condArgs.containsKey("maxLim")) {
+        c.matchAttr = String.valueOf(condArgs.get(MIN_LIM));
+      } else if (condArgs.containsKey(MAX_LIM)) {
         c.type = AttrCondPro.Type.MAX_LIM;
-        c.matchAttr = String.valueOf(condArgs.get("maxLim"));
-      } else if (condArgs.containsKey("fixBool")) {
+        c.matchAttr = String.valueOf(condArgs.get(MAX_LIM));
+      } else if (condArgs.containsKey(FIX_BOOL)) {
         c.type = AttrCondPro.Type.FIX_BOOL;
-        c.matchAttr = String.valueOf(condArgs.get("fixBool"));
-      } else if (condArgs.containsKey("fixNum")) {
+        c.matchAttr = String.valueOf(condArgs.get(FIX_BOOL));
+      } else if (condArgs.containsKey(FIX_NUM)) {
         c.type = AttrCondPro.Type.FIX_NUM;
-        c.matchAttr = String.valueOf(condArgs.get("fixNum"));
-      } else if (condArgs.containsKey("minLimAttr")) {
+        c.matchAttr = String.valueOf(condArgs.get(FIX_NUM));
+      } else if (condArgs.containsKey(MIN_LIM_ATTR)) {
         c.type = AttrCondPro.Type.MIN_LIM_ATTR;
-        c.matchAttr = String.valueOf(condArgs.get("minLimAttr"));
-      } else if (condArgs.containsKey("maxLimAttr")) {
+        c.matchAttr = String.valueOf(condArgs.get(MIN_LIM_ATTR));
+      } else if (condArgs.containsKey(MAX_LIM_ATTR)) {
         c.type = AttrCondPro.Type.MAX_LIM_ATTR;
-        c.matchAttr = String.valueOf(condArgs.get("maxLimAttr"));
-      } else if (condArgs.containsKey("min")) {
+        c.matchAttr = String.valueOf(condArgs.get(MAX_LIM_ATTR));
+      } else if (condArgs.containsKey(MIN)) {
         c.type = AttrCondPro.Type.MIN;
-        c.matchAttr = String.valueOf(condArgs.get("min"));
-      } else if (condArgs.containsKey("max")) {
+        c.matchAttr = String.valueOf(condArgs.get(MIN));
+      } else if (condArgs.containsKey(MAX)) {
         c.type = AttrCondPro.Type.MAX;
-        c.matchAttr = String.valueOf(condArgs.get("max"));
-      } else if (condArgs.containsKey("maxAttr")) {
+        c.matchAttr = String.valueOf(condArgs.get(MAX));
+      } else if (condArgs.containsKey(MAX_ATTR)) {
         c.type = AttrCondPro.Type.MAX_ATTR;
-        c.matchAttr = String.valueOf(condArgs.get("maxAttr"));
-      } else if (condArgs.containsKey("minAttr")) {
+        c.matchAttr = String.valueOf(condArgs.get(MAX_ATTR));
+      } else if (condArgs.containsKey(MIN_ATTR)) {
         c.type = AttrCondPro.Type.MIN_ATTR;
-        c.matchAttr = String.valueOf(condArgs.get("minAttr"));
-      } else if (condArgs.containsKey("fixStr")) {
+        c.matchAttr = String.valueOf(condArgs.get(MIN_ATTR));
+      } else if (condArgs.containsKey(FIX_STR)) {
         c.type = AttrCondPro.Type.FIX_STR;
-        c.matchAttr = String.valueOf(condArgs.get("fixStr"));
-      } else if (condArgs.containsKey("matchAttr")) {
+        c.matchAttr = String.valueOf(condArgs.get(FIX_STR));
+      } else if (condArgs.containsKey(MATCH_ATTR)) {
         c.type = AttrCondPro.Type.MATCH_ATTR;
-        c.matchAttr = String.valueOf(condArgs.get("matchAttr"));
-      } else if (condArgs.containsKey("matchObject")) {
+        c.matchAttr = String.valueOf(condArgs.get(MATCH_ATTR));
+      } else if (condArgs.containsKey(MATCH_OBJECT)) {
         c.type = AttrCondPro.Type.MATCH_OBJECT;
-        c.matchAttr = String.valueOf(condArgs.get("matchObject"));
+        c.matchAttr = String.valueOf(condArgs.get(MATCH_OBJECT));
       }
 
       attrConds.add(c);
@@ -344,11 +331,11 @@ public class ParserUtil {
     for (Map<String, Object> rel : rels) {
 
       Map<String, Object> condArgs =
-          (Map<String, Object>) rel.get("args");
+          (Map<String, Object>) rel.get(ARGS);
 
-      String left = asString(condArgs.get("left"));
-      String op   = asString(condArgs.get("op"));
-      String right= asString(condArgs.get("right"));
+      String left = asString(condArgs.get(LEFT));
+      String op   = asString(condArgs.get(OP));
+      String right= asString(condArgs.get(RIGHT));
 
       // split left
       String[] leftParts = left.split("\\.", 2);
@@ -379,11 +366,11 @@ public class ParserUtil {
 
     Map<String, Object> cacuPart = (Map<String, Object>) args.get(attrKey);
 
-    Map<String, Object> innerArgs = (Map<String, Object>) cacuPart.get("args");
+    Map<String, Object> innerArgs = (Map<String, Object>) cacuPart.get(ARGS);
 
     Cacu c = new Cacu();
-    c.attr  = (String) innerArgs.get("attr");
-    c.attr2 = (String) innerArgs.get("attr2");
+    c.attr  = (String) innerArgs.get(ATTR);
+    c.attr2 = (String) innerArgs.get(ATTR2);
 
     return c;
   }

@@ -13,6 +13,15 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static org.tzi.use.examplePlugin.util.UseUtils.isNumber;
+import static org.tzi.use.examplePlugin.util.constant.GeneratorConstant.AND;
+import static org.tzi.use.examplePlugin.util.constant.GeneratorConstant.DOT;
+import static org.tzi.use.examplePlugin.util.constant.GeneratorConstant.GREATER_THAN;
+import static org.tzi.use.examplePlugin.util.constant.GeneratorConstant.LESS_THAN;
+import static org.tzi.use.examplePlugin.util.constant.GeneratorConstant.OR;
+import static org.tzi.use.examplePlugin.util.constant.GeneratorConstant.RIGHT_BRACKET;
+import static org.tzi.use.examplePlugin.util.constant.GeneratorConstant.SELF;
+import static org.tzi.use.examplePlugin.util.constant.GeneratorConstant.SELF_DOT;
+import static org.tzi.use.examplePlugin.util.constant.GeneratorConstant.SPACE;
 
 public class GeneratorUtils {
 
@@ -30,7 +39,7 @@ public class GeneratorUtils {
 
     String resolvedRoot =
         (rootPrefix == null || rootPrefix.isEmpty())
-            ? "self"
+            ? SELF
             : rootPrefix;
 
     return ifParts.stream()
@@ -45,9 +54,9 @@ public class GeneratorUtils {
           else {
             cond = parseByFixType(c, resolvedRoot);
           }
-          return c.negated ? "not (" + cond + ")" : cond;
+          return c.negated ? "not (" + cond + RIGHT_BRACKET : cond;
         })
-        .collect(Collectors.joining(" and "));
+        .collect(Collectors.joining(AND));
   }
 
   private static String parseByRefs(IfPart c, String root) {
@@ -55,7 +64,7 @@ public class GeneratorUtils {
     System.out.println("Calsize: " + c.calSize);
 
     // build left hand side path: self.course.credits or e.course.credits
-    String left = String.join(".", root, c.ifAttr);
+    String left = String.join(DOT, root, c.ifAttr);
 
     // calSize
     if (c.calSize != null && c.calSize) {
@@ -63,23 +72,23 @@ public class GeneratorUtils {
     }
 
     // build right hand side path
-    // String right = root + "." + String.join(".", c.refs);
+    // String right = root + DOT + String.join(DOT, c.refs);
     String right = root;
 
     if (c.refs != null && !c.refs.isEmpty()) {
-      right = right + "." + String.join(".", c.refs);
+      right = right + DOT + String.join(DOT, c.refs);
     }
-    right = right + (c.ifFixValue.isEmpty() ? "" : ("." + c.ifFixValue));
+    right = right + (c.ifFixValue.isEmpty() ? "" : (DOT + c.ifFixValue));
 
     if (c.operatorAndValue != null) {
-      right = right + " " + renderOperatorValue(c.operatorAndValue);
+      right = right + SPACE + renderOperatorValue(c.operatorAndValue);
     }
 
     String cond;
     switch (c.ifFixType) {
-      case MIN_LIM, MIN_LIM_ATTR, MIN_VALUE, MIN -> cond = left + " > " + right;
+      case MIN_LIM, MIN_LIM_ATTR, MIN_VALUE, MIN -> cond = left + GREATER_THAN + right;
 
-      case MAX_LIM, MAX_LIM_ATTR, MAX_VALUE, MAX -> cond = left + " < " + right;
+      case MAX_LIM, MAX_LIM_ATTR, MAX_VALUE, MAX -> cond = left + LESS_THAN + right;
 
       case MATCH_ATTR, FIX_ATTR -> cond = left + " = " + right;
 
@@ -92,7 +101,7 @@ public class GeneratorUtils {
       default -> throw new RuntimeException("Unsupported AttrCondPro type: " + c.ifFixType);
     }
 
-    return c.negated ? "not (" + cond + ")" : cond;
+    return c.negated ? "not (" + cond + RIGHT_BRACKET : cond;
   }
 
 
@@ -103,9 +112,9 @@ public class GeneratorUtils {
 
     // calSize
     if (c.calSize != null && c.calSize) {
-      root = root + "." + c.ifAttr + "->size()";
+      root = root + DOT + c.ifAttr + "->size()";
     } else {
-      root = root + "." + c.ifAttr;
+      root = root + DOT + c.ifAttr;
     }
 
     return switch (c.ifFixType) {
@@ -141,13 +150,13 @@ public class GeneratorUtils {
         v = Math.abs(v);
 
         if (value instanceof Integer || value instanceof Long) {
-          return operator + " " + (long) v;
+          return operator + SPACE + (long) v;
         }
-        return operator + " " + v;
+        return operator + SPACE + v;
       }
     }
 
-    return operator + " " + value;
+    return operator + SPACE + value;
   }
 
   private static String invertOperator(String operator) {
@@ -198,7 +207,7 @@ public class GeneratorUtils {
               isDerivedMode
           );
         })
-        .collect(Collectors.joining(" and "));
+        .collect(Collectors.joining(AND));
   }
 
   /**
@@ -228,7 +237,7 @@ public class GeneratorUtils {
             iterator,
             false
         ))
-        .collect(Collectors.joining(" or "));
+        .collect(Collectors.joining(OR));
   }
 
   private static String buildSingleAllowedCondition(
@@ -244,16 +253,16 @@ public class GeneratorUtils {
     boolean hasIterator = iterator != null && !iterator.isEmpty();
 
     switch (scope) {
-      case ALL -> root = "self";
+      case ALL -> root = SELF;
 
       case LAST_ONLY -> {
-        if (isLast) root = "self";
+        if (isLast) root = SELF;
         else root = hasIterator ? iterator : "e";
       }
 
       case FIRST_ONLY -> {
         if (isFirst && hasIterator) root = iterator;
-        else root = "self";
+        else root = SELF;
       }
 
       default -> root = hasIterator ? iterator : "e";
@@ -261,7 +270,7 @@ public class GeneratorUtils {
 
     String right = "";
     if (c.scale != null && !c.scale.isEmpty()) {
-      right = "(" + c.scale + " * " + root + "." + c.attrs.get(0) + "." + c.matchAttr + ")";
+      right = "(" + c.scale + " * " + root + DOT + c.attrs.get(0) + DOT + c.matchAttr + RIGHT_BRACKET;
     } else if (isNumber(c.matchAttr)
         || c.type == AttrCondPro.Type.MIN_LIM
         || c.type == AttrCondPro.Type.MAX_LIM) {
@@ -272,7 +281,7 @@ public class GeneratorUtils {
           ? c.refAttr
           : root;
 
-      right = rightRoot + "." + c.matchAttr;
+      right = rightRoot + DOT + c.matchAttr;
     }
 
     // build left hand side path: self.course.credits or e.course.credits
@@ -280,9 +289,9 @@ public class GeneratorUtils {
 
     // derive is only for SumProduct constraint type 2
     if (isDerivedMode && c.attrs.size() > 1) {
-      path = root + "." + String.join(".", c.attrs.subList(1, c.attrs.size()));
+      path = root + DOT + String.join(DOT, c.attrs.subList(1, c.attrs.size()));
     } else {
-      path = root + "." + String.join(".", c.attrs);
+      path = root + DOT + String.join(DOT, c.attrs);
     }
 
 
@@ -293,9 +302,9 @@ public class GeneratorUtils {
 
     String cond;
     switch (c.type) {
-      case MIN_LIM, MIN_LIM_ATTR, MIN, MIN_ATTR -> cond = path + " > " + right;
+      case MIN_LIM, MIN_LIM_ATTR, MIN, MIN_ATTR -> cond = path + GREATER_THAN + right;
 
-      case MAX_LIM, MAX_LIM_ATTR, MAX, MAX_ATTR -> cond = path + " < " + right;
+      case MAX_LIM, MAX_LIM_ATTR, MAX, MAX_ATTR -> cond = path + LESS_THAN + right;
 
       case MATCH_ATTR ->  cond = path + " = " + right;
 
@@ -333,8 +342,8 @@ public class GeneratorUtils {
 
     String iter = (iterator == null || iterator.isBlank()) ? "e" : iterator;
 
-    String body = buildAllowedCondition(conds, RootScope.NONE, !iterator.equals("e") ? iterator : null, false);
-    return "self." + collection + "->exists(" + iter + " | " + body + ")";
+    String body = buildAllowedCondition(conds, RootScope.NONE, !"e".equals(iter) ? iter : null, false);
+    return SELF_DOT + collection + "->exists(" + iter + " | " + body + RIGHT_BRACKET;
   }
 
   /**
@@ -357,9 +366,9 @@ public class GeneratorUtils {
     return conds.stream()
         .map(c -> {
           String cond = buildSingleAllowedCondition(c, RootScope.NONE, true, false, null, false);
-          return "self." + collection + "->exists(e | " + cond + ")";
+          return SELF_DOT + collection + "->exists(e | " + cond + RIGHT_BRACKET;
         })
-        .collect(Collectors.joining(" " + joinOp + " "));
+        .collect(Collectors.joining(SPACE + joinOp + SPACE));
   }
 
 
@@ -413,11 +422,11 @@ public class GeneratorUtils {
             );
           }
 
-          return c.negated ? "not (" + cond + ")" : cond;
+          return c.negated ? "not (" + cond + RIGHT_BRACKET : cond;
         })
-        .collect(Collectors.joining(" and "));
+        .collect(Collectors.joining(AND));
 
-    return "self." + collection + "->exists(e | " + body + ")";
+    return SELF_DOT + collection + "->exists(e | " + body + RIGHT_BRACKET;
   }
 
 
@@ -433,9 +442,9 @@ public class GeneratorUtils {
       return prefix;
     }
     if (prefix != null) {
-      prefix = prefix.trim() + ".";
+      prefix = prefix.trim() + DOT;
     }
-    return prefix != null ? prefix + String.join(".", attrs) : String.join(".", attrs);
+    return prefix != null ? prefix + String.join(DOT, attrs) : String.join(DOT, attrs);
   }
 
   /**
@@ -457,9 +466,9 @@ public class GeneratorUtils {
       String selectPart
   ) {
     String basePath =
-        Objects.equals(rolePath, "self")
-            ? "self." + targetCollection
-            : "self." + rolePath + "." + targetCollection;
+        Objects.equals(rolePath, SELF)
+            ? SELF_DOT + targetCollection
+            : SELF_DOT + rolePath + DOT + targetCollection;
 
     String collectionExpr =
         basePath
@@ -469,16 +478,16 @@ public class GeneratorUtils {
     // only add self. if rolePath is self and value is not number
     String right =
         !isNumber(value)
-            ? "self." + value
+            ? SELF_DOT + value
             : value.toString();
 
-    return collectionExpr  + " " + symbol + " " + right;
+    return collectionExpr  + SPACE + symbol + SPACE + right;
   }
 
   public static String indent(String s, int spaces) {
     if (s == null || s.isBlank()) return s;
 
-    String pad = " ".repeat(spaces);
+    String pad = SPACE.repeat(spaces);
     return s.lines()
         .map(line -> pad + line)
         .collect(Collectors.joining("\n"));
@@ -498,7 +507,7 @@ public class GeneratorUtils {
             scope,
             i == lastIndex
         ))
-        .collect(Collectors.joining(" and "));
+        .collect(Collectors.joining(AND));
   }
 
   private static String buildSingleAllowedConditionWithOperator(
@@ -509,9 +518,9 @@ public class GeneratorUtils {
 
     String root;
     if (scope == RootScope.ALL) {
-      root = "self";
+      root = SELF;
     } else if (scope == RootScope.LAST_ONLY && isLast) {
-      root = "self";
+      root = SELF;
     } else {
       root = "e";
     }
@@ -520,7 +529,7 @@ public class GeneratorUtils {
     matchAttr = buildMatchAttr(c, root);
 
     // build left hand side path: self.course.credits or e.course.credits
-    String left = root + "." + String.join(".", c.attrs);
+    String left = root + DOT + String.join(DOT, c.attrs);
 
     // build right hand side path
     String right;
@@ -529,24 +538,24 @@ public class GeneratorUtils {
       // now()
       right = matchAttr;
     } else {
-      right = root + "." + String.join(".", c.refs);
+      right = root + DOT + String.join(DOT, c.refs);
 
       if (!matchAttr.isEmpty()) {
-        right = right + "." + matchAttr;
+        right = right + DOT + matchAttr;
       }
     }
 
     // add operator if specified
     if (c.operatorAndValue != null) {
-      right = right + " " + c.operatorAndValue.getOperator() + " " + c.operatorAndValue.getValue();
+      right = right + SPACE + c.operatorAndValue.getOperator() + SPACE + c.operatorAndValue.getValue();
     }
 
 
     String cond;
     switch (c.type) {
-      case MIN_LIM, MIN_LIM_ATTR, MIN, MIN_ATTR -> cond = left + " > " + right;
+      case MIN_LIM, MIN_LIM_ATTR, MIN, MIN_ATTR -> cond = left + GREATER_THAN + right;
 
-      case MAX_LIM, MAX_LIM_ATTR, MAX, MAX_ATTR -> cond = left + " < " + right;
+      case MAX_LIM, MAX_LIM_ATTR, MAX, MAX_ATTR -> cond = left + LESS_THAN + right;
 
       case FIX_BOOL -> cond = Boolean.parseBoolean(c.matchAttr.toString())
           ? left
@@ -557,7 +566,7 @@ public class GeneratorUtils {
       default -> throw new RuntimeException("Unsupported AttrCondPro type: " + c.type);
     }
 
-    return c.neg ? "not (" + cond + ")" : cond;
+    return c.neg ? "not (" + cond + RIGHT_BRACKET : cond;
   }
 
   private static String buildMatchAttr(AttrCondPro c, String root) {
@@ -568,7 +577,7 @@ public class GeneratorUtils {
     }
 
     if (c.scale != null && !c.scale.isEmpty()) {
-      return c.scale + " * " + root + "." + c.attrs.get(0) + "." + c.matchAttr;
+      return c.scale + " * " + root + DOT + c.attrs.get(0) + DOT + c.matchAttr;
     }
 
     if (isNumber(c.matchAttr)) {
@@ -581,7 +590,7 @@ public class GeneratorUtils {
 
   /**
    * Builds a condition string for excludesSelf condition.
-   * e.g: @AttrCond(attr = "previousSemester", excludesSelf = true) with rolePath equals to "self"
+   * e.g: @AttrCond(attr = "previousSemester", excludesSelf = true) with rolePath equals to SELF
    * then the generated OCL will be: previousSemester <> self
    * @param c
    * @return
@@ -600,14 +609,14 @@ public class GeneratorUtils {
    * @return
    */
   public static String buildRelation(RelationCond r) {
-    String left = r.leftRoot + "." + r.leftPath;
+    String left = r.leftRoot + DOT + r.leftPath;
 
     String right = r.rightRoot;
     if (r.rightPath != null && !r.rightPath.isEmpty()) {
-      right += "." + r.rightPath;
+      right += DOT + r.rightPath;
     }
 
-    return left + " " + r.operator + " " + right;
+    return left + SPACE + r.operator + SPACE + right;
   }
 
 
@@ -615,7 +624,7 @@ public class GeneratorUtils {
   public static String buildRelationConditions(List<RelationCond> conds) {
     return conds.stream()
         .map(GeneratorUtils::buildRelation)
-        .collect(Collectors.joining(" and "));
+        .collect(Collectors.joining(AND));
   }
 
 

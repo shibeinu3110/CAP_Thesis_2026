@@ -1,8 +1,11 @@
 package org.tzi.use.examplePlugin.metamodel.size_constraint;
 
 import org.tzi.use.examplePlugin.ast.ASTInterface;
+import org.tzi.use.examplePlugin.logic.ConstraintHandler;
 
-public class SizeConstraintDetector {
+import java.util.Map;
+
+public class SizeConstraintDetector implements ConstraintHandler {
   /**
    * Currently, we have 5 types of size constraints.
    * However, the type 1 generator and parser are made abstract enough to use for both type 1 to 4
@@ -17,5 +20,20 @@ public class SizeConstraintDetector {
     }
     // Placeholder implementation
     return SizeConstraintType.UNSUPPORTED;
+  }
+
+  @Override
+  public String detect(ASTInterface ast) {
+    SizeConstraintType type =
+        new SizeConstraintDetector().detectType(ast);
+    return "SizeConstraint: " + type;
+  }
+
+  @Override
+  public String execute(ASTInterface ast,
+                        Map<String, Object> json,
+                        String context,
+                        String name) {
+    return SizeConstraintExecutor.execute(ast, json, context, name);
   }
 }

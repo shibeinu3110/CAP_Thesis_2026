@@ -1,25 +1,21 @@
 package org.tzi.use.examplePlugin.metamodel.structural_constraint;
 
 import org.tzi.use.examplePlugin.ast.ASTInterface;
+import org.tzi.use.examplePlugin.logic.ConstraintHandler;
 
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ASSOC_CLS;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CHECK_FOR_EXI;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CHECK_STRUCTURE;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.COLLECT;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CROSS_REFERENCE;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.EXCLUDE_SELF;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.IF_PART;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.IS_UNDEFINED;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.MATCH_ATTR;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.MAX;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.SUM_ATTR;
-import static org.tzi.use.examplePlugin.util.CommonVar.SELF;
+import java.util.Map;
+
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.ASSOC_CLS;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.CHECK_STRUCTURE;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.CROSS_REFERENCE;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.EXCLUDE_SELF;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.IS_UNDEFINED;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.MAX;
 import static org.tzi.use.examplePlugin.util.UseUtils.hasKeyEqualsToValue;
 import static org.tzi.use.examplePlugin.util.UseUtils.hasKeyEqualsToValueInSpecificParam;
 import static org.tzi.use.examplePlugin.util.UseUtils.hasParamsLengthEqualsTo;
-import static org.tzi.use.examplePlugin.util.UseUtils.hasSpecificKey;
 
-public class StructuralConstraintDetector {
+public class StructuralConstraintDetector implements ConstraintHandler {
 
   public StructuralConstraintType detectType(ASTInterface astInterface) {
     if (astInterface.args.size() == 1 && astInterface.args.containsKey(ASSOC_CLS)) {
@@ -40,5 +36,20 @@ public class StructuralConstraintDetector {
     }
     // Placeholder implementation
     return StructuralConstraintType.UNSUPPORTED;
+  }
+
+  @Override
+  public String detect(ASTInterface ast) {
+    StructuralConstraintType type =
+        new StructuralConstraintDetector().detectType(ast);
+    return "StructuralConstraint: " + type;
+  }
+
+  @Override
+  public String execute(ASTInterface ast,
+                        Map<String, Object> json,
+                        String context,
+                        String name) {
+    return StructuralConstraintExecutor.execute(ast, json, context, name);
   }
 }

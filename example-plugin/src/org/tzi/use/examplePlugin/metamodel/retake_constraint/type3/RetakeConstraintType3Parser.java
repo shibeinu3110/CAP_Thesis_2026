@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ARGS;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ASSOC_CLS;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.COLLECT;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ROLE_PATH;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.TARGET_ASSOC;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.ARGS;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.ASSOC_CLS;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.COLLECT;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.ROLE_PATH;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.TARGET_ASSOC;
 
 public class RetakeConstraintType3Parser implements RetakeConstraintParser<RetakeConstraintType3> {
 

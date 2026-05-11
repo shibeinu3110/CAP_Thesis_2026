@@ -1,22 +1,15 @@
 package org.tzi.use.examplePlugin.metamodel.sumproduct_constraint.type3;
 
-import org.tzi.use.examplePlugin.metamodel.AttrCondPro;
 import org.tzi.use.examplePlugin.metamodel.sumproduct_constraint.SumProductConstraintParser;
-import org.tzi.use.examplePlugin.util.ParserUtil;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ARGS;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ASSOC_CLS;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CACU;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.DERIVE;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.RATIO;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.RESULT;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ROLE_PATH;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.SCALE;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.SUM_ATTR;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.ARGS;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.ASSOC_CLS;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.DERIVE;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.RESULT;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.ROLE_PATH;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.SUM_ATTR;
 
 public class SumProductConstraintType3Parser implements SumProductConstraintParser<SumProductConstraintType3> {
 

@@ -7,13 +7,13 @@ import org.tzi.use.examplePlugin.util.enumarate.IfFixType;
 import java.util.List;
 import java.util.Map;
 
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ARGS;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ASSOC_CLS;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ATTR;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.COLLECT;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.MATCH_ATTR;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ROLE_PATH;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.SUM_ATTR;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.ARGS;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.ASSOC_CLS;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.ATTR;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.COLLECT;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.MATCH_ATTR;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.ROLE_PATH;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.SUM_ATTR;
 import static org.tzi.use.examplePlugin.util.UseUtils.asString;
 import static org.tzi.use.examplePlugin.util.UseUtils.isNumber;
 

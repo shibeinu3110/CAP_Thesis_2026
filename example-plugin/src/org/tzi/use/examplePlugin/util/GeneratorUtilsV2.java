@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static org.tzi.use.examplePlugin.util.UseUtils.isNumber;
+import static org.tzi.use.examplePlugin.util.constant.GeneratorConstant.*;
 
 /**
  * Utility class for code generation, especially for generating condition strings based on IfPart.
@@ -25,7 +26,7 @@ public class GeneratorUtilsV2 {
    * <p>
    * E.g: @AttrCond(attr="failedAttempts", min=2)  --> the passed param is
    * <p>
-   * ifParts, rootPrefix = "self", referenceClass = c
+   * ifParts, rootPrefix = SELF, referenceClass = c
    * <p>
    * generate condition string: self.failedAttempts(c) >= 2
    *
@@ -40,7 +41,7 @@ public class GeneratorUtilsV2 {
 
     String resolvedRoot =
         (rootPrefix == null || rootPrefix.isEmpty())
-            ? "self"
+            ? SELF
             : rootPrefix;
 
     return ifParts.stream()
@@ -55,9 +56,9 @@ public class GeneratorUtilsV2 {
           else {
             cond = parseByFixType(c, resolvedRoot, referenceClass);
           }
-          return c.negated ? "not (" + cond + ")" : cond;
+          return c.negated ? "not (" + cond + RIGHT_BRACKET : cond;
         })
-        .collect(Collectors.joining(" and "));
+        .collect(Collectors.joining(AND));
   }
 
   private static String parseByRefs(IfPart c, String root, String referenceClass) {
@@ -65,7 +66,7 @@ public class GeneratorUtilsV2 {
     System.out.println("Calsize: " + c.calSize);
 
     // build left hand side path: self.course.credits or e.course.credits
-    String left = String.join(".", root, c.ifAttr);
+    String left = String.join(DOT, root, c.ifAttr);
 
     // calSize
     if (c.calSize != null && c.calSize) {
@@ -74,17 +75,17 @@ public class GeneratorUtilsV2 {
 
     // reference class
     if (referenceClass != null && !referenceClass.isEmpty()) {
-      left = left + "(" + referenceClass + ")";
+      left = left + LEFT_BRACKET + referenceClass + RIGHT_BRACKET;
     }
 
     // build right hand side path
-    // String right = root + "." + String.join(".", c.refs);
+    // String right = root + DOT + String.join(DOT, c.refs);
     String right = root;
 
     if (c.refs != null && !c.refs.isEmpty()) {
-      right = right + "." + String.join(".", c.refs);
+      right = right + DOT + String.join(DOT, c.refs);
     }
-    right = right + (c.ifFixValue.isEmpty() ? "" : ("." + c.ifFixValue));
+    right = right + (c.ifFixValue.isEmpty() ? "" : (DOT + c.ifFixValue));
 
     if (c.operatorAndValue != null) {
       right = right + " " + renderOperatorValue(c.operatorAndValue);
@@ -92,9 +93,9 @@ public class GeneratorUtilsV2 {
 
     String cond;
     switch (c.ifFixType) {
-      case MIN_LIM, MIN_LIM_ATTR, MIN_VALUE, MIN -> cond = left + " > " + right;
+      case MIN_LIM, MIN_LIM_ATTR, MIN_VALUE, MIN -> cond = left + GREATER_THAN + right;
 
-      case MAX_LIM, MAX_LIM_ATTR, MAX_VALUE, MAX -> cond = left + " < " + right;
+      case MAX_LIM, MAX_LIM_ATTR, MAX_VALUE, MAX -> cond = left + LESS_THAN + right;
 
       case MATCH_ATTR, FIX_ATTR -> cond = left + " = " + right;
 
@@ -107,7 +108,7 @@ public class GeneratorUtilsV2 {
       default -> throw new RuntimeException("Unsupported AttrCondPro type: " + c.ifFixType);
     }
 
-    return c.negated ? "not (" + cond + ")" : cond;
+    return c.negated ? "not (" + cond + RIGHT_BRACKET : cond;
   }
 
 
@@ -118,12 +119,12 @@ public class GeneratorUtilsV2 {
 
     // calSize
     if (c.calSize != null && c.calSize) {
-      root = root + "." + c.ifAttr + "->size()";
+      root = root + DOT + c.ifAttr + "->size()";
     } else if (referenceClass != null && !referenceClass.isEmpty()) {
-      root = root + "." + c.ifAttr + "(" + referenceClass + ")";
+      root = root + DOT + c.ifAttr + LEFT_BRACKET + referenceClass + RIGHT_BRACKET;
 
     } else {
-      root = root + "." + c.ifAttr;
+      root = root + DOT + c.ifAttr;
     }
 
     return switch (c.ifFixType) {
@@ -185,11 +186,11 @@ public class GeneratorUtilsV2 {
       return "true";
     }
 
-    String left = rolePath + "." + String.join(".", cond.attrs);
+    String left = rolePath + DOT + String.join(DOT, cond.attrs);
 
-    String right = referenceClass + "|" + referenceClass + "." + cond.insideExistValue + "=" + rootReferenceClass;
+    String right = referenceClass + "|" + referenceClass + DOT + cond.insideExistValue + "=" + rootReferenceClass;
 
-    return left + "->exists(" + right + ")";
+    return left + "->exists(" + right + RIGHT_BRACKET;
   }
 
 
@@ -219,7 +220,7 @@ public class GeneratorUtilsV2 {
             iterator,
             referenceClass
         ))
-        .collect(Collectors.joining(" and "));
+        .collect(Collectors.joining(AND));
   }
   private static String buildSingleAllowedCondition(
       AttrCondPro c,
@@ -235,16 +236,16 @@ public class GeneratorUtilsV2 {
     boolean hasIterator = iterator != null && !iterator.isEmpty();
 
     switch (scope) {
-      case ALL -> root = "self";
+      case ALL -> root = SELF;
 
       case LAST_ONLY -> {
-        if (isLast) root = "self";
+        if (isLast) root = SELF;
         else root = hasIterator ? iterator : "e";
       }
 
       case FIRST_ONLY -> {
         if (isFirst && hasIterator) root = iterator;
-        else root = "self";
+        else root = SELF;
       }
 
       default -> root = hasIterator ? iterator : "e";
@@ -252,20 +253,20 @@ public class GeneratorUtilsV2 {
 
     String right = "";
     if (c.scale != null && !c.scale.isEmpty()) {
-      right = c.scale + " * " + root + "." + c.attrs.get(0) + "." + c.matchAttr;
+      right = c.scale + " * " + root + DOT + c.attrs.get(0) + DOT + c.matchAttr;
     } else if (isNumber(c.matchAttr)
         || c.type == AttrCondPro.Type.MIN_LIM
         || c.type == AttrCondPro.Type.MAX_LIM) {
       // in case matchAttr is a number or it's a limit, we treat it as a value, not a path
       right = c.matchAttr.toString();
     } else {
-      right = root + "." + c.matchAttr;
+      right = root + DOT + c.matchAttr;
     }
 
     // build left hand side path: self.course.credits or e.course.credits
-    String path = root + "." + String.join(".", c.attrs);
+    String path = root + DOT + String.join(DOT, c.attrs);
     if (referenceClass != null && !referenceClass.isEmpty()) {
-      path = path + "(" + referenceClass + ")";
+      path = path + LEFT_BRACKET + referenceClass + RIGHT_BRACKET;
     }
 
     // in case c.type is null, (like we only have attr=value and attr2=value2), we will treat it as path
@@ -275,9 +276,9 @@ public class GeneratorUtilsV2 {
 
     String cond;
     switch (c.type) {
-      case MIN_LIM, MIN_LIM_ATTR, MIN -> cond = path + " < " + right;
+      case MIN_LIM, MIN_LIM_ATTR, MIN -> cond = path + LESS_THAN + right;
 
-      case MAX_LIM, MAX_LIM_ATTR, MAX -> cond = path + " > " + right;
+      case MAX_LIM, MAX_LIM_ATTR, MAX -> cond = path + GREATER_THAN + right;
 
       case MATCH_ATTR ->  cond = path + " = " + right;
 

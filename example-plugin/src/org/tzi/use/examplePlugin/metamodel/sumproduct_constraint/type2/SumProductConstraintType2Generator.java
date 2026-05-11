@@ -22,6 +22,10 @@ public class SumProductConstraintType2Generator implements SumProductConstraintG
 
     String checkForExi = buildAllowedCondition(sp.cacu, RootScope.ALL, null, true);
 
+    if (sp.result == null || sp.result.isBlank()) {
+      throw new IllegalArgumentException("Result cannot be null or blank");
+    }
+
     return """
         context %s::%s derive:
           %s(

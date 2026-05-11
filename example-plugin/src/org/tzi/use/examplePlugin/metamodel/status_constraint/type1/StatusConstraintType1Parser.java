@@ -4,8 +4,8 @@ import org.tzi.use.examplePlugin.metamodel.status_constraint.StatusConstraintPar
 
 import java.util.Map;
 
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ARGS;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CHECK_STATUS;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.ARGS;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.CHECK_STATUS;
 import static org.tzi.use.examplePlugin.util.ParserUtil.parseCheckForExi;
 import static org.tzi.use.examplePlugin.util.ParserUtil.parseIfPart;
 

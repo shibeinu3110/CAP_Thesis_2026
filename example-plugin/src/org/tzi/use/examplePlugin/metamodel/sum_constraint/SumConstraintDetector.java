@@ -1,10 +1,13 @@
 package org.tzi.use.examplePlugin.metamodel.sum_constraint;
 
 import org.tzi.use.examplePlugin.ast.ASTInterface;
+import org.tzi.use.examplePlugin.logic.ConstraintHandler;
 
-import static org.tzi.use.examplePlugin.util.CommonAttributes.BOUND_CONDITIONS;
-import static org.tzi.use.examplePlugin.util.CommonAttributes.COLLECT;
-import static org.tzi.use.examplePlugin.util.CommonAttributes.FIX_ATTR;
+import java.util.Map;
+
+import static org.tzi.use.examplePlugin.util.CommonComparationsAttributes.BOUND_CONDITIONS;
+import static org.tzi.use.examplePlugin.util.CommonComparationsAttributes.COLLECT;
+import static org.tzi.use.examplePlugin.util.CommonComparationsAttributes.FIX_ATTR;
 
 /**
  * Detects sum constraints in the AST representation of a model.
@@ -21,7 +24,7 @@ import static org.tzi.use.examplePlugin.util.CommonAttributes.FIX_ATTR;
  *  - BOUND: hasBoundAttribute == true
  *  - TYPE3_4: hasMoreThanOneCollectStatements == true
  */
-public class SumConstraintDetector {
+public class SumConstraintDetector implements ConstraintHandler {
 
   public SumConstraintType detectType(ASTInterface ast) {
     if (hasBoundAttribute(ast) && hasFixAttributeSumConstraint(ast)) {
@@ -68,5 +71,20 @@ public class SumConstraintDetector {
       }
     }
     return false;
+  }
+
+  @Override
+  public String detect(ASTInterface ast) {
+    SumConstraintType type =
+        new SumConstraintDetector().detectType(ast);
+    return "SumConstraint: " + type;
+  }
+
+  @Override
+  public String execute(ASTInterface ast,
+                        Map<String, Object> json,
+                        String context,
+                        String name) {
+    return SumConstraintExecutor.execute(ast, json, context, name);
   }
 }

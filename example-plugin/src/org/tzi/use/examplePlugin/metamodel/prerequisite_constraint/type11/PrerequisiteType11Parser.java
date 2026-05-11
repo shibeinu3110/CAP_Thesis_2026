@@ -1,17 +1,15 @@
 package org.tzi.use.examplePlugin.metamodel.prerequisite_constraint.type11;
 
 import org.tzi.use.examplePlugin.metamodel.prerequisite_constraint.PrerequisiteConstraintParser;
-import org.tzi.use.examplePlugin.util.ParserUtil;
 
 import java.util.Map;
 
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ARGS;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ASSOC_CLS;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CHECKED_ROLE;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CHECK_EXEC;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CROSS_REFERENCE;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.REQUIRE_EXIST;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ROLE_PATH;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.ARGS;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.ASSOC_CLS;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.CHECKED_ROLE;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.CHECK_EXEC;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.CROSS_REFERENCE;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.ROLE_PATH;
 
 public class PrerequisiteType11Parser implements PrerequisiteConstraintParser<PrerequisiteConstraintType11> {
 

@@ -74,7 +74,7 @@ public class FileParserPanel extends JPanel {
     rightScroll.setRowHeaderView(new LineNumberView(rightTextArea));
 
     JButton downloadButton = new JButton("Download File");
-    JButton validateButton = new JButton("Validate .use hehe");
+    JButton validateButton = new JButton("Validate .use");
 
     JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 8, 5));
     buttonPanel.add(validateButton);

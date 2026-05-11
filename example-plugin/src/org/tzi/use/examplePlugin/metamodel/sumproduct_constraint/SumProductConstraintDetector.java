@@ -1,23 +1,17 @@
 package org.tzi.use.examplePlugin.metamodel.sumproduct_constraint;
 
-import org.tzi.use.examplePlugin.CaculatorEnum;
 import org.tzi.use.examplePlugin.ast.ASTInterface;
+import org.tzi.use.examplePlugin.logic.ConstraintHandler;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.Map;
 
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CACU;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.IF_PART;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.MAX;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.SUM_ATTR;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.SUM_ATTR1;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.SUM_ATTR2;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.WINDOW;
-import static org.tzi.use.examplePlugin.util.UseUtils.hasKeyIn;
-import static org.tzi.use.examplePlugin.util.UseUtils.hasKeyInCheckForExi;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.CACU;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.SUM_ATTR;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.SUM_ATTR1;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.SUM_ATTR2;
 import static org.tzi.use.examplePlugin.util.UseUtils.hasSpecificKey;
 
-public class SumProductConstraintDetector {
+public class SumProductConstraintDetector implements ConstraintHandler {
   public SumProductConstraintType detectType(ASTInterface astInterface) {
 
       if (hasSpecificKey(astInterface, SUM_ATTR1)
@@ -31,5 +25,20 @@ public class SumProductConstraintDetector {
 
     // Placeholder implementation
     return SumProductConstraintType.UNSUPPORTED;
+  }
+
+  @Override
+  public String detect(ASTInterface ast) {
+    SumProductConstraintType type =
+        new SumProductConstraintDetector().detectType(ast);
+    return "SumProductConstraint: " + type;
+  }
+
+  @Override
+  public String execute(ASTInterface ast,
+                        Map<String, Object> json,
+                        String context,
+                        String name) {
+    return SumProductConstraintExecutor.execute(ast, json, context, name);
   }
 }

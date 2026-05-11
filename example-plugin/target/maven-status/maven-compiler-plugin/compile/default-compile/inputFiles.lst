@@ -33,6 +33,8 @@ D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\gui\type\CapTypeEditorP
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\gui\type\CapTypePopup.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\gui\view_type\TypeViewPanel.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\gui\view_type\TypeViewView.java
+D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\logic\ConstraintHandler.java
+D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\logic\ConstraintRegistry.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\AttrCond.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\AttrCondPro.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\Cacu.java

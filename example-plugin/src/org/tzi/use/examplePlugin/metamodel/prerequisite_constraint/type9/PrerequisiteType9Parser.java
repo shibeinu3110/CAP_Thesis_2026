@@ -4,10 +4,9 @@ import org.tzi.use.examplePlugin.metamodel.prerequisite_constraint.PrerequisiteC
 
 import java.util.Map;
 
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ARGS;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CHECKED_ROLE;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.MAX_DEPTH_LIMIT;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.NO_SELF;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.ARGS;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.CHECKED_ROLE;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.MAX_DEPTH_LIMIT;
 
 public class PrerequisiteType9Parser implements PrerequisiteConstraintParser<PrerequisiteConstraintType9> {
 

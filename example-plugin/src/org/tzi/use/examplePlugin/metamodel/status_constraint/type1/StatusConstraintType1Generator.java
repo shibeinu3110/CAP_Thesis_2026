@@ -23,6 +23,8 @@ public class StatusConstraintType1Generator implements StatusConstraintGenerator
     String allowedCond = null;
     if (sc1.checkStatus != null) {
       allowedCond = buildAllowedCondition(sc1.checkStatus, RootScope.ALL, null, false);
+    } else {
+      throw new IllegalArgumentException("CheckStatus cannot be null");
     }
     System.out.println("Status Condition: " + allowedCond);
 

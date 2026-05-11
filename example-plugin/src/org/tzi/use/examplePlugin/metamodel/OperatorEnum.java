@@ -14,7 +14,8 @@ public enum OperatorEnum {
   MIN_ATTR("minAttr", ">"),
   MAX_LIM_ATTR("maxLimAttr", "<="),
   MIN_LIM_ATTR("minLimAttr", ">="),
-  EQUALS("fixAttr", "="),;
+  EQUALS("fixAttr", "="),
+  EQUALS_VALUE("fixNum", "="),;
 
 
 

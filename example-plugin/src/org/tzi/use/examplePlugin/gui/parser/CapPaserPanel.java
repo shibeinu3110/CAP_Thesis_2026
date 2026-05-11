@@ -222,47 +222,17 @@
 package org.tzi.use.examplePlugin.gui.parser;
 
 import org.tzi.use.examplePlugin.ast.ASTInterface;
-import org.tzi.use.examplePlugin.metamodel.eligibility_constraint.EligibilityConstraintDetector;
-import org.tzi.use.examplePlugin.metamodel.eligibility_constraint.EligibilityConstraintExecutor;
-import org.tzi.use.examplePlugin.metamodel.eligibility_constraint.EligibilityConstraintType;
-import org.tzi.use.examplePlugin.metamodel.prerequisite_constraint.PrerequisiteConstraintDetector;
-import org.tzi.use.examplePlugin.metamodel.prerequisite_constraint.PrerequisiteConstraintExecutor;
-import org.tzi.use.examplePlugin.metamodel.prerequisite_constraint.PrerequisiteConstraintType;
-import org.tzi.use.examplePlugin.metamodel.retake_constraint.RetakeConstraintDetector;
-import org.tzi.use.examplePlugin.metamodel.retake_constraint.RetakeConstraintExecutor;
-import org.tzi.use.examplePlugin.metamodel.retake_constraint.RetakeConstraintType;
-import org.tzi.use.examplePlugin.metamodel.schedule_constraint.ScheduleConstraintDetector;
-import org.tzi.use.examplePlugin.metamodel.schedule_constraint.ScheduleConstraintExecutor;
-import org.tzi.use.examplePlugin.metamodel.schedule_constraint.ScheduleConstraintType;
-import org.tzi.use.examplePlugin.metamodel.size_constraint.SizeConstraintDetector;
-import org.tzi.use.examplePlugin.metamodel.size_constraint.SizeConstraintExecutor;
-import org.tzi.use.examplePlugin.metamodel.size_constraint.SizeConstraintType;
-import org.tzi.use.examplePlugin.metamodel.status_constraint.StatusConstraintDetector;
-import org.tzi.use.examplePlugin.metamodel.status_constraint.StatusConstraintExecutor;
-import org.tzi.use.examplePlugin.metamodel.status_constraint.StatusConstraintType;
-import org.tzi.use.examplePlugin.metamodel.structural_constraint.StructuralConstraintDetector;
-import org.tzi.use.examplePlugin.metamodel.structural_constraint.StructuralConstraintExecutor;
-import org.tzi.use.examplePlugin.metamodel.structural_constraint.StructuralConstraintType;
-import org.tzi.use.examplePlugin.metamodel.sum_constraint.SumConstraintExecutor;
-import org.tzi.use.examplePlugin.metamodel.sum_constraint.SumConstraintType;
-import org.tzi.use.examplePlugin.metamodel.sum_constraint.SumConstraintDetector;
-import org.tzi.use.examplePlugin.metamodel.sumproduct_constraint.SumProductConstraintDetector;
-import org.tzi.use.examplePlugin.metamodel.sumproduct_constraint.SumProductConstraintExecutor;
-import org.tzi.use.examplePlugin.metamodel.sumproduct_constraint.SumProductConstraintType;
-import org.tzi.use.examplePlugin.metamodel.time_constraint.TimeConstraintDetector;
-import org.tzi.use.examplePlugin.metamodel.time_constraint.TimeConstraintExecutor;
-import org.tzi.use.examplePlugin.metamodel.time_constraint.TimeConstraintType;
+import org.tzi.use.examplePlugin.logic.ConstraintHandler;
+import org.tzi.use.examplePlugin.logic.ConstraintRegistry;
 import org.tzi.use.examplePlugin.use.ASTToJSONConverter;
 import org.tzi.use.examplePlugin.util.ASTPrinter;
-import org.tzi.use.examplePlugin.util.CommonAttributes;
-import org.tzi.use.examplePlugin.util.ConstraintType;
+import org.tzi.use.examplePlugin.util.CommonComparationsAttributes;
 import org.tzi.use.examplePlugin.util.UseUtils;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class CapPaserPanel extends JPanel {
@@ -427,81 +397,19 @@ public class CapPaserPanel extends JPanel {
         return;
       }
 
-      String type = ASTToJSONConverter.toJsonObject(ast).get(CommonAttributes.TYPE).toString();
+      String type = ASTToJSONConverter.toJsonObject(ast).get(CommonComparationsAttributes.TYPE).toString();
       ConstraintKind kind = ConstraintKindDetector.detect(type);
 
-      System.out.println("Detected constraint kind: " + kind);
+      ConstraintHandler handler = ConstraintRegistry.get(kind);
 
-      switch (kind) {
-        case TIME -> {
-          TimeConstraintDetector detector = new TimeConstraintDetector();
-          TimeConstraintType timeType = detector.detectType(ast);
-          typeLabel.setText("TimeConstraint: " + timeType);
-        }
-
-        case SUM -> {
-          SumConstraintDetector detector = new SumConstraintDetector();
-          SumConstraintType sumType = detector.detectType(ast);
-          typeLabel.setText("SumConstraint: " + sumType);
-        }
-
-        case SIZE -> {
-          SizeConstraintDetector sizeConstraintDetector = new SizeConstraintDetector();
-          SizeConstraintType sizeType = sizeConstraintDetector.detectType(ast);
-          typeLabel.setText("SizeConstraint: " + sizeType);
-        }
-
-        case ELIGIBILITY -> {
-          EligibilityConstraintDetector eligibilityConstraintDetector = new EligibilityConstraintDetector();
-          EligibilityConstraintType eligibilityType = eligibilityConstraintDetector.detectType(ast);
-          typeLabel.setText("EligibilityConstraint: " + eligibilityType);
-        }
-
-        case SCHEDULE -> {
-          ScheduleConstraintDetector scheduleConstraintDetector = new ScheduleConstraintDetector();
-          ScheduleConstraintType scheduleType = scheduleConstraintDetector.detectType(ast);
-          typeLabel.setText("ScheduleConstraint: " + scheduleType);
-        }
-
-        case STATUS -> {
-          StatusConstraintDetector statusConstraintDetector = new StatusConstraintDetector();
-          StatusConstraintType statusType = statusConstraintDetector.detectType(ast);
-          typeLabel.setText("StatusConstraint: " + statusType);
-        }
-
-        case RETAKE -> {
-          RetakeConstraintDetector retakeConstraintDetector = new RetakeConstraintDetector();
-          RetakeConstraintType retakeType = retakeConstraintDetector.detectType(ast);
-          typeLabel.setText("RetakeConstraint: " + retakeType);
-        }
-
-        case STRUCTURAL -> {
-          StructuralConstraintDetector structuralConstraintDetector = new StructuralConstraintDetector();
-          StructuralConstraintType structuralType = structuralConstraintDetector.detectType(ast);
-          typeLabel.setText("StructuralConstraint: " + structuralType);
-        }
-
-        case PREREQUISITE -> {
-          PrerequisiteConstraintDetector prerequisiteConstraintDetector = new PrerequisiteConstraintDetector();
-          PrerequisiteConstraintType prerequisiteType = prerequisiteConstraintDetector.detectType(ast);
-          typeLabel.setText("PrerequisiteConstraint: " + prerequisiteType);
-        }
-
-        case SUM_PRODUCT -> {
-          SumProductConstraintDetector sumProductConstraintDetector = new SumProductConstraintDetector();
-          SumProductConstraintType sumProductType = sumProductConstraintDetector.detectType(ast);
-          typeLabel.setText("SumProductConstraint: " + sumProductType);
-        }
-
-        default -> {
-          typeLabel.setText("Unsupported constraint");
-        }
+      if (handler == null) {
+        typeLabel.setText("Unsupported constraint");
+        return;
       }
 
-      System.out.println("==============================");
-      System.out.println(ASTToJSONConverter.toJsonObject(ast));
+      typeLabel.setText(handler.detect(ast));
 
-      String ocl = ConstraintExecutor(
+      String ocl = handler.execute(
           ast,
           ASTToJSONConverter.toJsonObject(ast),
           context,
@@ -530,7 +438,7 @@ public class CapPaserPanel extends JPanel {
   public static String generateNameFromAST(ASTInterface ast, String context) {
 
     String type = ASTToJSONConverter.toJsonObject(ast)
-        .get(CommonAttributes.TYPE).toString();
+        .get(CommonComparationsAttributes.TYPE).toString();
 
     context = (context == null || context.isBlank()) ? "UnknownContext" : context.trim();
 
@@ -582,122 +490,5 @@ public class CapPaserPanel extends JPanel {
         "Input Error",
         JOptionPane.WARNING_MESSAGE
     );
-  }
-
-  private String ConstraintExecutor(ASTInterface astInterface, Map<String, Object> astJson, String context, String name) {
-
-    String type = astJson.get(CommonAttributes.TYPE).toString();
-
-    // Sum Constraint
-    if (type.equalsIgnoreCase(ConstraintType.SUM_CONSTRAINT)) {
-      System.out.println("This is a Sum Constraint.");
-      return SumConstraintExecutor.execute(
-          astInterface,
-          ASTToJSONConverter.toJsonObject(astInterface),
-          context,
-          name
-      );
-    }
-
-    // Eligibility Constraint
-    if (type.equalsIgnoreCase(ConstraintType.ELIGIBILITY_CONSTRAINT)) {
-      System.out.println("This is an Eligibility Constraint.");
-      return EligibilityConstraintExecutor.execute(
-          astInterface,
-          ASTToJSONConverter.toJsonObject(astInterface),
-          context,
-          name
-      );
-    }
-
-    // Schedule Constraint
-    if (type.equalsIgnoreCase(ConstraintType.SCHEDULE_CONSTRAINT)) {
-      System.out.println("This is a Schedule Constraint.");
-      return ScheduleConstraintExecutor.execute(
-          astInterface,
-          ASTToJSONConverter.toJsonObject(astInterface),
-          context,
-          name
-      );
-    }
-
-    // Size Constraint
-    if (type.equalsIgnoreCase(ConstraintType.SIZE_CONSTRAINT)) {
-      System.out.println("This is a Size Constraint.");
-      return SizeConstraintExecutor.execute(
-          astInterface,
-          ASTToJSONConverter.toJsonObject(astInterface),
-          context,
-          name
-      );
-    }
-
-    // Time Constraint
-    if (type.equalsIgnoreCase(ConstraintType.TIME_CONSTRAINT)) {
-      System.out.println("This is a Time Constraint.");
-      return TimeConstraintExecutor.execute(
-          astInterface,
-          ASTToJSONConverter.toJsonObject(astInterface),
-          context,
-          name
-      );
-    }
-
-    // Status Constraint
-    if (type.equalsIgnoreCase(ConstraintType.STATUS_CONSTRAINT)) {
-      System.out.println("This is a Status Constraint.");
-      return StatusConstraintExecutor.execute(
-          astInterface,
-          ASTToJSONConverter.toJsonObject(astInterface),
-          context,
-          name
-      );
-    }
-
-    // Retake Constraint
-    if (type.equalsIgnoreCase(ConstraintType.RETAKE_CONSTRAINT)) {
-      System.out.println("This is a Retake Constraint.");
-      return RetakeConstraintExecutor.execute(
-          astInterface,
-          ASTToJSONConverter.toJsonObject(astInterface),
-          context,
-          name
-      );
-    }
-
-    // Structural Constraint
-    if (type.equalsIgnoreCase(ConstraintType.STRUCTURAL_CONSTRAINT)) {
-      System.out.println("This is a Structural Constraint.");
-      return StructuralConstraintExecutor.execute(
-          astInterface,
-          ASTToJSONConverter.toJsonObject(astInterface),
-          context,
-          name
-      );
-    }
-
-    // Prerequisite Constraint
-    if (type.equalsIgnoreCase(ConstraintType.PREREQUISITE_CONSTRAINT)) {
-      System.out.println("This is a Prerequisite Constraint.");
-      return PrerequisiteConstraintExecutor.execute(
-          astInterface,
-          ASTToJSONConverter.toJsonObject(astInterface),
-          context,
-          name
-      );
-    }
-
-    // SumProduct constraint
-    if (type.equalsIgnoreCase(ConstraintType.SUM_PRODUCT_CONSTRAINT)) {
-      System.out.println("This is a SumProduct Constraint.");
-      return SumProductConstraintExecutor.execute(
-          astInterface,
-          ASTToJSONConverter.toJsonObject(astInterface),
-          context,
-          name
-      );
-    }
-
-    return null;
   }
 }

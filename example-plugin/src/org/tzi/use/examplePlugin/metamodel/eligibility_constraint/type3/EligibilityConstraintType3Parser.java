@@ -2,19 +2,18 @@ package org.tzi.use.examplePlugin.metamodel.eligibility_constraint.type3;
 
 import org.tzi.use.examplePlugin.metamodel.AttrCondPro;
 import org.tzi.use.examplePlugin.metamodel.eligibility_constraint.EligibilityConstraintParser;
-import org.tzi.use.examplePlugin.metamodel.eligibility_constraint.type2.EligibilityConstraintType2;
 import org.tzi.use.examplePlugin.util.ParserUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ARGS;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ASSOC_CLS;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CHECK_FOR_EXI;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.RATIO;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ROLE_PATH;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.SCALE;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.ARGS;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.ASSOC_CLS;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.CHECK_FOR_EXI;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.RATIO;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.ROLE_PATH;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.SCALE;
 
 public class EligibilityConstraintType3Parser implements EligibilityConstraintParser<EligibilityConstraintType3> {
   @Override

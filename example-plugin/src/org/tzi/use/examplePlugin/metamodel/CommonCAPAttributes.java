@@ -1,6 +1,10 @@
 package org.tzi.use.examplePlugin.metamodel;
 
-public class CommonAttributes {
+/**
+ * A class to hold all the common attributes for CAPs, including eligibility constraint, schedule constraint, size constraint, status constraint, retake constraint, structural constraint, prerequisite constraint, sum/product constraint.
+ */
+
+public class CommonCAPAttributes {
   // Joining attributes
   public static final String AND = "and";
   public static final String OR = "or";
@@ -13,9 +17,11 @@ public class CommonAttributes {
   public static final String COLLECT = "collect";
   public static final String IF_PART = "ifPart";
   public static final String ATTR = "attr";
+  public static final String ATTR2 = "attr2";
   public static final String MATCH_ATTR = "matchAttr";
   public static final String MAX = "max";
   public static final String MIN = "min";
+  public static final String REF = "ref";
 
   // eligibility constraint specific
   public static final String CHECK_FOR_EXI = "checkForExi";

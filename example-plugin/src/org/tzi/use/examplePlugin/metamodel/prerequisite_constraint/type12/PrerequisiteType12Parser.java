@@ -5,13 +5,10 @@ import org.tzi.use.examplePlugin.util.ParserUtil;
 
 import java.util.Map;
 
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ARGS;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ASSOC_CLS;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CHECKED_ROLE;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CHECK_EXEC;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CROSS_REFERENCE;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.REQUIRES;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ROLE_PATH;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.ARGS;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.ASSOC_CLS;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.REQUIRES;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.ROLE_PATH;
 
 public class PrerequisiteType12Parser implements PrerequisiteConstraintParser<PrerequisiteConstraintType12> {
 

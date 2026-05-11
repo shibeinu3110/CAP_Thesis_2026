@@ -35,8 +35,10 @@ public class SizeConstraintType1Generator implements SizeConstraintGenerator<Siz
             : null;
     System.out.println("Select Part: " + selectPart);
 
-
     // bound
+    if (sc1.bounds == null || sc1.bounds.isEmpty()) {
+      throw new IllegalArgumentException("Bounds cannot be null or empty");
+    }
     String bound =
         sc1.bounds.stream()
             .map(b -> buildSizePathWithOperator(

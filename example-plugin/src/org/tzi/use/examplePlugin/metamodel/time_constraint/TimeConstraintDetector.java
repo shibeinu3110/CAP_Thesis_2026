@@ -2,19 +2,21 @@ package org.tzi.use.examplePlugin.metamodel.time_constraint;
 
 import org.tzi.use.examplePlugin.CaculatorEnum;
 import org.tzi.use.examplePlugin.ast.ASTInterface;
+import org.tzi.use.examplePlugin.logic.ConstraintHandler;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.IF_PART;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.MAX;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.SUM_ATTR;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.WINDOW;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.IF_PART;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.MAX;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.SUM_ATTR;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.WINDOW;
 import static org.tzi.use.examplePlugin.util.UseUtils.hasKeyIn;
 import static org.tzi.use.examplePlugin.util.UseUtils.hasKeyInCheckForExi;
 import static org.tzi.use.examplePlugin.util.UseUtils.hasSpecificKey;
 
-public class TimeConstraintDetector {
+public class TimeConstraintDetector implements ConstraintHandler {
   public TimeConstraintType detectType(ASTInterface astInterface) {
 
     List<String> keys = Arrays.stream(CaculatorEnum.values())
@@ -36,5 +38,19 @@ public class TimeConstraintDetector {
     }
     // Placeholder implementation
     return TimeConstraintType.UNSUPPORTED;
+  }
+  @Override
+  public String detect(ASTInterface ast) {
+    TimeConstraintType type =
+        new TimeConstraintDetector().detectType(ast);
+    return "TimeConstraint: " + type;
+  }
+
+  @Override
+  public String execute(ASTInterface ast,
+                        Map<String, Object> json,
+                        String context,
+                        String name) {
+    return TimeConstraintExecutor.execute(ast, json, context, name);
   }
 }

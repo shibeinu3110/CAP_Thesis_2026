@@ -1,16 +1,12 @@
 package org.tzi.use.examplePlugin.metamodel.prerequisite_constraint.type7;
 
 import org.tzi.use.examplePlugin.metamodel.prerequisite_constraint.PrerequisiteConstraintParser;
-import org.tzi.use.examplePlugin.util.ParserUtil;
 
 import java.util.Map;
 
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ARGS;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ASSOC_CLS;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CHECKED_ROLE;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.NO_SELF;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.REQUIRES;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ROLE_PATH;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.ARGS;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.CHECKED_ROLE;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.NO_SELF;
 
 public class PrerequisiteType7Parser implements PrerequisiteConstraintParser<PrerequisiteConstraintType7> {
 

@@ -3,7 +3,7 @@ package org.tzi.use.examplePlugin.metamodel.schedule_constraint.type2;
 import org.tzi.use.examplePlugin.metamodel.eligibility_constraint.RootScope;
 import org.tzi.use.examplePlugin.metamodel.schedule_constraint.ScheduleConstraintGenerator;
 
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.AND;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.AND;
 import static org.tzi.use.examplePlugin.util.GeneratorUtils.buildAllowedOrCondition;
 import static org.tzi.use.examplePlugin.util.GeneratorUtils.buildExistsCheckConditionEach;
 import static org.tzi.use.examplePlugin.util.GeneratorUtils.buildIfCondition;

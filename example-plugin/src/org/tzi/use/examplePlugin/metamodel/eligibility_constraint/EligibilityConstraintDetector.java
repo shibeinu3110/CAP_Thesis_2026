@@ -1,19 +1,20 @@
 package org.tzi.use.examplePlugin.metamodel.eligibility_constraint;
 
 import org.tzi.use.examplePlugin.ast.ASTInterface;
+import org.tzi.use.examplePlugin.logic.ConstraintHandler;
 
 import java.util.List;
 import java.util.Map;
 
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CHECK_FOR_EXI;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.MATCH_COLL;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.MAX;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.MIN;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.RATIO;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.SCALE;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.SUM_ATTR;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.CHECK_FOR_EXI;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.MATCH_COLL;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.MAX;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.MIN;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.RATIO;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.SCALE;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.SUM_ATTR;
 
-public class EligibilityConstraintDetector {
+public class EligibilityConstraintDetector implements ConstraintHandler {
   public EligibilityConstraintType detectType(ASTInterface astInterface) {
     if (hasSumAttribute(astInterface) && hasMax(astInterface)) {
       return EligibilityConstraintType.TYPE1;
@@ -77,6 +78,21 @@ public class EligibilityConstraintDetector {
       }
     }
     return false;
+  }
+
+  @Override
+  public String detect(ASTInterface ast) {
+    EligibilityConstraintType type =
+        new EligibilityConstraintDetector().detectType(ast);
+    return "EligibilityConstraint: " + type;
+  }
+
+  @Override
+  public String execute(ASTInterface ast,
+                        Map<String, Object> json,
+                        String context,
+                        String name) {
+    return EligibilityConstraintExecutor.execute(ast, json, context, name);
   }
 
 }

@@ -5,8 +5,8 @@ import org.tzi.use.examplePlugin.util.ParserUtil;
 
 import java.util.Map;
 
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ARGS;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ROLE_PATH;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.ARGS;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.ROLE_PATH;
 
 public class TimeConstraintType4Parser implements TimeConstraintParser<TimeConstraintType4> {
 

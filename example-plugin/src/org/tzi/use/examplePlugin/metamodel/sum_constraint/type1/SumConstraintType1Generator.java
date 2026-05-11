@@ -10,6 +10,11 @@ public class SumConstraintType1Generator implements SumConstraintGenerator<SumCo
       String invariantName,
       SumConstraintType1 sc
   ) {
+
+    if (sc.filterAttr == null || sc.matchAttr == null) {
+      throw new IllegalArgumentException("Missing required arguments for SumConstraintType1");
+    }
+
     return String.format(
         """
         context %s

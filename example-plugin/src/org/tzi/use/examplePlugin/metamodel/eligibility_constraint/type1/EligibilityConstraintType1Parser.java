@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ARGS;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ASSOC_CLS;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.COLLECT;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.MAX;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ROLE_PATH;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.SUM_ATTR;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.ARGS;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.ASSOC_CLS;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.COLLECT;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.MAX;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.ROLE_PATH;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.SUM_ATTR;
 import static org.tzi.use.examplePlugin.util.UseUtils.asString;
 
 public class EligibilityConstraintType1Parser implements EligibilityConstraintParser<EligibilityConstraintType1> {
@@ -89,6 +89,10 @@ public class EligibilityConstraintType1Parser implements EligibilityConstraintPa
       } else if (condArgs.containsKey("max")) {
         c.type = AttrCondPro.Type.MAX;
         c.matchAttr = String.valueOf(condArgs.get("max"));
+      } else if (condArgs.containsKey("fixStr")) {
+        c.type = AttrCondPro.Type.FIX_STR;
+        c.matchAttr = String.valueOf(condArgs.get("fixStr"));
+
       }
 
       attrConds.add(c);

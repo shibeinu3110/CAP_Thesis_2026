@@ -2,7 +2,10 @@ package org.tzi.use.examplePlugin.util;
 
 import java.util.List;
 
-public class CommonAttributes {
+/**
+ * A class to hold the common attributes for constraints, especially for operations in the CAPS
+ */
+public class CommonComparationsAttributes {
 
     // Attributes for constraints
     public static final String COLLECT = "collect";
@@ -24,9 +27,15 @@ public class CommonAttributes {
     public static final String MIN_VALUE = "minValue";
     public static final String MAX_LIM_ATTR = "maxLimAttr";
     public static final String MIN_LIM_ATTR = "minLimAttr";
+    public static final String MATCH_OBJECT = "matchObject";
 
 
     public static final String TYPE = "type";
     public static final List<String> BOUND_CONDITIONS = List.of(
         MAX, MIN, MAX_ATTR, MIN_ATTR, MAX_LIM, MIN_LIM, MAX_LIM_ATTR, MIN_LIM_ATTR);
+
+
+    public static String LEFT = "left";
+    public static String RIGHT = "right";
+    public static String OP = "op";
 }

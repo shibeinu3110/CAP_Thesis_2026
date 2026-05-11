@@ -1,20 +1,23 @@
 package org.tzi.use.examplePlugin.metamodel.retake_constraint;
 
 import org.tzi.use.examplePlugin.ast.ASTInterface;
+import org.tzi.use.examplePlugin.logic.ConstraintHandler;
 
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CHECK_FOR_EXI;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CHECK_FOR_EXI2;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.COLLECT;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.IF_PART;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.MATCH_ATTR;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.MAX;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.SUM_ATTR;
+import java.util.Map;
+
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.CHECK_FOR_EXI;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.CHECK_FOR_EXI2;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.COLLECT;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.IF_PART;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.MATCH_ATTR;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.MAX;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.SUM_ATTR;
 import static org.tzi.use.examplePlugin.util.UseUtils.hasKeyEqualsToValue;
 import static org.tzi.use.examplePlugin.util.UseUtils.hasKeyEqualsToValueInSpecificParam;
 import static org.tzi.use.examplePlugin.util.UseUtils.hasParamsLengthEqualsTo;
 import static org.tzi.use.examplePlugin.util.UseUtils.hasSpecificKey;
 
-public class RetakeConstraintDetector {
+public class RetakeConstraintDetector implements ConstraintHandler {
 
   public RetakeConstraintType detectType(ASTInterface astInterface) {
 
@@ -45,5 +48,20 @@ public class RetakeConstraintDetector {
     }
     // Placeholder implementation
     return RetakeConstraintType.UNSUPPORTED;
+  }
+
+  @Override
+  public String detect(ASTInterface ast) {
+    RetakeConstraintType type =
+        new RetakeConstraintDetector().detectType(ast);
+    return "RetakeConstraint: " + type;
+  }
+
+  @Override
+  public String execute(ASTInterface ast,
+                        Map<String, Object> json,
+                        String context,
+                        String name) {
+    return RetakeConstraintExecutor.execute(ast, json, context, name);
   }
 }

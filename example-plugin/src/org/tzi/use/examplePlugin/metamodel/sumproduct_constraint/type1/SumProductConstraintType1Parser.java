@@ -5,14 +5,14 @@ import org.tzi.use.examplePlugin.util.ParserUtil;
 
 import java.util.Map;
 
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ARGS;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ASSOC_CLS;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.DERIVE;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.FILTERS;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.RESULT;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.ROLE_PATH;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.SUM_ATTR1;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.SUM_ATTR2;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.ARGS;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.ASSOC_CLS;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.DERIVE;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.FILTERS;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.RESULT;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.ROLE_PATH;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.SUM_ATTR1;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.SUM_ATTR2;
 
 public class SumProductConstraintType1Parser implements SumProductConstraintParser<SumProductConstraintType1> {
 

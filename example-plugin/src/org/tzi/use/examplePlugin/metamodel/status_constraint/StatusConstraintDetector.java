@@ -1,16 +1,17 @@
 package org.tzi.use.examplePlugin.metamodel.status_constraint;
 
 import org.tzi.use.examplePlugin.ast.ASTInterface;
+import org.tzi.use.examplePlugin.logic.ConstraintHandler;
 
 import java.util.List;
+import java.util.Map;
 
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.CHECK_STATUS;
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.IF_PART;
-import static org.tzi.use.examplePlugin.util.CommonAttributes.COLLECT;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.IF_PART;
+import static org.tzi.use.examplePlugin.util.CommonComparationsAttributes.COLLECT;
 import static org.tzi.use.examplePlugin.util.UseUtils.hasKeyIn;
 import static org.tzi.use.examplePlugin.util.UseUtils.hasSpecificKey;
 
-public class StatusConstraintDetector {
+public class StatusConstraintDetector implements ConstraintHandler {
   private static final String CAL_SIZE = "calSize";
   /**
    * Currently, we have 5 types of size constraints.
@@ -31,5 +32,20 @@ public class StatusConstraintDetector {
     }
     // Placeholder implementation
     return StatusConstraintType.UNSUPPORTED;
+  }
+
+  @Override
+  public String detect(ASTInterface ast) {
+    StatusConstraintType type =
+        new StatusConstraintDetector().detectType(ast);
+    return "StatusConstraint: " + type;
+  }
+
+  @Override
+  public String execute(ASTInterface ast,
+                        Map<String, Object> json,
+                        String context,
+                        String name) {
+    return StatusConstraintExecutor.execute(ast, json, context, name);
   }
 }

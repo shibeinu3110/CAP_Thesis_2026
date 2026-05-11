@@ -1,12 +1,11 @@
 package org.tzi.use.examplePlugin.metamodel.sum_constraint.type1;
 
-import org.tzi.use.examplePlugin.ast.ASTInterface;
 import org.tzi.use.examplePlugin.metamodel.sum_constraint.SumConstraintParser;
 
 import java.util.List;
 import java.util.Map;
 
-import static org.tzi.use.examplePlugin.metamodel.CommonAttributes.*;
+import static org.tzi.use.examplePlugin.metamodel.CommonCAPAttributes.*;
 
 @SuppressWarnings("unchecked")
 public class SumConstraintType1Parser implements SumConstraintParser<SumConstraintType1> {
