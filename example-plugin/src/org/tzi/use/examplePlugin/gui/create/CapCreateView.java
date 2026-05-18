@@ -6,7 +6,8 @@ import org.tzi.use.gui.views.View;
 import javax.swing.*;
 import java.awt.*;
 
-
+// we need to implement the View interface to be able to switch between this view and the management view
+// and the view interface is required to show UI in the USE application, otherwise it will not be displayed
 public class CapCreateView extends JPanel implements View {
 
   private final CapCreatePanel capPanel;

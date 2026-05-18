@@ -14,6 +14,8 @@ public class TypeViewPanel extends JPanel {
   private JTextArea annotationExampleArea, oclExampleArea;
   private JTextArea descriptionArea;
 
+  public static final Font UI_FONT = new Font("SansSerif", Font.PLAIN, 14);
+
   public TypeViewPanel(String capName, String typeName) {
     initUI();
     loadType(capName, typeName);
@@ -39,6 +41,11 @@ public class TypeViewPanel extends JPanel {
     annotationExampleArea = createViewCodeArea();
     oclExampleArea = createViewCodeArea();
 
+    annotationSpecArea.setFont(UI_FONT);
+    oclSpecArea.setFont(UI_FONT);
+    annotationExampleArea.setFont(UI_FONT);
+    oclExampleArea.setFont(UI_FONT);
+
     JScrollPane capSpecScroll =
         createScroll(annotationSpecArea, "CAP Spec");
     JScrollPane oclSpecScroll =
@@ -61,10 +68,12 @@ public class TypeViewPanel extends JPanel {
     examplePanel.setPreferredSize(new Dimension(0, 240));
 
     // ===== DESCRIPTION =====
-    descriptionArea = new JTextArea(4, 20);
+    descriptionArea = new JTextArea();
+    descriptionArea.setRows(4);
     descriptionArea.setEditable(false);
     descriptionArea.setLineWrap(true);
     descriptionArea.setWrapStyleWord(true);
+    descriptionArea.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
 
     JScrollPane descScroll = new JScrollPane(descriptionArea);
     descScroll.setBorder(
@@ -139,6 +148,7 @@ public class TypeViewPanel extends JPanel {
     area.setLineWrap(false);
     area.setTabSize(2);
     area.setBackground(new Color(248, 248, 248));
+    area.setEditable(true);
     return area;
   }
 

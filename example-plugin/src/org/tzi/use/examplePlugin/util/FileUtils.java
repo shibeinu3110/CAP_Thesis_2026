@@ -22,17 +22,20 @@ public class FileUtils {
 
     List<String> currentCAPs = new ArrayList<>();
 
-    Path parentDir = Paths.get(CAP_STORAGE_URL);
+    Path parentDir = CAP_ROOT;
 
-    try (DirectoryStream<Path> stream =
-             Files.newDirectoryStream(parentDir, Files::isDirectory)) {
-      for (Path path : stream) {
-        currentCAPs.add(path.getFileName().toString());
+    try {
+      Files.createDirectories(parentDir);
+      // get all objects int the parent directory and filter only the directories, then add their names to the currentCAPs list
+      try (DirectoryStream<Path> stream =
+               Files.newDirectoryStream(parentDir, Files::isDirectory)) {
+        for (Path path : stream) {
+          currentCAPs.add(path.getFileName().toString());
+        }
       }
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
-
     return currentCAPs;
   }
 
@@ -87,8 +90,8 @@ public class FileUtils {
 
   /**
    * Remove excessive blank lines from the content. A blank line is defined as a line that contains only whitespace characters (spaces, tabs) or is completely empty.
-   * @param content
-   * @return
+   * @param content the input content that may contain excessive blank lines
+   * @return the cleaned content with excessive blank lines removed, ensuring that there are no more than two consecutive blank lines
    */
   public static String cleanExcessiveBlankLines(String content) {
     if (content == null || content.isEmpty()) {

@@ -14,6 +14,13 @@ public class StructuralConstraintType1Generator implements StructuralConstraintG
 
     System.out.println("Generating StructuralConstraintType1...");
 
+    if (sc1.checkStructure == null || sc1.checkStructure.isEmpty()) {
+      return """
+        context %s inv %s:
+          true
+        """.formatted(contextClass, invariantName);
+    }
+
 
     String checkStructure = buildAllowedCondition(sc1.checkStructure, null, null, false);
 

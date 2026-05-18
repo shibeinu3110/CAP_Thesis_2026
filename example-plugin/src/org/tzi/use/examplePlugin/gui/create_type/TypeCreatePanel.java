@@ -35,6 +35,7 @@ public class TypeCreatePanel extends JPanel {
     loadExistingType(capName, typeName);
   }
 
+  // step in each folder, then read the 5 txt files to fill in the fields
   private void loadExistingType(String capName, String typeName) {
     try {
       Path capFolder = CAP_ROOT.resolve(capName);

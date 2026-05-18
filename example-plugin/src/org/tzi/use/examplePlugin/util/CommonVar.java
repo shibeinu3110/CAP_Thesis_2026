@@ -3,9 +3,11 @@ package org.tzi.use.examplePlugin.util;
 import java.nio.file.Path;
 
 public class CommonVar {
-  public static final String CAP_STORAGE_URL = "D:/DATN/cap_storage";
 
-  public static final Path CAP_ROOT = Path.of(CAP_STORAGE_URL.toString());
+  // use relative path
+  public static final Path CAP_ROOT =
+      Path.of(System.getProperty("user.home"), ".use", "cap_storage");
+  public static final String CAP_STORAGE_URL = CAP_ROOT.toString();
 
   public static final String SELF = "self";
 }

@@ -46,7 +46,7 @@ public class FileParserPanel extends JPanel {
   private void initUI() {
     setLayout(new BorderLayout(8, 8));
 
-    Font textFont = new Font(Font.MONOSPACED, Font.PLAIN, 14);
+    Font textFont = new Font(Font.MONOSPACED, Font.PLAIN, 20);
 
     // ===== LEFT TEXT AREA =====
     leftTextArea = new JTextArea();
@@ -99,7 +99,20 @@ public class FileParserPanel extends JPanel {
     // ===== CONVERT BUTTON =====
     JButton convertButton = new JButton("Convert →");
     convertButton.setPreferredSize(new Dimension(120, 40));
-    convertButton.addActionListener(e -> convertFile());
+    convertButton.addActionListener(e -> {
+      try {
+        convertFile();
+      } catch (Exception ex) {
+        ex.printStackTrace();
+
+        JOptionPane.showMessageDialog(
+            this,
+            ex.getMessage(),
+            "Conversion Error",
+            JOptionPane.ERROR_MESSAGE
+        );
+      }
+    });
 
     JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
     centerPanel.add(convertButton);
@@ -153,14 +166,20 @@ public class FileParserPanel extends JPanel {
     }
   }
 
+  /**
+   * Check if the file has a valid extension (.txt or .use).
+   * @param file the file to check
+   * @return true if the file has a valid extension, false otherwise
+   */
   private boolean isValidExtension(File file) {
     String name = file.getName().toLowerCase();
     return name.endsWith(".txt") || name.endsWith(".use");
   }
 
+  // convert the input USE spec with CAP annotations into a pure USE spec, then display in the right text area and save to a temp file for downloading
   private void convertFile() {
 
-    // clear previous output
+    // clear previous output by setting empty string to temp files, if failed show error message and return
     try {
       saveContentToFixedFile(
           "",
@@ -185,10 +204,14 @@ public class FileParserPanel extends JPanel {
       return;
     }
 
+
+    // at this point, the astModel is USE specification + annotation specification
     String inputContainsAnnotation = leftTextArea.getText();
     ASTModel astModel;
     try {
       astModel = parseAST(inputContainsAnnotation);
+
+      // assign context, which is the nearest class into annotation, if there is no class below the annotation, show error message and return
       assignContext(astModel);
       for (CAPAnnotation cap : astModel.getCapAnnotations()) {
         System.out.println(
@@ -205,6 +228,7 @@ public class FileParserPanel extends JPanel {
         UseSpecSplitter.split(leftTextArea.getText());
 
     // keep the core spec for now, just print it to console
+    // the annotation spec will be parsed by another approach
     String coreUse = r.coreSpec;
     try {
       // save to core temp file
@@ -222,6 +246,7 @@ public class FileParserPanel extends JPanel {
     // the starter of the constraints
     StringBuilder sb = new StringBuilder();
 
+    // this part is to define will the OCL generated from annotation be appended directly to the core spec, or we need to add the "constraints" keyword before appending OCL, it depends on whether there is already OCL constraint in the original USE spec, if there is already OCL constraint, we can append OCL generated from annotation directly after that, if there is no OCL constraint, we need to add the "constraints" keyword before appending OCL generated from annotation
     boolean isContainingOCL = mmodelContainsOCL(model);
     if (!isContainingOCL) {
       // ìf there is no OCL constraint in the model, we need to add the "constraints" keyword before appending OCL from annotation

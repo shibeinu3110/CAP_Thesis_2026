@@ -52,6 +52,7 @@ public class CapManagePanel extends JPanel {
   private void initUI() {
     setLayout(new BorderLayout());
 
+    // get all CAPs and display in table
     JTable table = new JTable(new CapTableModel(getCurrentCAP()));
     table.setRowHeight(36);
     table.setShowGrid(false);
@@ -208,6 +209,8 @@ public class CapManagePanel extends JPanel {
       int row,
       JButton sourceBtn
   ) {
+
+    // create new popup
     popup = new CapTypePopup(
         capName,
         t -> {
@@ -228,6 +231,7 @@ public class CapManagePanel extends JPanel {
         }
     );
 
+    // all of this just to set position for the popup below the "Types" button of the corresponding row
     Rectangle cellRect = table.getCellRect(row, 0, true);
 
     Point p = new Point(cellRect.x, cellRect.y + cellRect.height);
@@ -237,6 +241,7 @@ public class CapManagePanel extends JPanel {
     popup.setLocation(p);
     popup.setVisible(true);
   }
+
   private void openTypeView(String capName, String typeName) {
     System.out.println("View type " + typeName + " of CAP " + capName);
     TypeViewView typeView = new TypeViewView(capName, typeName);

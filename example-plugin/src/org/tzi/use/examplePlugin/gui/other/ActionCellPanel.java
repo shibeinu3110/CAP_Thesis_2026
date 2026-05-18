@@ -22,7 +22,7 @@ public class ActionCellPanel extends JPanel {
     deleteBtn = createFlatButton("Delete");
 
     // styling delete button
-    deleteBtn.setBackground(new Color(220, 53, 69)); // đỏ kiểu Bootstrap danger
+    deleteBtn.setBackground(new Color(220, 53, 69));
     deleteBtn.setForeground(Color.WHITE);
     deleteBtn.setOpaque(true);
     deleteBtn.setBorderPainted(false);

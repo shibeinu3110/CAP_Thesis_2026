@@ -38,7 +38,7 @@ D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\logic\ConstraintRegistr
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\AttrCond.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\AttrCondPro.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\Cacu.java
-D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\CommonAttributes.java
+D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\CommonCAPAttributes.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\eligibility_constraint\EligibilityConstraintDetector.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\eligibility_constraint\EligibilityConstraintExecutor.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\metamodel\eligibility_constraint\EligibilityConstraintGenerator.java
@@ -243,8 +243,10 @@ D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\use\CAPToOCLVisitor.jav
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\use\CAPVisitor.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\util\ASTPrinter.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\util\CapTypeStorage.java
-D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\util\CommonAttributes.java
+D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\util\CommonComparationsAttributes.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\util\CommonVar.java
+D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\util\constant\GeneratorConstant.java
+D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\util\constant\ParserConstant.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\util\ConstraintType.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\util\enumarate\BoundType.java
 D:\DATN\use\example-plugin\src\org\tzi\use\examplePlugin\util\enumarate\IfFixType.java

@@ -363,7 +363,6 @@ public class CapPaserPanel extends JPanel {
       return;
     }
 
-//    String name = getRealText(nameField);
 
     try {
       ASTInterface ast = UseUtils.parseASTFromText(annotation);

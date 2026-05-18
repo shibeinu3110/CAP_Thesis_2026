@@ -16,8 +16,10 @@ public class CapTypeStorage {
     return CAP_ROOT.resolve(capName).resolve("types");
   }
 
-  // show all types of a CAP
+  // show all types of a  specific CAP
   public static List<String> listTypes(String capName) {
+
+    // get the "types" folder of the CAP, if it does not exist, return an empty list, otherwise list all subdirectories (type names) and return them as a list
     Path root = typeRoot(capName);
     try {
       ensureDirectory(root);
@@ -27,6 +29,8 @@ public class CapTypeStorage {
     }
     if (!Files.exists(root)) return List.of();
 
+    // get all objects in the "types" directory and filter only the directories, then get their names and return as a list
+    // for display purposes
     try (var s = Files.list(root)) {
       return s.filter(Files::isDirectory)
           .map(p -> p.getFileName().toString())

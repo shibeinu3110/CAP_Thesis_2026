@@ -15,31 +15,19 @@ public class CapTypePopup extends JPopupMenu {
       Consumer<String> onDelete,
       Runnable onAdd
   ) {
-//    JPanel list = new JPanel();
-//    list.setLayout(new BoxLayout(list, BoxLayout.Y_AXIS));
-//
-//    for (String type : CapTypeStorage.listTypes(capName)) {
-//      list.add(createRow(type, onView, onEdit, onDelete));
-//    }
-//
-//    JScrollPane scroll = new JScrollPane(list);
-//    scroll.setPreferredSize(new Dimension(420, 200));
-//    add(scroll);
-//
-//    JButton addBtn = new JButton("+ Add new type");
-//    addBtn.addActionListener(e -> onAdd.run());
-//    add(addBtn);
     JPanel container = new JPanel();
     container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
     container.setBorder(BorderFactory.createEmptyBorder(6, 6, 6, 6));
 
     // ===== HEADER =====
+    // the root CAP's name
     JLabel header = new JLabel(capName);
     header.setFont(header.getFont().deriveFont(Font.BOLD));
     header.setBorder(BorderFactory.createEmptyBorder(4, 8, 8, 8));
     container.add(header);
 
     // ===== TYPES =====
+    // types in this CAP
     for (String type : CapTypeStorage.listTypes(capName)) {
       container.add(createTypeRow(type, onView, onEdit, onDelete));
     }

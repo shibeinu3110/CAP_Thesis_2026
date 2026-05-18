@@ -6,6 +6,9 @@ import java.awt.*;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
+// This class is to handle the edit, delete, open and show types action when user clicks the corresponding button in the table cell. It will call the corresponding function passed from CapManagePanel to perform the action, and then stop editing to close the cell editor. The showTypes function is a QuadConsumer that takes capName, table, row and button as parameters, which is used to show the popup menu for showing types when user clicks the "Show Types" button.
+// by default, the cell does not allow editing, so we need to override the isCellEditable method in the table model to return true for the action column, and return false for other columns. This way, only the action column can be edited (clicked), and other columns are not editable.
+
 public class ActionCellEditor extends AbstractCellEditor
     implements TableCellEditor {
 
@@ -48,6 +51,7 @@ public class ActionCellEditor extends AbstractCellEditor
     });
   }
 
+  // get the current capName from the first column of the table, and set the background color of the panel to the selection background color of the table when the cell is being edited (clicked). This way, we can know which CAP is being edited (clicked) and show the corresponding actions in the panel.
   @Override
   public Component getTableCellEditorComponent(
       JTable table, Object value,

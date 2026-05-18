@@ -1,5 +1,8 @@
 package org.tzi.use.examplePlugin.parser;
 
+/**
+ * Splits a USE specification into its core part and its annotations.
+ */
 public final class UseSpecSplitter {
 
   public static final class Result {

@@ -8,6 +8,10 @@ public class StructuralConstraintType4Generator implements StructuralConstraintG
 
     System.out.println("Generating StructuralConstraintType4...");
 
+    if(sc4.targetAssoc == null || sc4.targetAssoc.isEmpty() || sc4.rolePath == null || sc4.rolePath.isEmpty()) {
+      throw new IllegalArgumentException("StructuralConstraintType4 requires non-empty targetAssoc and rolePath");
+    }
+
     return """
         context %s inv %s:
           self.%s -> isUnique(%s | %s.%s)

@@ -25,3 +25,8 @@ association Subject between
     Enrolment[*] role enrolments
     Course[1] role course
 end
+
+constraints
+context Student
+    inv UniqueEnrolmentPerCourse:
+        self.enrolments->isUnique(e | e.course)
