@@ -1,215 +1,343 @@
-# USE - UML-based Specification Environment
+<div align="center">
 
-(Note that this is a release of a research prototype. There is no
-warranty of any kind.)
+# CAP Annotation to OCL Converter
 
-## SME Notes 
-- With the java project use-code, we need to add `use-core/target/generated-sources/antlr3` to the build path in Eclipse    
+### A Thesis Project for Automated OCL Constraint Generation and Validation
 
-- To package the USE project (in order to obtain the jar file)
-  * Right click on the root folder for USE `Run As \ Maven build` 
-  * Right click on the package folder 'Run As \ Maven build' : set the `Goals` the value `package`  
+Convert CAP annotations into **OCL (Object Constraint Language)** constraints with support for:
 
-- To run the USE
-  * Unzip the `use-assembly/target/use<curVersion>.zip` (after packing the USE project)
-  * Run `use<curVersion>/bin/use` 
+✅ Standalone conversion  
+✅ Domain model validation  
+✅ UML-based analysis  
+✅ USE plugin integration
 
-- To load the file jar for the under-development plugin:
-  * Package the plugin (in order to obtain the jar file):
-    - Right click on the package folder (inside Eclipse) `Run As \ Maven build` : set the `Goals` the value `package`
-    - With an external maven using the command: ```mvn ... package ...```
-  * Copy the generated jar file (the file with full jar dependencies) for the plugin into the USE directory (i.e., the `use-assembly/target/use<curVersion>/lib/plugins` directory). Instead of copying this jar file, you could create a soft link (in linux) for it.
+</div>
 
-## Overview
+---
 
-USE is a system for the specification of information systems. It is
-based on a subset of the Unified Modeling Language (UML) [1]. A USE
-specification contains a textual description of a model using features
-found in UML class diagrams (classes, associations, etc.). Expressions
-written in the Object Constraint Language (OCL) are used to specify
-additional integrity constraints on the model. A model can be animated
-to validate the specification against non-formal requirements. System
-states (snapshots of a running system) can be created and manipulated
-during an animation. For each snapshot the OCL constraints are
-automatically checked. Information about a system state is given by
-graphical views.  OCL expressions can be entered and evaluated to
-query detailed information about a system state.
+# Overview
 
-The USE specification language is based on UML and OCL. Due to the
-semi-formal definition of OCL there are some language constructs whose
-interpretation is ambiguous or unclear [2]. In [3] and [4] we have
-presented a formalization of OCL which attempts to provide a solution
-for most of the problems. The USE approach to validation is described
-in [5] and [6].
+**CAP Annotation to OCL Converter** is a plugin-based system developed on top of the **USE (UML-based Specification Environment)** ecosystem.
 
-## Installation
+The project aims to simplify the process of:
 
-To install USE, read the instructions in the [INSTALL](INSTALL) file.
+- Defining CAP annotations
+- Generating OCL constraints automatically
+- Validating generated constraints against UML domain models
+- Supporting model-driven engineering workflows
 
-## Getting started
+This project was developed as part of an academic thesis focusing on automated constraint generation and validation.
 
-After successful installation, the following command can be used to
-invoke USE on an example specification. Change the current directory
-to the top level directory of the distribution and enter the following
-(the exact commands may depend on your platform):
+---
+
+# Key Features
+
+## CAP Management
+
+Create and manage CAP annotations with:
+
+- Class diagrams
+- Descriptions
+- Quick preview information
+
+This helps users quickly understand the purpose and structure of each CAP.
+
+---
+
+## CAP Classification
+
+Assign semantic types to CAPs based on business logic.
+
+This improves organization and enables better annotation management.
+
+---
+
+## Standalone Annotation → OCL Conversion
+
+Convert CAP annotations directly into OCL constraints without requiring a domain model.
+
+### Suitable for
+
+- Rapid testing
+- Independent OCL generation
+- Annotation experimentation
+- Learning and research
+
+---
+
+## Domain Model Validation
+
+Generate OCL constraints using a `.use` domain model context.
+
+The system validates generated OCL against the domain model to ensure:
+
+- Correct syntax
+- Valid references
+- Structural consistency
+- Compatibility with UML elements
+
+---
+
+# Architecture
+
+```text
+root
+├── use-cap
+├── use-assembly
+├── use-gui
+└── ...
+```
+
+| Module | Purpose |
+|---|---|
+| `use-cap` | Main CAP annotation plugin |
+| `use-gui` | GUI resources and runtime assets |
+| `use-assembly` | USE application packaging |
+
+---
+
+# Prerequisites
+
+Before running the project, ensure the following are installed:
+
+- Java
+- Maven
+
+Verify installation:
 
 ```bash
-cd examples
-../bin/use -v Documentation/Demo/Demo.use
+java -version
+mvn -version
 ```
 
-The last command will compile and check the file Demo.use in the
-examples directory. It contains a USE specification for a simple model
-of a company. The -v switch is used to increase verbosity of
-output. The main interface to the tool is a command line interface
-where you enter commands at a prompt. The output should therefore be
-similar to the following.
+---
 
-```
-loading properties from: C:\Dev\USE\use-6.0.0\etc\use.properties
-USE version X.X.X, Copyright (C) 1999-2024 University of Bremen & University of Applied Sciences Hamburg
-Plugin path: [C:\Dev\USE\use-6.0.0\lib\plugins]
-Plugin filename(s) [AssociationExtend.jar,ModelValidatorPlugin-5.2.0-r1.jar,ObjectToClassPlugin-2.0.jar,OCLComplexityPlugin5.1.0.jar,use-filmstrip.jar]
-compiling specification...
-Model Company (3 classes, 3 associations, 4 invariants, 0 operations, 0 pre-/postconditions, 0 state machines)
-Enter `help' for a list of available commands.
-Enter `plugins' for a list of available plugin commands.
-use>
+# Clone Repository
+
+```bash
+git clone https://github.com/shibeinu3110/CAP_Thesis_2026.git
 ```
 
-At this point you can enter commands at the prompt (try `help' for a
-list of available commands). You can enter OCL-like expressions by
-starting the input with a question mark. The expression will be
-evaluated and its result will be shown, e.g.:
+---
 
-```ocl
-use> ? Set{1,2,3}->select(e | e > 1)
--> Set{2,3} : Set(Integer)
+# Setup Instructions
+
+## Step 1 — Download Required Resources
+
+Download `bin.zip` from the repository resources.
+
+---
+
+## Step 2 — Extract Files
+
+Unzip the downloaded archive.
+
+---
+
+## Step 3 — Copy `bin` Directory
+
+Copy the extracted `bin` folder into:
+
+```text
+use-gui/src/main/resources/
 ```
 
-The file test/queries.cmd contains a large number of examples for
-valid expressions.
+Your structure should look like:
 
-Commands can also be read from a separate file with the "read"
-command. Look at the files Demo*.cmd in the same directory. For
-example, starting with Demo0.cmd, an object is created and the new
-system state will be visualized in the system state window.
-
-```use
-use> open Demo0.cmd
-Demo0.cmd> !create d0:Department;
+```text
+resources
+├── bin
+├── images
+└── ...
 ```
 
-For more information about the graphical user interface please refer
-to the [quick tour](http://www.db.informatik.uni-bremen.de/projects/USE/).
+---
 
-## Documentation
+# Running the Project
 
-Documentation is available in the [manual](manual/main.md) directory.
-It contains a quick tour demonstrating the central features of USE.
-The tool is heavily based on ideas published in [3], [4] and [6].
-See the references at the end of the file.
+The project can be executed using either:
 
-Some information about issues related to OCL can be found in the file
-README.OCL.
+- Manual build process
+- Automated batch script
 
-Note, that the documentation was automatically translated from LaTex to Markdown 
-and has still many issues. Feel free to submit changes to the documentation.
+---
 
-## Contact
+# Option 1 — Manual Build
 
-Comments and bug reports are welcome and should be addressed on [GitHub](https://github.com/useocl/use/issues).
+## 1. Build Plugin
 
-The project's web site is <https://github.com/useocl/use/>
+Run from the root directory:
 
-## Credits
+```bash
+mvn clean package -pl use-cap -am
+```
 
-The parser for USE specifications is implemented with the ANTLR parser
-generator which is in the public domain. We have included the source
-code of ANTLR in this distribution, so that the USE parser can be
-easily regenerated. We would like to thank Terence Parr and the other
-developers of [ANTLR](http://www.antlr.org) for making this great tool freely available.
+---
 
-## Copying
+## 2. Copy Generated JAR
 
-USE is released under the GNU public license, see the file COPYING for
-details. The distribution contains the following libraries from
-external parties. Source code for these libraries is available from
-the web.
+Copy the generated JAR file from:
 
-- The [ANTLR parser generator tool](http://www.antlr.org)
-- The [JUnit library](http://www.junit.org)
+```text
+use-cap/target/
+```
 
-## Reporting bugs
+Paste it into:
 
-Bug reports can submitted on [GitHub](https://github.com/useocl/use/issues)
+```text
+use-assembly/src/main/resources/plugins/
+```
 
-When submitting bug reports, use the available bug template and always include:
+---
 
-- a complete description of the problem encountered
-- the output of `use -V'
-- the operating system and version
-- the architecture.
+## 3. Build USE Assembly
 
-If possible, include:
+```bash
+mvn package -pl use-assembly
+```
 
-- a stack trace, if an exception occurred
+## 4. Extract and Run the Application
 
-These steps will help diagnose the problem.
+Extract the following archive:
 
-## Acknowledgments
+```text
+use-assembly/target/use-7.1.1.zip
+```
 
-The following people made very helpful contributions to the USE
-project. A big "thank you" to all of you.
+After extraction, run:
 
-* Hanna Bauerdick
-* Joern Bohling
-* Jens Brüning
-* Fabian Büttner
-* Duc-Hanh Dang
-* Heino Gärtner
-* Daniel Gent
-* Martin Gogolla
-* Fabian Gutsche
-* Lars Hamann
-* Frank Hilken
-* Andreas Kästner
-* Ralf Kollmann
-* Mirco Kuhlmann
-* Arne Lindow
-* Oliver Radfelder
-* Mark Richters
-* Antje Werner
-* Paul Ziemann
+```text
+bin/start_use.bat
+```
 
-There are many other people who provided comments and input on
-USE. Although we cannot list them all by name here, their feedback was
-very helpful and is highly appreciated.
+to start the application.
 
-## References
+---
 
-[1] OMG Unified Modeling Language Specification, Version 2.5.1, December 2017.
-    Object Management Group, Inc., Framingham, Mass., Internet: http://www.omg.org/spec/UML, 2021.
+# Option 2 — Automated Script
 
-[2] Martin Gogolla and Mark Richters. On constraints and queries in
-    UML. In Martin Schader and Axel Korthaus, editors, The Unified
-    Modeling Language -- Technical Aspects and Applications, pages
-    109--121. Physica-Verlag, Heidelberg, 1998.
+A helper script is included to automate the entire setup and execution process.
 
-[3] Mark Richters and Martin Gogolla. On formalizing the UML object
-    constraint language OCL. In Tok Wang Ling, Sudha Ram, and Mong Li
-    Lee, editors, Proc. 17th Int. Conf. Conceptual Modeling (ER'98),
-    pages 449--464. Springer, Berlin, LNCS 1507, 1998.
+## Usage
 
-[4] Mark Richters and Martin Gogolla. A metamodel for OCL. In Robert
-    France and Bernhard Rumpe, editors, Proceedings of the Second
-    International Conference on the Unified Modeling Language: UML'99,
-    LNCS 1723. Springer, 1999.
+### 1. Open Script
 
-[5] Mark Richters and Martin Gogolla. Validating UML models and OCL
-    constraints. Accepted paper for the Third International Conference
-    on the Unified Modeling Language, UML'2000, York.
+```text
+run-use.bat
+```
 
-[6] Mark Richters. A Precise Approach to Validating UML Models and OCL
-    Constraints. Phd thesis. Universitaet Bremen. Logos Verlag,
-    Berlin, BISS Monographs, No. 14. 2002.
+---
+
+### 2. Configure Root Directory
+
+Update:
+
+```text
+ROOT_DIR
+```
+
+to match your local cloned repository path.
+
+---
+
+### 3. Execute Script
+
+Run using CMD:
+
+```bash
+run-use.bat
+```
+
+The script automatically:
+
+- Builds the plugin
+- Copies generated artifacts
+- Packages the USE assembly
+- Launches the application
+
+---
+
+# Successful Installation
+
+If everything runs correctly, the plugin should appear inside the USE GUI.
+
+Add your screenshot below:
+
+```markdown
+![Plugin Screenshot](images/plugin-preview.png)
+```
+
+---
+
+# Example Workflow
+
+```text
+Create CAP Annotation
+        ↓
+Select Conversion Mode
+        ↓
+Generate OCL Constraints
+        ↓
+Validate Against .use Domain Model
+        ↓
+Review Generated OCL Output
+```
+
+---
+
+# Technologies Used
+
+| Technology | Purpose |
+|---|---|
+| Java | Core development |
+| Maven | Dependency management & build |
+| ANTLR | Annotation parsing |
+| OCL | Constraint specification |
+| USE | UML/OCL environment |
+
+---
+
+# Future Improvements
+
+Planned enhancements include:
+
+- Advanced OCL semantic validation
+- Better annotation parsing support
+- Enhanced GUI interaction
+- Additional CAP templates
+- Import/export functionality
+- Improved error visualization
+
+---
+
+# Contributing
+
+Contributions are welcome.
+
+You can contribute by:
+
+1. Forking the repository
+2. Creating a feature branch
+3. Implementing improvements
+4. Opening a Pull Request
+
+Bug reports, feature requests, and discussions are highly appreciated.
+
+---
+
+# Support
+
+If you encounter any issues or have questions:
+
+- Open an issue on GitHub
+- Or contact:
+
+```text
+22028033@vnu.edu.vn
+```
+
+---
+
+# License
+
+This project was developed for academic and research purposes as part of a thesis project.
