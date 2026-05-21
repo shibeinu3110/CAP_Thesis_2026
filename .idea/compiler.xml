@@ -6,9 +6,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="example-plugin" />
         <module name="use-core" />
         <module name="use-gui" />
+        <module name="use-cap" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

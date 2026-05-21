@@ -3,6 +3,8 @@
   <component name="AdditionalModuleElements">
     <content url="file://$MODULE_DIR$" dumb="true">
       <sourceFolder url="file://$MODULE_DIR$/ExamplePluginService/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/example-plugin/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/use-cap/src" isTestSource="false" />
     </content>
   </component>
 </module>

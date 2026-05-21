@@ -12,7 +12,7 @@
         <module>use-core</module>
         <module>use-gui</module>
         <module>use-assembly</module>
-        <module>example-plugin</module>
+        <module>use-cap</module>
 <!--        
 		<module>use-validator</module>
         <module>use-filmstrip</module>

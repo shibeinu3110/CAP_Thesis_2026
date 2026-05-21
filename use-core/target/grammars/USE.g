@@ -658,6 +658,7 @@ capArg returns [Map.Entry<String,Object> entry]
 
 capValue returns [Object val]
 :
+    // double-quoted string
     s1=NON_OCL_STRING
         {
             $val = $s1.getText().substring(1, $s1.getText().length() - 1);

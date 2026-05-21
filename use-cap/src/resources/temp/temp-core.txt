@@ -1,0 +1,32 @@
+model EnrollmentSystem
+
+class Course
+attributes
+    name : String
+end
+
+
+class Student
+attributes
+    name : String
+end
+
+class Enrolment
+attributes
+    grade : Real
+end
+
+association Participation between
+    Student[1] role student
+    Enrolment[*] role enrolments
+end
+
+association Subject between
+    Enrolment[*] role enrolments
+    Course[1] role course
+end
+
+constraints
+context Student
+    inv UniqueEnrolmentPerCourse:
+        self.enrolments->isUnique(e | e.course)
