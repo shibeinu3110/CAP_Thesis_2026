@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
 Plugin-Name: Example Plugin
 Plugin-Version: 0.1
-Main-Class: org.tzi.use.examplePlugin.ExamplePlugin
+Main-Class: org.tzi.use.useCap.ExamplePlugin
 Plugin-Publisher: Roman Asendorf

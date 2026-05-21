@@ -1,17 +1,17 @@
 grammar CAP;
 
 @header {
-package org.tzi.use.examplePlugin.parser;
+package org.tzi.use.useCap.parser;
 
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
-import org.tzi.use.examplePlugin.ast.*;
+import org.tzi.use.useCap.ast.*;
 }
 
 @lexer::header {
-package org.tzi.use.examplePlugin.parser;
+package org.tzi.use.useCap.parser;
 }
 
 @members {
