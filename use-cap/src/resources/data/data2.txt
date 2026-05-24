@@ -1,0 +1,500 @@
+model CourseMan
+
+-- ======================
+-- ENUMERATIONS
+-- ======================
+enum StudentStatus {ENROLLED, GRADUATED, PROBATION, SUSPENDED}
+enum CourseLevel {BASIC, ADVANCED}
+enum CourseType {CORE, ELECTIVE}
+enum EnrolStatus {PLANNED, ACTIVE, COMPLETED, WITHDRAWN, ENROLLED}
+enum EnrolProStatus {ACTIVE, ON_LEAVE, COMPLETED, WITHDRAWN}
+enum AcademicStatus {GOOD, PROBATION}
+enum Grade {A, B, C, D, F, I, W}
+
+-- ======================
+-- CORE CLASSES
+-- ======================
+
+@SumConstraint(
+  assocCls = enrolments,
+  rolePath = course,
+  collect = {
+    @AttrCond(attr = offering.semester, matchAttr = currentSemester)
+  },
+  sumAttr = credits,
+  fixAttr = self.totalCredits
+)
+
+@SumConstraint(
+  assocCls = enrolments,
+  rolePath = course,
+  collect = {
+    @AttrCond(attr = program, matchAttr = program)
+  },
+  sumAttr = credits,
+  fixAttr = self.completedCredits
+)
+
+class Student
+attributes
+    id     : String
+    name   : String
+    email  : String
+    status : StudentStatus
+    aidCap : Real
+    balance : Real
+
+    -- compatibility fields for generated OCL
+    totalCredits : Integer
+    completedCredits : Integer
+    currentSemester : AcademicTerm
+
+    -- generated OCL compatibility
+    program : Program derived =
+        ProgramEnrolment.allInstances()
+            ->any(pe |
+                pe.student = self and
+                pe.isActive = true)
+            .program
+
+    enrolments : Set(Enrolment) derived =
+        Enrolment.allInstances()
+            ->select(e | e.student = self)
+            ->asSet()
+
+    -- Derived
+    totalCreditsCompleted : Integer derived =
+        Enrolment.allInstances()
+            ->select(e |
+                e.student = self and
+                e.status = EnrolStatus::COMPLETED and
+                e.grade <> 'F' and
+                e.grade <> 'I' and
+                e.grade <> 'W')
+            ->collect(e | e.offering.module.credits)
+            ->sum()
+
+    cumulativeGPA : Real derived =
+        let totalPoints : Real =
+            Enrolment.allInstances()
+                ->select(e |
+                    e.student = self and
+                    e.status = EnrolStatus::COMPLETED and
+                    e.grade <> 'F' and
+                    e.grade <> 'I' and
+                    e.grade <> 'W')
+                ->collect(e |
+                    e.offering.module.credits *
+                    (if e.grade = 'A' then 4.0
+                     else if e.grade = 'B' then 3.0
+                     else if e.grade = 'C' then 2.0
+                     else if e.grade = 'D' then 1.0
+                     else 0.0 endif endif endif endif))
+                ->sum()
+        in
+            if self.totalCreditsCompleted = 0 then 0.0
+            else totalPoints / self.totalCreditsCompleted
+            endif
+
+    overallStatus : AcademicStatus derived =
+        if self.cumulativeGPA >= 2.0
+        then AcademicStatus::GOOD
+        else AcademicStatus::PROBATION
+        endif
+
+    curTerm : AcademicTerm derived =
+        AcademicTerm.allInstances()->any(t | t.isCurTerm)
+
+operations
+
+    enrolmentsIn(t: AcademicTerm) : Set(Enrolment) =
+        self.enrolments
+            ->select(e | e.offering.term = t)
+            ->asSet()
+
+    completedEnrolments() : Set(Enrolment) =
+        self.enrolments
+            ->select(e | e.status = EnrolStatus::COMPLETED)
+            ->asSet()
+
+    completedModules() : Set(CourseModule) =
+        self.completedEnrolments()
+            ->select(e |
+                e.grade <> 'F' and
+                e.grade <> 'I' and
+                e.grade <> 'W')
+            ->collect(e | e.offering.module)
+            ->asSet()
+
+end
+
+
+class CourseModule
+attributes
+    code          : String
+    title         : String
+    credits       : Integer
+    tuitionFee    : Real
+    level         : CourseLevel
+    type          : CourseType
+    passingScore  : Real
+    requiredCredits : Integer
+    isCapstone    : Boolean
+end
+
+
+class CourseOffering
+attributes
+    id : Integer
+    schedule : String
+    room : String
+    minStudents : Integer
+    maxStudents : Integer
+
+    -- compatibility alias
+    semester : AcademicTerm derived = self.term
+
+    curEnrollment : Integer derived =
+        Enrolment.allInstances()
+            ->select(e |
+                e.offering = self and
+                (e.status = EnrolStatus::PLANNED or
+                 e.status = EnrolStatus::ACTIVE or
+                 e.status = EnrolStatus::COMPLETED))
+            ->size()
+
+operations
+
+    enrolmentCount() : Integer =
+        Enrolment.allInstances()
+            ->select(e |
+                e.offering = self and
+                (e.status = EnrolStatus::PLANNED or
+                 e.status = EnrolStatus::ACTIVE or
+                 e.status = EnrolStatus::COMPLETED))
+            ->size()
+
+end
+
+
+class Program
+attributes
+    code : String
+    programName : String
+    totalCredits : Integer
+    minGPA : Real
+    tuitionCap : Real
+    maxWithdrawals : Integer
+    minCoreCredits : Integer
+    maxElectiveCredits : Integer
+    maxCreditsPerTerm : Integer
+    minTotalCredits : Integer
+end
+
+
+class AcademicTerm
+attributes
+    id : String
+    isCurTerm : Boolean
+    year : Integer
+    startDate : String
+    endDate : String
+    addDeadline : String
+    dropDeadline : String
+
+operations
+
+    getCurTerm() : AcademicTerm =
+        AcademicTerm.allInstances()
+            ->select(t | t.isCurTerm = true)
+            ->any(true)
+
+end
+
+
+class TermRecord
+attributes
+    id : String
+    isExemptMinCredits : Boolean
+    scholarshipTotal : Real
+
+    gpa : Real derived =
+        let totalPoints : Real =
+            Enrolment.allInstances()
+                ->select(e |
+                    e.student.termRecord->includes(self)
+                    and e.offering.term = self.term
+                    and e.grade <> 'F'
+                    and e.grade <> 'I'
+                    and e.grade <> 'W')
+                ->collect(e |
+                    e.offering.module.credits *
+                    (if e.grade = 'A' then 4.0
+                     else if e.grade = 'B' then 3.0
+                     else if e.grade = 'C' then 2.0
+                     else if e.grade = 'D' then 1.0
+                     else 0.0 endif endif endif endif))
+                ->sum()
+        in
+            if self.termCredits = 0
+            then 0.0
+            else totalPoints / self.termCredits
+            endif
+
+    termCredits : Integer derived =
+        Enrolment.allInstances()
+            ->select(e |
+                e.student.termRecord->includes(self)
+                and e.offering.term = self.term)
+            ->collect(e | e.offering.module.credits)
+            ->sum()
+
+    tuitionTotal : Real derived =
+        Enrolment.allInstances()
+            ->select(e |
+                e.student.termRecord->includes(self)
+                and e.offering.term = self.term)
+            ->collect(e | e.offering.module.tuitionFee)
+            ->sum()
+
+    withdrawals : Integer derived =
+        Enrolment.allInstances()
+            ->select(e |
+                e.student.termRecord->includes(self)
+                and e.offering.term = self.term
+                and e.status = EnrolStatus::WITHDRAWN)
+            ->size()
+
+    academicStatus : AcademicStatus derived =
+        if self.gpa >= 2.0
+        then AcademicStatus::GOOD
+        else AcademicStatus::PROBATION
+        endif
+
+    studySemester : Integer derived =
+        self.student.termRecord
+            ->select(tr | tr.term.startDate < self.term.startDate)
+            ->size() + 1
+
+    prevSemGpa : Real derived =
+        self.calcPrevSemGpa()
+
+operations
+
+    prevTerm() : TermRecord =
+        self.student.termRecord
+            ->any(tr | tr.studySemester = self.studySemester - 1)
+
+    calcPrevSemGpa() : Real =
+        if self.prevTerm().oclIsUndefined()
+        then 0.0
+        else self.prevTerm().gpa
+        endif
+
+end
+
+
+class Instructor
+attributes
+    id : String
+    name : String
+    email : String
+    availability : String
+    workloadLimit : Integer
+end
+
+
+-- ======================
+-- ASSOCIATION CLASS
+-- ======================
+
+associationclass Enrolment
+between
+    Student[*] role student
+    CourseOffering[*] role offering
+
+attributes
+    id : String
+    status : EnrolStatus
+    grade : String
+    attempt : String
+    withdrawDate : String
+
+    -- compatibility aliases
+    course : CourseModule derived =
+        self.offering.module
+
+    program : Program derived =
+        self.course.program
+
+    gradePoints : Real derived =
+        if self.grade = 'A' then 4.0
+        else if self.grade = 'B' then 3.0
+        else if self.grade = 'C' then 2.0
+        else if self.grade = 'D' then 1.0
+        else 0.0 endif endif endif endif
+
+    isPassed : Boolean derived =
+        if (self.grade <> 'F'
+            and self.grade <> 'I'
+            and self.grade <> 'W')
+        then true
+        else false
+        endif
+
+    enrolledAt : String
+
+operations
+
+    module() : CourseModule =
+        self.offering.module
+
+    term() : AcademicTerm =
+        self.offering.term
+
+    gradePoints() : Real =
+        if self.grade = 'A' then 4.0
+        else if self.grade = 'B' then 3.0
+        else if self.grade = 'C' then 2.0
+        else if self.grade = 'D' then 1.0
+        else 0.0 endif endif endif endif
+
+    isPassed() : Boolean =
+        (self.grade <> 'F'
+         and self.grade <> 'I'
+         and self.grade <> 'W')
+
+end
+
+
+associationclass ProgramEnrolment
+between
+    Student[*] role student
+    Program[1] role program
+
+attributes
+    id : String
+    admissionTerm : String
+    status : EnrolProStatus
+
+    isActive : Boolean derived =
+        if self.status = EnrolProStatus::ACTIVE
+        then true
+        else false
+        endif
+
+operations
+
+    isActive() : Boolean =
+        self.status = EnrolProStatus::ACTIVE
+
+end
+
+
+-- ===============================================
+-- DATA TYPES
+-- ===============================================
+
+dataType Date
+operations
+    Date(day: Integer, month : Integer, year : Integer)
+    pre: day >= 1 and day <= 31
+    pre: month >= 1 and month <= 12
+end
+
+
+dataType Time
+operations
+    Time(hour: Integer, minute: Integer, second: Integer)
+    pre: hour >= 0 and hour < 24
+    pre: minute >= 0 and minute < 60
+    pre: second >= 0 and second < 60
+end
+
+
+-- ======================
+-- ASSOCIATIONS
+-- ======================
+
+association Offers
+between
+    CourseModule[1] role module
+    CourseOffering[*] role offering
+end
+
+
+association Prerequisites
+between
+    CourseModule[*] role module
+    CourseModule[*] role prerequisites
+end
+
+
+association Corequisites
+between
+    CourseModule[*] role moduleCore
+    CourseModule[*] role corequisites
+end
+
+
+association RequiredPreviousCourses
+between
+    CourseModule[*] role modulerePreq
+    CourseModule[*] role requiredPreviousCourses
+end
+
+
+association Exclusions
+between
+    CourseModule[*] role moduleEx
+    CourseModule[*] role exclusions
+end
+
+
+association CourseProgram
+between
+    CourseModule[*] role module
+    Program[1] role program
+end
+
+
+association StudentTerm
+between
+    Student[1] role student
+    TermRecord[*] role termRecord
+end
+
+
+association TermOffering
+between
+    AcademicTerm[1] role term
+    CourseOffering[*] role offering
+end
+
+
+association TermRecordTerm
+between
+    TermRecord[*] role termRecord
+    AcademicTerm[1] role term
+end
+
+
+association Teaching
+between
+    CourseOffering[*] role offering
+    Instructor[1] role instructor
+end
+
+
+class HelpRequest
+attributes
+    id : String
+    content : String
+end
+
+
+association RequestStudent
+between
+    Student[1] role requester
+    HelpRequest[*] role helpRequests
+end

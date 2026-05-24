@@ -103,6 +103,10 @@ public class GUIUtils extends JPanel {
 
     card.add(centerPanel, BorderLayout.CENTER);
 
+    Color defaultColor = card.getBackground();
+    Color hoverColor = new Color(245, 245, 245);
+
+    card.setOpaque(true);
     // ===== CLICK =====
     card.addMouseListener(new MouseAdapter() {
       @Override
@@ -112,13 +116,12 @@ public class GUIUtils extends JPanel {
 
       @Override
       public void mouseEntered(MouseEvent e) {
-        card.setBackground(new Color(245, 245, 245));
-        card.setOpaque(true);
+        card.setBackground(hoverColor);
       }
 
       @Override
       public void mouseExited(MouseEvent e) {
-        card.setOpaque(false);
+        card.setBackground(defaultColor);
       }
     });
 

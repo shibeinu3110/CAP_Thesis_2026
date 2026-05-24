@@ -33,4 +33,9 @@ public class ExamplePluginAction implements IPluginActionDelegate {
     MainWindow.instance().addNewViewFrame(frame);
     setMaximumFrameSize(frame);
   }
+
+  @Override
+  public boolean shouldBeEnabled(IPluginAction pluginAction) {
+    return true;
+  }
 }

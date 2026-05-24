@@ -1,4 +1,0 @@
-context Student inv StructuralConstraint_Student_7331:
-  self.enrolments -> isUnique(e | e.course)
-
-

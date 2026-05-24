@@ -25,7 +25,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 import static org.tzi.use.useCap.gui.parser.CapPaserPanel.generateNameFromAST;
-import static org.tzi.use.useCap.util.FileUtils.cleanExcessiveBlankLines;
+import static org.tzi.use.useCap.util.CommonVar.corePath;import static org.tzi.use.useCap.util.CommonVar.oclPath;import static org.tzi.use.useCap.util.FileUtils.cleanExcessiveBlankLines;
 import static org.tzi.use.useCap.util.FileUtils.saveContentToFixedFile;
 import static org.tzi.use.useCap.util.UseUtils.constraintExecutor;
 import static org.tzi.use.useCap.util.UseUtils.mappingToASTInterface;
@@ -74,7 +74,7 @@ public class FileParserPanel extends JPanel {
     rightScroll.setRowHeaderView(new LineNumberView(rightTextArea));
 
     JButton downloadButton = new JButton("Download File");
-    JButton validateButton = new JButton("Validate .use hehe123123");
+    JButton validateButton = new JButton("Validate .use file");
 
     JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 8, 5));
     buttonPanel.add(validateButton);
@@ -180,15 +180,18 @@ public class FileParserPanel extends JPanel {
   // convert the input USE spec with CAP annotations into a pure USE spec, then display in the right text area and save to a temp file for downloading
   private void convertFile() {
 
+    // clear
+    rightTextArea.setText("");
+
     // clear previous output by setting empty string to temp files, if failed show error message and return
     try {
       saveContentToFixedFile(
           "",
-          "D:/DATN/use/example-plugin/src/resources/temp/temp-core.txt"
+          corePath
       );
       saveContentToFixedFile(
           "",
-          "D:/DATN/use/example-plugin/src/resources/temp/temp-ocl.txt"
+          oclPath
       );
     } catch (IOException e) {
       JOptionPane.showMessageDialog(
@@ -222,7 +225,17 @@ public class FileParserPanel extends JPanel {
         );
       }
     } catch (Exception ex) {
-      throw new RuntimeException(ex);
+      rightTextArea.setText("");
+      outputFile = null;
+
+      JOptionPane.showMessageDialog(
+          this,
+          "Failed to parse annotations:\n" + ex.getMessage(),
+          "Parse Error",
+          JOptionPane.ERROR_MESSAGE
+      );
+
+      return;
     }
 
     UseSpecSplitter.Result r =
@@ -233,7 +246,7 @@ public class FileParserPanel extends JPanel {
     String coreUse = r.coreSpec;
     try {
       // save to core temp file
-      saveContentToFixedFile(coreUse, "D:/DATN/use/example-plugin/src/resources/temp/temp-core.txt");
+      saveContentToFixedFile(coreUse, corePath);
       System.out.println("Saved core USE to temp-core.txt");
     } catch (IOException e) {
       e.printStackTrace();
@@ -243,6 +256,13 @@ public class FileParserPanel extends JPanel {
     // create the MModel contains annotation
     // also save the OCL generated from annotation to a temp file for merging in later step
     MModel model = compileUseModelFromString(inputContainsAnnotation, this);
+
+    // clear all incase model í null
+    if (model == null) {
+      rightTextArea.setText("");
+      outputFile = null;
+      return;
+    }
 
     // the starter of the constraints
     StringBuilder sb = new StringBuilder();
@@ -277,7 +297,7 @@ public class FileParserPanel extends JPanel {
       try {
         saveContentToFixedFile(
             sb.toString(),
-            "D:/DATN/use/example-plugin/src/resources/temp/temp-ocl.txt");
+            oclPath);
       } catch (IOException e) {
         throw new RuntimeException(e);
       }
@@ -405,12 +425,12 @@ public class FileParserPanel extends JPanel {
 
     // read core spec
     String core = cleanExcessiveBlankLines(
-        Files.readString(Path.of("D:/DATN/use/example-plugin/src/resources/temp/temp-core.txt")));
+        Files.readString(Path.of(corePath)));
     sb.append(core).append("\n\n");
 
     // read annotation-generated OCL spec
     String ocl = cleanExcessiveBlankLines(
-        Files.readString(Path.of("D:/DATN/use/example-plugin/src/resources/temp/temp-ocl.txt")));
+        Files.readString(Path.of(oclPath)));
 
     // if there is OCL, read OCL file and append to core spec
     if (hasOCL) {
