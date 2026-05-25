@@ -1,84 +1,80 @@
 <div align="center">
 
-# CAP Annotation to OCL Converter
+# USE-CAP
 
-### A Thesis Project for Automated OCL Constraint Generation and Validation
+### Hệ thống sinh và kiểm tra ràng buộc OCL tự động từ đặc tả chú thích
 
-Convert CAP annotations into **OCL (Object Constraint Language)** constraints with support for:
+Hỗ trợ:
 
-✅ Standalone conversion  
-✅ Domain model validation  
-✅ UML-based analysis  
-✅ USE plugin integration
+Chuyển đổi Chú thích → OCL độc lập  
+Kiểm tra ràng buộc OCL trong ngữ cảnh mô hình miền
+Tích hợp plugin vào môi trường USE
 
 </div>
 
 ---
 
-# Overview
+# Tổng quan
 
-**CAP Annotation to OCL Converter** is a plugin-based system developed on top of the **USE (UML-based Specification Environment)** ecosystem.
+**USE-CAP** được phát triển như một plugin của nền tảng **USE (UML-based Specification Environment)**.
 
-The project aims to simplify the process of:
+Mục tiêu của plugin là:
 
-- Defining CAP annotations
-- Generating OCL constraints automatically
-- Validating generated constraints against UML domain models
-- Supporting model-driven engineering workflows
+- Định nghĩa các mẫu CAP, cùng các biến thể nhằm làm ví dụ minh họa cho người sử dụng
+- Sinh ràng buộc **OCL (Object Constraint Language)** tự động
+- Kiểm tra tính hợp lệ của OCL với mô hình UML
+- Hỗ trợ quy trình phát triển hướng mô hình (Model-Driven Engineering)
 
-This project was developed as part of an academic thesis focusing on automated constraint generation and validation.
-
----
-
-# Key Features
-
-## CAP Management
-
-Create and manage CAP annotations with:
-
-- Class diagrams
-- Descriptions
-- Quick preview information
-
-This helps users quickly understand the purpose and structure of each CAP.
+Dự án được xây dựng trong khuôn khổ **khóa luận tốt nghiệp**, tập trung vào bài toán sinh và xác thực ràng buộc tự động.
 
 ---
 
-## CAP Classification
+# Chức năng chính
 
-Assign semantic types to CAPs based on business logic.
+## 1. Quản lý CAP
 
-This improves organization and enables better annotation management.
+Hệ thống cho phép tạo và quản lý CAP với các thông tin:
 
----
+- Sơ đồ lớp (Class Diagram)
+- Mô tả chức năng
+- Thông tin xem nhanh (Preview)
 
-## Standalone Annotation → OCL Conversion
-
-Convert CAP annotations directly into OCL constraints without requiring a domain model.
-
-### Suitable for
-
-- Rapid testing
-- Independent OCL generation
-- Annotation experimentation
-- Learning and research
+Giúp người dùng dễ dàng hiểu ý nghĩa và cấu trúc của từng CAP.
 
 ---
 
-## Domain Model Validation
+## 2. Phân loại CAP
 
-Generate OCL constraints using a `.use` domain model context.
-
-The system validates generated OCL against the domain model to ensure:
-
-- Correct syntax
-- Valid references
-- Structural consistency
-- Compatibility with UML elements
+Cho phép gán **semantic type** cho từng CAP dựa trên logic nghiệp vụ nhằm giúp người dùng có cái nhìn trực quan hơn về các biến thể.
 
 ---
 
-# Architecture
+## 3. Chuyển đổi chú thích → OCL độc lập
+
+Cho phép sinh ràng buộc OCL trực tiếp từ chú thích mà **không cần ngữ cảnh**.
+
+Phù hợp cho:
+
+- Kiểm thử nhanh
+- Sinh OCL độc lập
+- Kiểm tra ngữ pháp chú thích
+
+---
+
+## 4. Kiểm tra theo mô hình miền
+
+Hệ thống hỗ trợ sinh OCL dựa trên ngữ cảnh của file domain model `.use`.
+
+OCL sinh ra sẽ được kiểm tra để đảm bảo:
+
+- Đúng cú pháp
+- Tham chiếu hợp lệ
+- Tương thích cấu trúc UML
+- Phù hợp với các phần tử trong mô hình
+
+---
+
+# Kiến trúc dự án
 
 ```text
 root
@@ -88,22 +84,22 @@ root
 └── ...
 ```
 
-| Module | Purpose |
-|---|---|
-| `use-cap` | Main CAP annotation plugin |
-| `use-gui` | GUI resources and runtime assets |
-| `use-assembly` | USE application packaging |
+| Module | Vai trò |
+|---------|----------|
+| `use-cap` | Plugin CAP chính |
+| `use-gui` | Tài nguyên giao diện và runtime |
+| `use-assembly` | Đóng gói ứng dụng USE |
 
 ---
 
-# Prerequisites
+# Yêu cầu môi trường
 
-Before running the project, ensure the following are installed:
+Trước khi chạy dự án, cần cài đặt:
 
 - Java
 - Maven
 
-Verify installation:
+Kiểm tra phiên bản:
 
 ```bash
 java -version
@@ -120,29 +116,35 @@ git clone https://github.com/shibeinu3110/CAP_Thesis_2026.git
 
 ---
 
-# Setup Instructions
+# Hướng dẫn cài đặt
 
-## Step 1 — Download Required Resources
+## Bước 1 — Tải tài nguyên cần thiết
 
-Download `bin.zip` from the repository resources.
+Tải file:
+
+```text
+bin.zip
+```
+
+trong phần tài nguyên của repository.
 
 ---
 
-## Step 2 — Extract Files
+## Bước 2 — Giải nén
 
-Unzip the downloaded archive.
+Giải nén file đã tải.
 
 ---
 
-## Step 3 — Copy `bin` Directory
+## Bước 3 — Copy thư mục `bin`
 
-Copy the extracted `bin` folder into:
+Sao chép thư mục `bin` vào:
 
 ```text
 use-gui/src/main/resources/
 ```
 
-Your structure should look like:
+Cấu trúc sau khi copy:
 
 ```text
 resources
@@ -153,20 +155,26 @@ resources
 
 ---
 
-# Running the Project
+# Chạy dự án
 
-The project can be executed using either:
+Có hai cách chạy hệ thống:
 
-- Manual build process
-- Automated batch script
+- Build thủ công
+- Sử dụng script tự động
+
+Tuy nhiên, cả 2 cách đều cần chạy lệnh này đầu tiên
+
+```bash
+mvn clean install
+```
 
 ---
 
-# Option 1 — Manual Build
+# Cách 1 — Build thủ công
 
-## 1. Build Plugin
+## Bước 1: Build plugin
 
-Run from the root directory:
+Chạy tại thư mục root:
 
 ```bash
 mvn clean package -pl use-cap -am
@@ -174,15 +182,15 @@ mvn clean package -pl use-cap -am
 
 ---
 
-## 2. Copy Generated JAR
+## Bước 2: Copy file JAR
 
-Copy the generated JAR file from:
+Copy file `.jar` được sinh tại:
 
 ```text
 use-cap/target/
 ```
 
-Paste it into:
+vào:
 
 ```text
 use-assembly/src/main/resources/plugins/
@@ -190,37 +198,37 @@ use-assembly/src/main/resources/plugins/
 
 ---
 
-## 3. Build USE Assembly
+## Bước 3: Build USE Assembly
 
 ```bash
 mvn package -pl use-assembly
 ```
 
-## 4. Extract and Run the Application
+---
 
-Extract the following archive:
+## Bước 4: Giải nén và chạy ứng dụng
+
+Giải nén file:
 
 ```text
 use-assembly/target/use-7.1.1.zip
 ```
 
-After extraction, run:
+Sau đó chạy:
 
 ```text
 bin/start_use.bat
 ```
 
-to start the application.
+để khởi động ứng dụng.
 
 ---
 
-# Option 2 — Automated Script
+# Cách 2 — Sử dụng script tự động
 
-A helper script is included to automate the entire setup and execution process.
+Khóa luận có script hỗ trợ build và chạy toàn bộ hệ thống.
 
-## Usage
-
-### 1. Open Script
+## Bước 1: Mở file script
 
 ```text
 run-use.bat
@@ -228,116 +236,87 @@ run-use.bat
 
 ---
 
-### 2. Configure Root Directory
+## Bước 2: Cấu hình thư mục dự án
 
-Update:
+Cập nhật biến:
 
 ```text
 ROOT_DIR
 ```
 
-to match your local cloned repository path.
+theo đường dẫn repository trên máy của bạn.
 
 ---
 
-### 3. Execute Script
+## Bước 3: Chạy script
 
-Run using CMD:
+Mở CMD và chạy:
 
 ```bash
 run-use.bat
 ```
 
-The script automatically:
+Script sẽ tự động:
 
-- Builds the plugin
-- Copies generated artifacts
-- Packages the USE assembly
-- Launches the application
-
----
-
-# Successful Installation
-
-If everything runs correctly, the plugin should appear inside the USE GUI.
-
-Add your screenshot below:
-
-```markdown
-![Plugin Screenshot](images/plugin-preview.png)
-```
+- Build plugin
+- Copy artifact cần thiết
+- Build USE assembly
+- Khởi chạy ứng dụng
 
 ---
 
-# Example Workflow
+# Cài đặt thành công
 
-```text
-Create CAP Annotation
-        ↓
-Select Conversion Mode
-        ↓
-Generate OCL Constraints
-        ↓
-Validate Against .use Domain Model
-        ↓
-Review Generated OCL Output
-```
+Nếu quá trình chạy thành công, plugin sẽ xuất hiện trong giao diện USE.
+
+<img width="493" height="215" alt="image" src="https://github.com/user-attachments/assets/12643329-bb1d-4a1f-81a3-5ca3ef805ac4" />
 
 ---
 
-# Technologies Used
+# Công nghệ sử dụng
 
-| Technology | Purpose |
-|---|---|
-| Java | Core development |
-| Maven | Dependency management & build |
-| ANTLR | Annotation parsing |
-| OCL | Constraint specification |
-| USE | UML/OCL environment |
-
----
-
-# Future Improvements
-
-Planned enhancements include:
-
-- Advanced OCL semantic validation
-- Better annotation parsing support
-- Enhanced GUI interaction
-- Additional CAP templates
-- Import/export functionality
-- Improved error visualization
+| Công nghệ | Mục đích |
+|------------|-----------|
+| Java | Phát triển hệ thống |
+| Maven | Build & quản lý dependency |
+| ANTLR | Parsing Annotation |
+| OCL | Đặc tả ràng buộc |
+| USE | Môi trường UML/OCL |
 
 ---
 
-# Contributing
+# Hướng phát triển
 
-Contributions are welcome.
+Các cải tiến dự kiến trong tương lai:
 
-You can contribute by:
-
-1. Forking the repository
-2. Creating a feature branch
-3. Implementing improvements
-4. Opening a Pull Request
-
-Bug reports, feature requests, and discussions are highly appreciated.
+- Kiểm tra semantic OCL nâng cao
+- Mở rộng khả năng parsing annotation
+- Cải thiện giao diện người dùng
+- Bổ sung thêm CAP template
+- Hỗ trợ import/export
+- Hiển thị lỗi trực quan hơn
 
 ---
 
-# Support
+# Đóng góp
 
-If you encounter any issues or have questions:
+Quy trình đóng góp:
 
-- Open an issue on GitHub
-- Or contact:
+1. Fork repository
+2. Tạo branch mới
+3. Phát triển tính năng / sửa lỗi
+4. Tạo Pull Request
+
+---
+
+# Liên hệ hỗ trợ
+
+Nếu gặp lỗi hoặc có câu hỏi:
+
+- Tạo Issue trên GitHub
+- Hoặc liên hệ:
 
 ```text
 22028033@vnu.edu.vn
 ```
 
----
-
-# License
-
-This project was developed for academic and research purposes as part of a thesis project.
